@@ -9,8 +9,10 @@ class SuppliesRoomData{
   final List<int> amount;
   final List<int> availableAmount;
   final List<bool> consumable;
+  final List<String?> imagePath;
 
-  SuppliesRoomData(this.schoolName, this.suppliesRoom, this.name, this.amount, this.availableAmount, this.consumable);
+  SuppliesRoomData(this.schoolName, this.suppliesRoom, this.name, this.amount,
+      this.availableAmount, this.consumable, this.imagePath);
 
   static Future<SuppliesRoomData> getData(String schoolName, String suppliesRoom) async{
     final documentSnapshot = await firestore.collection(schoolName).doc(suppliesRoom).get();
@@ -23,15 +25,17 @@ class SuppliesRoomData{
         List<int> amount = [];
         List<int> availableAmount = [];
         List<bool> consumable = [];
+        List<String?> imagePath = [];
 
         for (var supply in supplies) {
           name.add(supply['name']);
           amount.add(supply['amount']);
           availableAmount.add(supply['availableAmount']);
           consumable.add(supply['consumable'] ?? false);
+          imagePath.add(supply['imagePath']);
         }
 
-        return SuppliesRoomData(schoolName, suppliesRoom, name, amount, availableAmount, consumable);
+        return SuppliesRoomData(schoolName, suppliesRoom, name, amount, availableAmount, consumable, imagePath);
       } else {
         throw Exception('error');
       }
@@ -54,6 +58,7 @@ class SuppliesRoomData{
     amount.add(inputAmount);
     availableAmount.add(inputAmount);
     consumable.add(inputConsumable);
+    imagePath.add(null);
 
     await documentSnapshot.update({
       'supplies': FieldValue.arrayUnion([inputSuppliesData])
