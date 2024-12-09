@@ -19,7 +19,7 @@ void main() async{
   late SuppliesRoomData suppliesRoomInfo;
 
   suppliesRoomInfo = await SuppliesRoomData.getData('물리준비실', 'supplies');
-  await suppliesRoomInfo.rentSupplies(1, 2, SuppliesProcess.back);
+  //await suppliesRoomInfo.rentSupplies(1, 2, SuppliesProcess.rent);
   print(suppliesRoomInfo.name);
   print(suppliesRoomInfo.amount);
   print(suppliesRoomInfo.availableAmount);

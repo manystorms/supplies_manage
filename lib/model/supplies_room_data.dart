@@ -70,8 +70,10 @@ class SuppliesRoomData{
   }
 
   Future<void> rentSupplies(int suppliesNum, int processAmount, SuppliesProcess process) async {
-    if(availableAmount[suppliesNum] < processAmount && process == SuppliesProcess.rent) {
+    if(process == SuppliesProcess.rent && availableAmount[suppliesNum] < processAmount) {
       throw Exception('에러 발생: 대여하려는 준비물의 수가 대여가능한 준비물의 수보다 많습니다.');
+    }else if(process == SuppliesProcess.back && availableAmount[suppliesNum]+processAmount > amount[suppliesNum]) {
+      throw Exception('에러 발생: 저장된 준비물 데이터가 손상되었습니다. 관리자에게 문의하세요.');
     }
 
     if(process == SuppliesProcess.rent) {
