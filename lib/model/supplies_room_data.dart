@@ -8,8 +8,8 @@ class SuppliesRoomData{
   final String schoolName;
   final String suppliesRoom;
   final List<String> name;
-  final List<int> amount;
-  final List<int> availableAmount;
+  final List<int?> amount;
+  final List<int?> availableAmount;
   final List<bool> consumable;
   final List<String?> imagePath;
 
@@ -24,8 +24,8 @@ class SuppliesRoomData{
       if (data != null && data.containsKey('supplies')) {
         List<dynamic> supplies = data['supplies'];
         List<String> name = [];
-        List<int> amount = [];
-        List<int> availableAmount = [];
+        List<int?> amount = [];
+        List<int?> availableAmount = [];
         List<bool> consumable = [];
         List<String?> imagePath = [];
 
@@ -46,40 +46,19 @@ class SuppliesRoomData{
     }
   }
 
-  Future<void> inputData(String inputName, int inputAmount, bool inputConsumable) async{
-    if(name.contains(inputName)) throw Exception('에러: 이미 추가하려는 준비물이 추가된 상태입니다');
-
-    final documentSnapshot = firestore.collection(schoolName).doc(suppliesRoom);
-
-    final Map<String, dynamic> inputSuppliesData = {
-      'name': inputName,
-      'amount': inputAmount,
-      'availableAmount': inputAmount,
-      'consumable': inputConsumable
-    };
-
-    name.add(inputName);
-    amount.add(inputAmount);
-    availableAmount.add(inputAmount);
-    consumable.add(inputConsumable);
-    imagePath.add(null);
-
-    await documentSnapshot.update({
-      'supplies': FieldValue.arrayUnion([inputSuppliesData])
-    });
-  }
-
   Future<void> rentSupplies(int suppliesNum, int processAmount, SuppliesProcess process) async {
-    if(process == SuppliesProcess.rent && availableAmount[suppliesNum] < processAmount) {
+    if(amount[suppliesNum] == null || availableAmount[suppliesNum] == null) return;
+
+    if(process == SuppliesProcess.rent && (availableAmount[suppliesNum]??0) < processAmount) {
       throw Exception('에러 발생: 대여하려는 준비물의 수가 대여가능한 준비물의 수보다 많습니다.');
-    }else if(process == SuppliesProcess.back && availableAmount[suppliesNum]+processAmount > amount[suppliesNum]) {
+    }else if(process == SuppliesProcess.back && (availableAmount[suppliesNum]??0)+processAmount > (amount[suppliesNum]??0)) {
       throw Exception('에러 발생: 저장된 준비물 데이터가 손상되었습니다. 관리자에게 문의하세요.');
     }
 
-    if(process == SuppliesProcess.rent) {
-      availableAmount[suppliesNum] -= processAmount;
+    if(process == SuppliesProcess.rent && availableAmount[suppliesNum] != null) {
+      availableAmount[suppliesNum] = availableAmount[suppliesNum]??0 - processAmount;
     }else if(process == SuppliesProcess.back){
-      availableAmount[suppliesNum] += processAmount;
+      availableAmount[suppliesNum] = availableAmount[suppliesNum]??0 + processAmount;
     }
 
     final documentSnapshot = firestore.collection(schoolName).doc(suppliesRoom);

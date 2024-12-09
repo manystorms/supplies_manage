@@ -19,7 +19,7 @@ void main() async{
   late SuppliesRoomData suppliesRoomInfo;
 
   suppliesRoomInfo = await SuppliesRoomData.getData('물리준비실', 'supplies');
-  //await suppliesRoomInfo.rentSupplies(1, 2, SuppliesProcess.rent);
+  //await suppliesRoomInfo.inputData('aa', 3, true);
   print(suppliesRoomInfo.name);
   print(suppliesRoomInfo.amount);
   print(suppliesRoomInfo.availableAmount);
@@ -52,7 +52,7 @@ class MyApp extends StatelessWidget {
               ElevatedButton(
                 onPressed: () {
                   UpdateSuppliesData a = UpdateSuppliesData('물리준비실', 'supplies');
-                  a.uploadImage();
+                  a.inputData('vv', 10, false);
                 },
                 child: Text("Press Me"),
               ),
