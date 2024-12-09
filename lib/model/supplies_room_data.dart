@@ -2,19 +2,18 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 
 final FirebaseFirestore firestore = FirebaseFirestore.instance;
 
-enum SuppliesProcess {rent, back}
-
 class SuppliesRoomData{
   final String schoolName;
   final String suppliesRoom;
   final List<String> name;
   final List<int?> amount;
   final List<int?> availableAmount;
+  final List<String?> location;
   final List<bool> consumable;
-  final List<String?> imagePath;
+  final List<int> imageNum;
 
   SuppliesRoomData(this.schoolName, this.suppliesRoom, this.name, this.amount,
-      this.availableAmount, this.consumable, this.imagePath);
+      this.availableAmount, this.location, this.consumable, this.imageNum);
 
   static Future<SuppliesRoomData> getData(String schoolName, String suppliesRoom) async{
     final documentSnapshot = await firestore.collection(schoolName).doc(suppliesRoom).get();
@@ -26,18 +25,20 @@ class SuppliesRoomData{
         List<String> name = [];
         List<int?> amount = [];
         List<int?> availableAmount = [];
+        List<String?> location = [];
         List<bool> consumable = [];
-        List<String?> imagePath = [];
+        List<int> imageNum = [];
 
         for (var supply in supplies) {
           name.add(supply['name']);
           amount.add(supply['amount']);
           availableAmount.add(supply['availableAmount']);
+          location.add(supply['location']);
           consumable.add(supply['consumable'] ?? false);
-          imagePath.add(supply['imagePath']);
+          imageNum.add(supply['imageNum']);
         }
 
-        return SuppliesRoomData(schoolName, suppliesRoom, name, amount, availableAmount, consumable, imagePath);
+        return SuppliesRoomData(schoolName, suppliesRoom, name, amount, availableAmount, location, consumable, imageNum);
       } else {
         throw Exception('error');
       }
@@ -46,20 +47,14 @@ class SuppliesRoomData{
     }
   }
 
-  Future<void> rentSupplies(int suppliesNum, int processAmount, SuppliesProcess process) async {
+  Future<void> rentSupplies(int suppliesNum, int rentAmount) async {
     if(amount[suppliesNum] == null || availableAmount[suppliesNum] == null) return;
 
-    if(process == SuppliesProcess.rent && (availableAmount[suppliesNum]??0) < processAmount) {
+    if((availableAmount[suppliesNum]??0) < rentAmount) {
       throw Exception('에러 발생: 대여하려는 준비물의 수가 대여가능한 준비물의 수보다 많습니다.');
-    }else if(process == SuppliesProcess.back && (availableAmount[suppliesNum]??0)+processAmount > (amount[suppliesNum]??0)) {
-      throw Exception('에러 발생: 저장된 준비물 데이터가 손상되었습니다. 관리자에게 문의하세요.');
     }
 
-    if(process == SuppliesProcess.rent && availableAmount[suppliesNum] != null) {
-      availableAmount[suppliesNum] = availableAmount[suppliesNum]??0 - processAmount;
-    }else if(process == SuppliesProcess.back){
-      availableAmount[suppliesNum] = availableAmount[suppliesNum]??0 + processAmount;
-    }
+    availableAmount[suppliesNum] = availableAmount[suppliesNum]??0 - rentAmount;
 
     final documentSnapshot = firestore.collection(schoolName).doc(suppliesRoom);
 
@@ -74,6 +69,10 @@ class SuppliesRoomData{
         throw Exception('에러 발생: 데이터가 손상되었습니다. 관리자에게 문의하세요.');
       }
     }
+  }
+
+  Future<void> rentCancel() async {
+
   }
 }
 

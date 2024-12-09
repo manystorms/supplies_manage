@@ -1,4 +1,3 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:supplies_manage/firebase_options.dart';
 import 'package:flutter/material.dart';
@@ -23,8 +22,9 @@ void main() async{
   print(suppliesRoomInfo.name);
   print(suppliesRoomInfo.amount);
   print(suppliesRoomInfo.availableAmount);
+  print(suppliesRoomInfo.location);
   print(suppliesRoomInfo.consumable);
-  print(suppliesRoomInfo.imagePath);
+  print(suppliesRoomInfo.imageNum);
 
 
   runApp(MaterialApp(home: MyApp()));
@@ -44,17 +44,17 @@ class MyApp extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              Text(
+              const Text(
                 'Network Image',
                 style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
               ),
-              SizedBox(height: 20), // 간격 추가
+              const SizedBox(height: 20), // 간격 추가
               ElevatedButton(
                 onPressed: () {
                   UpdateSuppliesData a = UpdateSuppliesData('물리준비실', 'supplies');
-                  a.inputData('vv', 10, false);
+                  a.inputData('vv', 10, '4-4-4', false);
                 },
-                child: Text("Press Me"),
+                child: const Text("Press Me"),
               ),
             ],
           ),
