@@ -51,7 +51,8 @@ class ManageSuppliesData{
   }
 
   Future<void> inputData(String inputName, int? inputAmount, String? inputLocation, bool inputConsumable) async{
-    //준비물 이름이 같은 경우가 없도록 예외 처리 필요
+    if(name.contains(inputName) == true) throw Exception('에러 발생: 추가하려는 준비물이 이미 입력되어 있습니다.');
+
     final documentSnapshot = firestore.collection(schoolName).doc(suppliesRoom);
 
     final Map<String, dynamic> inputSuppliesData = {
