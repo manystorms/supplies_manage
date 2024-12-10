@@ -21,6 +21,7 @@ void main() async{
 
   suppliesRoomInfo = await SuppliesRoomData.getData('물리준비실', 'supplies');
   manageSuppliesDataInfo = await ManageSuppliesData.getData('물리준비실', 'supplies');
+  await suppliesRoomInfo.rentSupplies(1, 2, 'bb');
   //await suppliesRoomInfo.inputData('aa', 3, true);
   print(suppliesRoomInfo.name);
   print(suppliesRoomInfo.amount);
@@ -28,6 +29,9 @@ void main() async{
   print(suppliesRoomInfo.location);
   print(suppliesRoomInfo.consumable);
   print(suppliesRoomInfo.imageNum);
+  print(suppliesRoomInfo.applicationUserName);
+  print(suppliesRoomInfo.applicationSuppliesName);
+  print(suppliesRoomInfo.applicationRentAmount);
 
 
   runApp(MaterialApp(home: MyApp()));
