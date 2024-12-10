@@ -3,7 +3,9 @@ import 'package:supplies_manage/firebase_options.dart';
 import 'package:flutter/material.dart';
 import 'package:supplies_manage/model/sign_in_sign_up.dart';
 import 'package:supplies_manage/model/supplies_room_data.dart';
-import 'package:supplies_manage/model/update_supplies_data.dart';
+import 'package:supplies_manage/model/manage_supplies_data.dart';
+
+late ManageSuppliesData manageSuppliesDataInfo;
 
 void main() async{
   WidgetsFlutterBinding.ensureInitialized();
@@ -18,6 +20,7 @@ void main() async{
   late SuppliesRoomData suppliesRoomInfo;
 
   suppliesRoomInfo = await SuppliesRoomData.getData('물리준비실', 'supplies');
+  manageSuppliesDataInfo = await ManageSuppliesData.getData('물리준비실', 'supplies');
   //await suppliesRoomInfo.inputData('aa', 3, true);
   print(suppliesRoomInfo.name);
   print(suppliesRoomInfo.amount);
@@ -51,8 +54,7 @@ class MyApp extends StatelessWidget {
               const SizedBox(height: 20), // 간격 추가
               ElevatedButton(
                 onPressed: () {
-                  UpdateSuppliesData a = UpdateSuppliesData('물리준비실', 'supplies');
-                  a.inputData('vv', 10, '4-4-4', false);
+                  manageSuppliesDataInfo.inputImageData(0);
                 },
                 child: const Text("Press Me"),
               ),
