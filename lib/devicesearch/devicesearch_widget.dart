@@ -4,8 +4,6 @@ import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:provider/provider.dart';
 import 'package:supplies_manage/variables_file.dart';
 import 'devicesearch_model.dart';
 export 'devicesearch_model.dart';
@@ -53,7 +51,7 @@ class _DevicesearchWidgetState extends State<DevicesearchWidget>
         key: scaffoldKey,
         backgroundColor: FlutterFlowTheme.of(context).secondaryBackground,
         appBar: PreferredSize(
-          preferredSize: Size.fromHeight(50.0),
+          preferredSize: const Size.fromHeight(50.0),
           child: AppBar(
             backgroundColor: FlutterFlowTheme.of(context).secondaryBackground,
             automaticallyImplyLeading: false,
@@ -80,7 +78,7 @@ class _DevicesearchWidgetState extends State<DevicesearchWidget>
                     useGoogleFonts: false,
                   ),
             ),
-            actions: [],
+            actions: const [],
             centerTitle: false,
             elevation: 0.0,
           ),
@@ -95,7 +93,7 @@ class _DevicesearchWidgetState extends State<DevicesearchWidget>
                   children: [
                     Expanded(
                       child: Padding(
-                        padding: EdgeInsetsDirectional.fromSTEB(
+                        padding: const EdgeInsetsDirectional.fromSTEB(
                             16.0, 12.0, 8.0, 0.0),
                         child: TextFormField(
                           controller: _model.searchBarTextController,
@@ -149,7 +147,7 @@ class _DevicesearchWidgetState extends State<DevicesearchWidget>
                             filled: true,
                             fillColor:
                                 FlutterFlowTheme.of(context).primaryBackground,
-                            contentPadding: EdgeInsetsDirectional.fromSTEB(
+                            contentPadding: const EdgeInsetsDirectional.fromSTEB(
                                 24.0, 24.0, 20.0, 24.0),
                             prefixIcon: Icon(
                               Icons.search,
@@ -170,7 +168,7 @@ class _DevicesearchWidgetState extends State<DevicesearchWidget>
                     ),
                     Padding(
                       padding:
-                          EdgeInsetsDirectional.fromSTEB(0.0, 12.0, 12.0, 0.0),
+                          const EdgeInsetsDirectional.fromSTEB(0.0, 12.0, 12.0, 0.0),
                       child: FlutterFlowIconButton(
                         borderColor: Colors.transparent,
                         borderRadius: 30.0,
@@ -192,7 +190,7 @@ class _DevicesearchWidgetState extends State<DevicesearchWidget>
                   child: Column(
                     children: [
                       Align(
-                        alignment: Alignment(-1.0, 0),
+                        alignment: const Alignment(-1.0, 0),
                         child: FlutterFlowButtonTabBar(
                           useToggleButtonStyle: false,
                           isScrollable: true,
@@ -202,7 +200,7 @@ class _DevicesearchWidgetState extends State<DevicesearchWidget>
                                     letterSpacing: 0.0,
                                     useGoogleFonts: false,
                                   ),
-                          unselectedLabelStyle: TextStyle(),
+                          unselectedLabelStyle: const TextStyle(),
                           labelColor: FlutterFlowTheme.of(context).primary,
                           unselectedLabelColor:
                               FlutterFlowTheme.of(context).secondaryText,
@@ -211,11 +209,11 @@ class _DevicesearchWidgetState extends State<DevicesearchWidget>
                           borderWidth: 2.0,
                           borderRadius: 12.0,
                           elevation: 0.0,
-                          labelPadding: EdgeInsetsDirectional.fromSTEB(
+                          labelPadding: const EdgeInsetsDirectional.fromSTEB(
                               16.0, 0.0, 16.0, 0.0),
-                          buttonMargin: EdgeInsetsDirectional.fromSTEB(
+                          buttonMargin: const EdgeInsetsDirectional.fromSTEB(
                               0.0, 12.0, 16.0, 0.0),
-                          padding: EdgeInsetsDirectional.fromSTEB(
+                          padding: const EdgeInsetsDirectional.fromSTEB(
                               16.0, 0.0, 16.0, 0.0),
                           tabs: [
                             Tab(
@@ -249,7 +247,7 @@ class _DevicesearchWidgetState extends State<DevicesearchWidget>
                                         print('first_tap_search ${i}');
                                       },
                                       child: Padding(
-                                        padding: EdgeInsetsDirectional.fromSTEB(
+                                        padding: const EdgeInsetsDirectional.fromSTEB(
                                             16.0, 8.0, 16.0, 0.0),
                                         child: Container(
                                           width: double.infinity,
@@ -260,7 +258,7 @@ class _DevicesearchWidgetState extends State<DevicesearchWidget>
                                             BorderRadius.circular(12.0),
                                           ),
                                           child: Padding(
-                                            padding: EdgeInsetsDirectional.fromSTEB(
+                                            padding: const EdgeInsetsDirectional.fromSTEB(
                                                 8.0, 8.0, 12.0, 8.0),
                                             child: Row(
                                               mainAxisSize: MainAxisSize.max,
@@ -278,7 +276,7 @@ class _DevicesearchWidgetState extends State<DevicesearchWidget>
                                                   ),
                                                 ),
                                                 Padding(
-                                                  padding: EdgeInsetsDirectional
+                                                  padding: const EdgeInsetsDirectional
                                                       .fromSTEB(
                                                       16.0, 0.0, 0.0, 0.0),
                                                   child: Text(
@@ -294,7 +292,7 @@ class _DevicesearchWidgetState extends State<DevicesearchWidget>
                                                     ),
                                                   ),
                                                 ),
-                                                Spacer(),    //남은 공간 모두 차지하여, 버튼 오른쪽으로 위치하도록.
+                                                const Spacer(),    //남은 공간 모두 차지하여, 버튼 오른쪽으로 위치하도록.
                                                 Row(         //위치, 신청 버튼 수정 부분
                                                   mainAxisAlignment: MainAxisAlignment.end,
                                                   children: [
@@ -308,11 +306,11 @@ class _DevicesearchWidgetState extends State<DevicesearchWidget>
                                                         width: 75.0,
                                                         height: 70.0,
                                                         padding:
-                                                        EdgeInsetsDirectional
+                                                        const EdgeInsetsDirectional
                                                             .fromSTEB(24.0, 0.0,
                                                             24.0, 0.0),
                                                         iconPadding:
-                                                        EdgeInsetsDirectional
+                                                        const EdgeInsetsDirectional
                                                             .fromSTEB(0.0, 0.0,
                                                             0.0, 0.0),
                                                         color: FlutterFlowTheme.of(
@@ -328,7 +326,7 @@ class _DevicesearchWidgetState extends State<DevicesearchWidget>
                                                           useGoogleFonts: false,
                                                         ),
                                                         elevation: 3.0,
-                                                        borderSide: BorderSide(
+                                                        borderSide: const BorderSide(
                                                           color: Colors.transparent,
                                                           width: 1.0,
                                                         ),
@@ -337,7 +335,7 @@ class _DevicesearchWidgetState extends State<DevicesearchWidget>
                                                             8.0),
                                                       ),
                                                     ),
-                                                    SizedBox(width: 12.0),
+                                                    const SizedBox(width: 12.0),
                                                     FFButtonWidget(
                                                       onPressed: () {
                                                         print('물품 신청하는 버튼 ${i}');
@@ -347,9 +345,9 @@ class _DevicesearchWidgetState extends State<DevicesearchWidget>
                                                       options: FFButtonOptions(
                                                         width: 75.0,
                                                         height: 70.0,
-                                                        padding: EdgeInsetsDirectional.fromSTEB(24.0, 0.0, 24.0, 0.0),
+                                                        padding: const EdgeInsetsDirectional.fromSTEB(24.0, 0.0, 24.0, 0.0),
                                                         iconPadding:
-                                                        EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
+                                                        const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
                                                         color: FlutterFlowTheme.of(context).primary,
                                                         textStyle: FlutterFlowTheme.of(context).titleSmall.override(
                                                           fontFamily: 'Pretendard',
@@ -358,7 +356,7 @@ class _DevicesearchWidgetState extends State<DevicesearchWidget>
                                                           useGoogleFonts: false,
                                                         ),
                                                         elevation: 3.0,
-                                                        borderSide: BorderSide(
+                                                        borderSide: const BorderSide(
                                                           color: Colors.transparent,
                                                           width: 1.0,
                                                         ),
@@ -388,7 +386,7 @@ class _DevicesearchWidgetState extends State<DevicesearchWidget>
                                         print('first_tap_search ${i}');
                                       },
                                       child: Padding(
-                                        padding: EdgeInsetsDirectional.fromSTEB(
+                                        padding: const EdgeInsetsDirectional.fromSTEB(
                                             16.0, 8.0, 16.0, 0.0),
                                         child: Container(
                                           width: double.infinity,
@@ -399,7 +397,7 @@ class _DevicesearchWidgetState extends State<DevicesearchWidget>
                                             BorderRadius.circular(12.0),
                                           ),
                                           child: Padding(
-                                            padding: EdgeInsetsDirectional.fromSTEB(
+                                            padding: const EdgeInsetsDirectional.fromSTEB(
                                                 8.0, 8.0, 12.0, 8.0),
                                             child: Row(
                                               mainAxisSize: MainAxisSize.max,
@@ -417,7 +415,7 @@ class _DevicesearchWidgetState extends State<DevicesearchWidget>
                                                   ),
                                                 ),
                                                 Padding(
-                                                  padding: EdgeInsetsDirectional
+                                                  padding: const EdgeInsetsDirectional
                                                       .fromSTEB(
                                                       16.0, 0.0, 0.0, 0.0),
                                                   child: Text(
@@ -433,7 +431,7 @@ class _DevicesearchWidgetState extends State<DevicesearchWidget>
                                                     ),
                                                   ),
                                                 ),
-                                                Spacer(),    //남은 공간 모두 차지하여, 버튼 오른쪽으로 위치하도록.
+                                                const Spacer(),    //남은 공간 모두 차지하여, 버튼 오른쪽으로 위치하도록.
                                                 Row(         //위치, 신청 버튼 수정 부분
                                                   mainAxisAlignment: MainAxisAlignment.end,
                                                   children: [
@@ -447,11 +445,11 @@ class _DevicesearchWidgetState extends State<DevicesearchWidget>
                                                         width: 75.0,
                                                         height: 70.0,
                                                         padding:
-                                                        EdgeInsetsDirectional
+                                                        const EdgeInsetsDirectional
                                                             .fromSTEB(24.0, 0.0,
                                                             24.0, 0.0),
                                                         iconPadding:
-                                                        EdgeInsetsDirectional
+                                                        const EdgeInsetsDirectional
                                                             .fromSTEB(0.0, 0.0,
                                                             0.0, 0.0),
                                                         color: FlutterFlowTheme.of(
@@ -467,7 +465,7 @@ class _DevicesearchWidgetState extends State<DevicesearchWidget>
                                                           useGoogleFonts: false,
                                                         ),
                                                         elevation: 3.0,
-                                                        borderSide: BorderSide(
+                                                        borderSide: const BorderSide(
                                                           color: Colors.transparent,
                                                           width: 1.0,
                                                         ),
@@ -476,7 +474,7 @@ class _DevicesearchWidgetState extends State<DevicesearchWidget>
                                                             8.0),
                                                       ),
                                                     ),
-                                                    SizedBox(width: 12.0),
+                                                    const SizedBox(width: 12.0),
                                                     FFButtonWidget(
                                                       onPressed: () {
                                                         print('물품 신청하는 버튼');
@@ -486,9 +484,9 @@ class _DevicesearchWidgetState extends State<DevicesearchWidget>
                                                       options: FFButtonOptions(
                                                         width: 75.0,
                                                         height: 70.0,
-                                                        padding: EdgeInsetsDirectional.fromSTEB(24.0, 0.0, 24.0, 0.0),
+                                                        padding: const EdgeInsetsDirectional.fromSTEB(24.0, 0.0, 24.0, 0.0),
                                                         iconPadding:
-                                                        EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
+                                                        const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
                                                         color: FlutterFlowTheme.of(context).primary,
                                                         textStyle: FlutterFlowTheme.of(context).titleSmall.override(
                                                           fontFamily: 'Pretendard',
@@ -497,7 +495,7 @@ class _DevicesearchWidgetState extends State<DevicesearchWidget>
                                                           useGoogleFonts: false,
                                                         ),
                                                         elevation: 3.0,
-                                                        borderSide: BorderSide(
+                                                        borderSide: const BorderSide(
                                                           color: Colors.transparent,
                                                           width: 1.0,
                                                         ),
@@ -527,7 +525,7 @@ class _DevicesearchWidgetState extends State<DevicesearchWidget>
                                         print('first_tap_search ${i}');
                                       },
                                       child: Padding(
-                                        padding: EdgeInsetsDirectional.fromSTEB(
+                                        padding: const EdgeInsetsDirectional.fromSTEB(
                                             16.0, 8.0, 16.0, 0.0),
                                         child: Container(
                                           width: double.infinity,
@@ -538,7 +536,7 @@ class _DevicesearchWidgetState extends State<DevicesearchWidget>
                                             BorderRadius.circular(12.0),
                                           ),
                                           child: Padding(
-                                            padding: EdgeInsetsDirectional.fromSTEB(
+                                            padding: const EdgeInsetsDirectional.fromSTEB(
                                                 8.0, 8.0, 12.0, 8.0),
                                             child: Row(
                                               mainAxisSize: MainAxisSize.max,
@@ -556,7 +554,7 @@ class _DevicesearchWidgetState extends State<DevicesearchWidget>
                                                   ),
                                                 ),
                                                 Padding(
-                                                  padding: EdgeInsetsDirectional
+                                                  padding: const EdgeInsetsDirectional
                                                       .fromSTEB(
                                                       16.0, 0.0, 0.0, 0.0),
                                                   child: Text(
@@ -586,11 +584,11 @@ class _DevicesearchWidgetState extends State<DevicesearchWidget>
                                                         width: 75.0,
                                                         height: 70.0,
                                                         padding:
-                                                        EdgeInsetsDirectional
+                                                        const EdgeInsetsDirectional
                                                             .fromSTEB(24.0, 0.0,
                                                             24.0, 0.0),
                                                         iconPadding:
-                                                        EdgeInsetsDirectional
+                                                        const EdgeInsetsDirectional
                                                             .fromSTEB(0.0, 0.0,
                                                             0.0, 0.0),
                                                         color: FlutterFlowTheme.of(
@@ -606,7 +604,7 @@ class _DevicesearchWidgetState extends State<DevicesearchWidget>
                                                           useGoogleFonts: false,
                                                         ),
                                                         elevation: 3.0,
-                                                        borderSide: BorderSide(
+                                                        borderSide: const BorderSide(
                                                           color: Colors.transparent,
                                                           width: 1.0,
                                                         ),
@@ -615,7 +613,7 @@ class _DevicesearchWidgetState extends State<DevicesearchWidget>
                                                             8.0),
                                                       ),
                                                     ),
-                                                    SizedBox(width: 12.0),
+                                                    const SizedBox(width: 12.0),
                                                     FFButtonWidget(
                                                       onPressed: () {
                                                         print('물품 신청하는 버튼');
@@ -625,9 +623,9 @@ class _DevicesearchWidgetState extends State<DevicesearchWidget>
                                                       options: FFButtonOptions(
                                                         width: 75.0,
                                                         height: 70.0,
-                                                        padding: EdgeInsetsDirectional.fromSTEB(24.0, 0.0, 24.0, 0.0),
+                                                        padding: const EdgeInsetsDirectional.fromSTEB(24.0, 0.0, 24.0, 0.0),
                                                         iconPadding:
-                                                        EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
+                                                        const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
                                                         color: FlutterFlowTheme.of(context).primary,
                                                         textStyle: FlutterFlowTheme.of(context).titleSmall.override(
                                                           fontFamily: 'Pretendard',
@@ -636,7 +634,7 @@ class _DevicesearchWidgetState extends State<DevicesearchWidget>
                                                           useGoogleFonts: false,
                                                         ),
                                                         elevation: 3.0,
-                                                        borderSide: BorderSide(
+                                                        borderSide: const BorderSide(
                                                           color: Colors.transparent,
                                                           width: 1.0,
                                                         ),
