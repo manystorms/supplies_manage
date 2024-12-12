@@ -1,12 +1,8 @@
-import '/flutter_flow/flutter_flow_button_tabbar.dart';
-import '/flutter_flow/flutter_flow_icon_button.dart';
-import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
-import '/flutter_flow/flutter_flow_widgets.dart';
 import 'devicesearch_widget.dart' show DevicesearchWidget;
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:provider/provider.dart';
+import 'package:supplies_manage/model/supplies_room_data.dart';
+import 'package:supplies_manage/model/user_data.dart';
 
 class DevicesearchModel extends FlutterFlowModel<DevicesearchWidget> {
   ///  State fields for stateful widgets in this page.
@@ -19,6 +15,12 @@ class DevicesearchModel extends FlutterFlowModel<DevicesearchWidget> {
   TabController? tabBarController;
   int get tabBarCurrentIndex =>
       tabBarController != null ? tabBarController!.index : 0;
+
+  late SuppliesRoomData suppliesRoomInfo;
+
+  Future<void> getSuppliesRoomData() async{
+    suppliesRoomInfo = await SuppliesRoomData.getData(schoolName, suppliesRoom);
+  }
 
   @override
   void initState(BuildContext context) {}

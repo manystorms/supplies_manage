@@ -21,8 +21,23 @@ class _DevicesearchWidgetState extends State<DevicesearchWidget>
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
+  void getSuppliesRoomData() async{
+    print('a');
+    await _model.getSuppliesRoomData();
+    print(_model.suppliesRoomInfo.name);
+    print(_model.suppliesRoomInfo.amount);
+    print(_model.suppliesRoomInfo.availableAmount);
+    print(_model.suppliesRoomInfo.location);
+    print(_model.suppliesRoomInfo.consumable);
+    print(_model.suppliesRoomInfo.imageNum);
+    print(_model.suppliesRoomInfo.applicationUserName);
+    print(_model.suppliesRoomInfo.applicationSuppliesName);
+    print(_model.suppliesRoomInfo.applicationRentAmount);
+    setState(() {}); print('b');
+  }
+
   @override
-  void initState() {
+  void initState(){
     super.initState();
     _model = createModel(context, () => DevicesearchModel());
 
@@ -34,6 +49,7 @@ class _DevicesearchWidgetState extends State<DevicesearchWidget>
       length: 3,
       initialIndex: 0,
     )..addListener(() => safeSetState(() {}));
+    getSuppliesRoomData();
   }
 
   @override
@@ -66,8 +82,7 @@ class _DevicesearchWidgetState extends State<DevicesearchWidget>
                 size: 30.0,
               ),
               onPressed: () {
-                print("뒤로가기_devicesearch");
-                Navigator.pop(context);
+                context.pop();
               },
             ),
             title: Text(
