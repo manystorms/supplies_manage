@@ -30,6 +30,49 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  flutter_localizations:
+    sdk: flutter
+  flutter_web_plugins:
+    sdk: flutter
+  auto_size_text: 3.0.0
+  cached_network_image: 3.4.1
+  cached_network_image_platform_interface: 4.1.1
+  cached_network_image_web: 1.3.1
+  collection: 1.18.0
+  flutter_animate: 4.5.0
+  flutter_cache_manager: 3.4.1
+  font_awesome_flutter: 10.7.0
+  from_css_color: 2.0.0
+  go_router: 12.1.3
+  google_fonts: 6.1.0
+  intl: 0.19.0
+  json_path: 0.7.2
+  page_transition: 2.1.0
+  path_provider: 2.1.4
+  path_provider_android: 2.2.10
+  path_provider_foundation: 2.4.0
+  path_provider_linux: 2.2.1
+  path_provider_platform_interface: 2.1.2
+  path_provider_windows: 2.3.0
+  provider: 6.1.2
+  shared_preferences: 2.3.2
+  shared_preferences_android: 2.3.2
+  shared_preferences_foundation: 2.5.2
+  shared_preferences_linux: 2.4.1
+  shared_preferences_platform_interface: 2.4.1
+  shared_preferences_web: 2.4.2
+  shared_preferences_windows: 2.4.1
+  sqflite: 2.3.3+1
+  sqflite_common: 2.5.4+3
+  timeago: 3.6.1
+  url_launcher: 6.3.0
+  url_launcher_android: 6.3.10
+  url_launcher_ios: 6.3.1
+  url_launcher_linux: 3.2.0
+  url_launcher_macos: 3.2.1
+  url_launcher_platform_interface: 2.3.2
+  url_launcher_web: 2.3.3
+  url_launcher_windows: 3.1.2
 
   firebase_core: ^3.2.0
   firebase_auth: ^5.1.2
@@ -42,16 +85,15 @@ dependencies:
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.6
 
+dependency_overrides:
+  http: 1.2.2
+  uuid: ^4.0.0
+
 dev_dependencies:
+  flutter_lints: 4.0.0
+  lints: 4.0.0
   flutter_test:
     sdk: flutter
-
-  # The "flutter_lints" package below contains a set of recommended lints to
-  # encourage good coding practices. The lint set provided by the package is
-  # activated in the `analysis_options.yaml` file located at the root of your
-  # package. See that file for information about deactivating specific lint
-  # rules and activating additional ones.
-  flutter_lints: ^3.0.0
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
@@ -63,6 +105,25 @@ flutter:
   # included with your application, so that you can use the icons in
   # the material Icons class.
   uses-material-design: true
+
+  assets:
+    - assets/fonts/
+    - assets/images/
+    - assets/videos/
+    - assets/audios/
+    - assets/rive_animations/
+    - assets/pdfs/
+    - assets/jsons/
+
+  fonts:
+    - family: 'Moneygraphy'
+      fonts:
+        - asset: assets/fonts/Moneygraphy-Rounded.ttf
+          weight: 200
+    - family: 'Pretendard'
+      fonts:
+        - asset: assets/fonts/Moneygraphy-Rounded.ttf
+          weight: 500
 
   # To add assets to your application, add an assets section, like this:
   # assets:
