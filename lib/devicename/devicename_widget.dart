@@ -3,8 +3,6 @@ import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:provider/provider.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:supplies_manage/variables_file.dart';
 import 'devicename_model.dart';
@@ -60,7 +58,7 @@ class _DevicenameWidgetState extends State<DevicenameWidget> {
           ),
         ),
         title: Padding(
-          padding: EdgeInsets.only(top: 2.0),
+          padding: const EdgeInsets.only(top: 2.0),
           child: Text(
             ' ${name[widget.indexNum]}',
             style: FlutterFlowTheme.of(context).headlineMedium.override(
@@ -70,7 +68,7 @@ class _DevicenameWidgetState extends State<DevicenameWidget> {
             ),
           ),
         ),
-        actions: [],
+        actions: const [],
         centerTitle: false,
         elevation: 0.0,
       ),
@@ -89,7 +87,7 @@ class _DevicenameWidgetState extends State<DevicenameWidget> {
                 mainAxisSize: MainAxisSize.max,
                 children: [
                   Padding(
-                    padding: EdgeInsets.all(25.0),
+                    padding: const EdgeInsets.all(25.0),
                     child: ClipRRect(
                       borderRadius: BorderRadius.circular(12.0),
                       child: Container(
@@ -115,7 +113,7 @@ class _DevicenameWidgetState extends State<DevicenameWidget> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       mainAxisSize: MainAxisSize.max,
                       children: [
-                        SizedBox(height: 20),
+                        const SizedBox(height: 20),
                         Container(
                           //width: 100.0,
                           //height: 100.0,
@@ -135,7 +133,7 @@ class _DevicenameWidgetState extends State<DevicenameWidget> {
                             ),
                           ),
                         ),
-                        SizedBox(height: 10),
+                        const SizedBox(height: 10),
                         Container(
                           //width: MediaQuery.sizeOf(context).width * 0.8,
                           height: 100.0,
@@ -162,7 +160,7 @@ class _DevicenameWidgetState extends State<DevicenameWidget> {
               ),
             ),
             Align(
-              alignment: AlignmentDirectional(-0.9, 0.0),
+              alignment: const AlignmentDirectional(-0.9, 0.0),
               child: Text(
                 '대여 사유',
                 style: FlutterFlowTheme.of(context).titleLarge.override(
@@ -173,8 +171,7 @@ class _DevicenameWidgetState extends State<DevicenameWidget> {
                 ),
               ),
             ),
-            SizedBox(height: 10),
-            ////////////////////////////////////////////////////////////////////////////////////////////////////////
+            const SizedBox(height: 10),
             Center(
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -214,12 +211,12 @@ class _DevicenameWidgetState extends State<DevicenameWidget> {
                         ),
                         enabledBorder: OutlineInputBorder(
                           borderSide:
-                          BorderSide(color: Colors.transparent, width: 1.0),
+                          const BorderSide(color: Colors.transparent, width: 1.0),
                           borderRadius: BorderRadius.circular(8.0),
                         ),
                         focusedBorder: OutlineInputBorder(
                           borderSide:
-                          BorderSide(color: Colors.grey, width: 1.0),
+                          const BorderSide(color: Colors.grey, width: 1.0),
                           borderRadius: BorderRadius.circular(8.0),
                         ),
                         filled: true,
@@ -238,7 +235,7 @@ class _DevicenameWidgetState extends State<DevicenameWidget> {
                     ),
                   ),
 
-                  SizedBox(height: 20.0),
+                  const SizedBox(height: 20.0),
 
                   // 대여 수량
                   Container(
@@ -259,7 +256,7 @@ class _DevicenameWidgetState extends State<DevicenameWidget> {
                             useGoogleFonts: false,
                           ),
                         ),
-                        SizedBox(width: 10.0),
+                        const SizedBox(width: 10.0),
                         Container(
                           width: 150.0,
                           height: 40.0,
@@ -310,9 +307,9 @@ class _DevicenameWidgetState extends State<DevicenameWidget> {
             ),
             /////////////////////////////////////////////////////////////////////////
             Align(
-              alignment: AlignmentDirectional(0.0, 0.0),
+              alignment: const AlignmentDirectional(0.0, 0.0),
               child: Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(0.0, 20.0, 0.0, 24.0),
+                padding: const EdgeInsetsDirectional.fromSTEB(0.0, 20.0, 0.0, 24.0),
                 child: FFButtonWidget(
                   onPressed: () {
                     print('대여항목 넘겨주는 버튼_devicename');
@@ -321,20 +318,20 @@ class _DevicenameWidgetState extends State<DevicenameWidget> {
                         context: context,
                         barrierDismissible: true,
                         builder: (BuildContext context) {
-                          return AlertDialog(content: Text('대여할까요?'), actions: [
+                          return AlertDialog(content: const Text('대여할까요?'), actions: [
                             Center(
                               child: Column(
                                 children: [
                                   TextButton(
-                                    child: Text('예'),
+                                    child: const Text('예'),
                                     onPressed: () {
                                       Navigator.of(context).pop();
                                       context.pop(); // 인수 보내야 함
                                     },
                                   ),
-                                  SizedBox(height: 12.0),
+                                  const SizedBox(height: 12.0),
                                   TextButton(
-                                    child: Text('아니요'),
+                                    child: const Text('아니요'),
                                     onPressed: () {
                                       Navigator.of(context).pop();
                                     },
@@ -349,9 +346,9 @@ class _DevicenameWidgetState extends State<DevicenameWidget> {
                   options: FFButtonOptions(
                     width: 300.0,
                     height: 60.0,
-                    padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
+                    padding: const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
                     iconPadding:
-                    EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
+                    const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
                     color: FlutterFlowTheme.of(context).primary,
                     textStyle:
                     FlutterFlowTheme.of(context).headlineSmall.override(
@@ -361,7 +358,7 @@ class _DevicenameWidgetState extends State<DevicenameWidget> {
                       useGoogleFonts: false,
                     ),
                     elevation: 3.0,
-                    borderSide: BorderSide(
+                    borderSide: const BorderSide(
                       color: Colors.transparent,
                       width: 1.0,
                     ),
