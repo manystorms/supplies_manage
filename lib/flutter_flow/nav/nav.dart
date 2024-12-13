@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:provider/provider.dart';
+import 'package:supplies_manage/loginpage/loginpage_widget.dart';
 
 import '/index.dart';
 import '/main.dart';
@@ -36,18 +37,24 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
       initialLocation: '/',
       debugLogDiagnostics: true,
       refreshListenable: appStateNotifier,
-      errorBuilder: (context, state) => MainpageWidget(),
+      errorBuilder: (context, state) => LoginPageWidget(),
       routes: [
         FFRoute(
           name: '_initialize',
           path: '/',
-          builder: (context, _) => MainpageWidget(),
+          builder: (context, _) => LoginPageWidget(),
         ),
 
         FFRoute(
           name: 'devicesearch',
           path: '/devicesearch',
           builder: (context, params) => DevicesearchWidget(),
+        ),
+
+        FFRoute(
+          name: 'loginpage',
+          path: '/loginpage',
+          builder: (context, params) => LoginPageWidget(),
         ),
 
         FFRoute(
