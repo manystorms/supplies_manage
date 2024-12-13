@@ -42,6 +42,10 @@ class LoginCreateAccountPageModel
 
   Future<bool> createAccountSuccess() async {
     try{
+      if(passwordCreateTextController.text != passwordCreateConfirmTextController.text) {
+        return false;
+      }
+
       await createAccount(emailAddressCreateTextController.text, passwordCreateTextController.text);
       return true;
     }catch(e) {
