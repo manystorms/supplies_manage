@@ -3,12 +3,9 @@ import '/flutter_flow/flutter_flow_button_tabbar.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
-import 'dart:math';
 import 'package:flutter/material.dart';
-import 'package:flutter/scheduler.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:provider/provider.dart';
 
 import 'loginpage_model.dart';
 export 'loginpage_model.dart';
@@ -70,15 +67,15 @@ class _LoginCreateAccountPageWidgetState
             curve: Curves.easeInOut,
             delay: 0.0.ms,
             duration: 400.0.ms,
-            begin: Offset(0.0, 80.0),
-            end: Offset(0.0, 0.0),
+            begin: const Offset(0.0, 80.0),
+            end: const  Offset(0.0, 0.0),
           ),
           ScaleEffect(
             curve: Curves.easeInOut,
             delay: 150.0.ms,
             duration: 400.0.ms,
-            begin: Offset(0.8, 0.8),
-            end: Offset(1.0, 1.0),
+            begin: const Offset(0.8, 0.8),
+            end: const Offset(1.0, 1.0),
           ),
         ],
       ),
@@ -97,8 +94,8 @@ class _LoginCreateAccountPageWidgetState
             curve: Curves.easeInOut,
             delay: 300.0.ms,
             duration: 400.0.ms,
-            begin: Offset(0.0, 20.0),
-            end: Offset(0.0, 0.0),
+            begin: const Offset(0.0, 20.0),
+            end: const Offset(0.0, 0.0),
           ),
         ],
       ),
@@ -117,8 +114,8 @@ class _LoginCreateAccountPageWidgetState
             curve: Curves.easeInOut,
             delay: 300.0.ms,
             duration: 400.0.ms,
-            begin: Offset(0.0, 20.0),
-            end: Offset(0.0, 0.0),
+            begin: const Offset(0.0, 20.0),
+            end: const Offset(0.0, 0.0),
           ),
         ],
       ),
@@ -148,7 +145,7 @@ class _LoginCreateAccountPageWidgetState
             mainAxisSize: MainAxisSize.max,
             children: [
               Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(0, 32, 0, 16),
+                padding: const  EdgeInsetsDirectional.fromSTEB(0, 32, 0, 16),
                 child: Text(
                   '물리 준비실 \n물품 대여 프로그램',
                   style: FlutterFlowTheme.of(context).displaySmall.override(
@@ -162,20 +159,20 @@ class _LoginCreateAccountPageWidgetState
               ),
               Expanded(
                 child: Align(
-                  alignment: AlignmentDirectional(0, 0),
+                  alignment: const AlignmentDirectional(0, 0),
                   child: Padding(
-                    padding: EdgeInsetsDirectional.fromSTEB(0, 12, 0, 12),
+                    padding: const EdgeInsetsDirectional.fromSTEB(0, 12, 0, 12),
                     child: Container(
                       width: double.infinity,
                       height: MediaQuery.sizeOf(context).height * 0.8,
-                      constraints: BoxConstraints(
+                      constraints: const BoxConstraints(
                         maxWidth: 530,
                       ),
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(12),
                       ),
                       child: Padding(
-                        padding: EdgeInsetsDirectional.fromSTEB(0, 16, 0, 0),
+                        padding: const EdgeInsetsDirectional.fromSTEB(0, 16, 0, 0),
                         child: Column(
                           children: [
                             Expanded(
@@ -183,9 +180,9 @@ class _LoginCreateAccountPageWidgetState
                                 controller: _model.tabBarController,
                                 children: [
                                   Align(
-                                    alignment: AlignmentDirectional(0, -1),
+                                    alignment: const AlignmentDirectional(0, -1),
                                     child: Padding(
-                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                      padding: const EdgeInsetsDirectional.fromSTEB(
                                           24, 16, 24, 0),
                                       child: SingleChildScrollView(
                                         child: Column(
@@ -228,7 +225,7 @@ class _LoginCreateAccountPageWidgetState
                                               ),
                                             ),
                                             Padding(
-                                              padding: EdgeInsetsDirectional
+                                              padding: const EdgeInsetsDirectional
                                                   .fromSTEB(0, 4, 0, 24),
                                               child: Text(
                                                 '물리실 물품을 손쉽게 관리하고\n편하게 대여할 수 있도록 개발한 프로그램',
@@ -252,7 +249,7 @@ class _LoginCreateAccountPageWidgetState
                                               ),
                                             ),
                                             Padding(
-                                              padding: EdgeInsetsDirectional
+                                              padding: const EdgeInsetsDirectional
                                                   .fromSTEB(0, 0, 0, 16),
                                               child: Container(
                                                 width: double.infinity,
@@ -262,7 +259,7 @@ class _LoginCreateAccountPageWidgetState
                                                   focusNode: _model
                                                       .emailAddressCreateFocusNode,
                                                   autofocus: true,
-                                                  autofillHints: [
+                                                  autofillHints: const [
                                                     AutofillHints.email
                                                   ],
                                                   obscureText: false,
@@ -341,7 +338,7 @@ class _LoginCreateAccountPageWidgetState
                                                         .of(context)
                                                         .secondaryBackground,
                                                     contentPadding:
-                                                    EdgeInsets.all(24),
+                                                    const EdgeInsets.all(24),
                                                   ),
                                                   style: FlutterFlowTheme.of(
                                                       context)
@@ -372,7 +369,7 @@ class _LoginCreateAccountPageWidgetState
                                               ),
                                             ),
                                             Padding(
-                                              padding: EdgeInsetsDirectional
+                                              padding: const EdgeInsetsDirectional
                                                   .fromSTEB(0, 0, 0, 16),
                                               child: Container(
                                                 width: double.infinity,
@@ -382,7 +379,7 @@ class _LoginCreateAccountPageWidgetState
                                                   focusNode: _model
                                                       .passwordCreateFocusNode,
                                                   autofocus: true,
-                                                  autofillHints: [
+                                                  autofillHints: const [
                                                     AutofillHints.password
                                                   ],
                                                   obscureText: !_model
@@ -462,7 +459,7 @@ class _LoginCreateAccountPageWidgetState
                                                         .of(context)
                                                         .secondaryBackground,
                                                     contentPadding:
-                                                    EdgeInsets.all(24),
+                                                    const EdgeInsets.all(24),
                                                     suffixIcon: InkWell(
                                                       onTap: () => safeSetState(
                                                             () => _model
@@ -513,7 +510,7 @@ class _LoginCreateAccountPageWidgetState
                                               ),
                                             ),
                                             Padding(
-                                              padding: EdgeInsetsDirectional
+                                              padding: const EdgeInsetsDirectional
                                                   .fromSTEB(0, 0, 0, 16),
                                               child: Container(
                                                 width: double.infinity,
@@ -523,7 +520,7 @@ class _LoginCreateAccountPageWidgetState
                                                   focusNode: _model
                                                       .passwordCreateConfirmFocusNode,
                                                   autofocus: true,
-                                                  autofillHints: [
+                                                  autofillHints: const [
                                                     AutofillHints.password
                                                   ],
                                                   obscureText: !_model
@@ -603,7 +600,7 @@ class _LoginCreateAccountPageWidgetState
                                                         .of(context)
                                                         .secondaryBackground,
                                                     contentPadding:
-                                                    EdgeInsets.all(24),
+                                                    const EdgeInsets.all(24),
                                                     suffixIcon: InkWell(
                                                       onTap: () => safeSetState(
                                                             () => _model
@@ -655,24 +652,26 @@ class _LoginCreateAccountPageWidgetState
                                             ),
                                             Align(
                                               alignment:
-                                              AlignmentDirectional(0, 0),
+                                              const AlignmentDirectional(0, 0),
                                               child: Padding(
-                                                padding: EdgeInsetsDirectional
+                                                padding: const EdgeInsetsDirectional
                                                     .fromSTEB(0, 0, 0, 16),
                                                 child: FFButtonWidget(
-                                                  onPressed: () {
-                                                    print('Button pressed ...');
+                                                  onPressed: () async {
+                                                    if(await _model.createAccountSuccess() == true) {
+                                                      context.push('/mainpage');
+                                                    }
                                                   },
                                                   text: 'Get Started',
                                                   options: FFButtonOptions(
                                                     width: 230,
                                                     height: 52,
                                                     padding:
-                                                    EdgeInsetsDirectional
+                                                    const EdgeInsetsDirectional
                                                         .fromSTEB(
                                                         0, 0, 0, 0),
                                                     iconPadding:
-                                                    EdgeInsetsDirectional
+                                                    const EdgeInsetsDirectional
                                                         .fromSTEB(
                                                         0, 0, 0, 0),
                                                     color: FlutterFlowTheme.of(
@@ -696,7 +695,7 @@ class _LoginCreateAccountPageWidgetState
                                                               .titleSmallFamily),
                                                     ),
                                                     elevation: 3,
-                                                    borderSide: BorderSide(
+                                                    borderSide: const BorderSide(
                                                       color: Colors.transparent,
                                                       width: 1,
                                                     ),
@@ -714,9 +713,9 @@ class _LoginCreateAccountPageWidgetState
                                     ),
                                   ),
                                   Align(
-                                    alignment: AlignmentDirectional(0, -1),
+                                    alignment: const AlignmentDirectional(0, -1),
                                     child: Padding(
-                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                      padding: const EdgeInsetsDirectional.fromSTEB(
                                           24, 16, 24, 0),
                                       child: SingleChildScrollView(
                                         child: Column(
@@ -759,7 +758,7 @@ class _LoginCreateAccountPageWidgetState
                                               ),
                                             ),
                                             Padding(
-                                              padding: EdgeInsetsDirectional
+                                              padding: const EdgeInsetsDirectional
                                                   .fromSTEB(0, 4, 0, 24),
                                               child: Text(
                                                 '물리실 물품을 손쉽게 관리하고\n편하게 대여할 수 있도록 개발한 프로그램',
@@ -783,7 +782,7 @@ class _LoginCreateAccountPageWidgetState
                                               ),
                                             ),
                                             Padding(
-                                              padding: EdgeInsetsDirectional
+                                              padding: const EdgeInsetsDirectional
                                                   .fromSTEB(0, 0, 0, 16),
                                               child: Container(
                                                 width: double.infinity,
@@ -793,7 +792,7 @@ class _LoginCreateAccountPageWidgetState
                                                   focusNode: _model
                                                       .emailAddressFocusNode,
                                                   autofocus: true,
-                                                  autofillHints: [
+                                                  autofillHints: const [
                                                     AutofillHints.email
                                                   ],
                                                   obscureText: false,
@@ -872,7 +871,7 @@ class _LoginCreateAccountPageWidgetState
                                                         .of(context)
                                                         .secondaryBackground,
                                                     contentPadding:
-                                                    EdgeInsetsDirectional
+                                                    const EdgeInsetsDirectional
                                                         .fromSTEB(
                                                         24, 24, 0, 24),
                                                   ),
@@ -905,7 +904,7 @@ class _LoginCreateAccountPageWidgetState
                                               ),
                                             ),
                                             Padding(
-                                              padding: EdgeInsetsDirectional
+                                              padding: const EdgeInsetsDirectional
                                                   .fromSTEB(0, 0, 0, 16),
                                               child: Container(
                                                 width: double.infinity,
@@ -915,7 +914,7 @@ class _LoginCreateAccountPageWidgetState
                                                   focusNode:
                                                   _model.passwordFocusNode,
                                                   autofocus: true,
-                                                  autofillHints: [
+                                                  autofillHints: const [
                                                     AutofillHints.password
                                                   ],
                                                   obscureText: !_model
@@ -995,7 +994,7 @@ class _LoginCreateAccountPageWidgetState
                                                         .of(context)
                                                         .secondaryBackground,
                                                     contentPadding:
-                                                    EdgeInsetsDirectional
+                                                    const EdgeInsetsDirectional
                                                         .fromSTEB(
                                                         24, 24, 0, 24),
                                                     suffixIcon: InkWell(
@@ -1049,24 +1048,26 @@ class _LoginCreateAccountPageWidgetState
                                             ),
                                             Align(
                                               alignment:
-                                              AlignmentDirectional(0, 0),
+                                              const AlignmentDirectional(0, 0),
                                               child: Padding(
-                                                padding: EdgeInsetsDirectional
+                                                padding: const EdgeInsetsDirectional
                                                     .fromSTEB(0, 0, 0, 16),
                                                 child: FFButtonWidget(
-                                                  onPressed: () {
-                                                    print('Button pressed ...');
+                                                  onPressed: () async {
+                                                    if(await _model.signInSuccess() == true) {
+                                                      context.push('/mainpage');
+                                                    }
                                                   },
                                                   text: 'Sign In',
                                                   options: FFButtonOptions(
                                                     width: 230,
                                                     height: 52,
                                                     padding:
-                                                    EdgeInsetsDirectional
+                                                    const EdgeInsetsDirectional
                                                         .fromSTEB(
                                                         0, 0, 0, 0),
                                                     iconPadding:
-                                                    EdgeInsetsDirectional
+                                                    const EdgeInsetsDirectional
                                                         .fromSTEB(
                                                         0, 0, 0, 0),
                                                     color: FlutterFlowTheme.of(
@@ -1090,7 +1091,7 @@ class _LoginCreateAccountPageWidgetState
                                                               .titleSmallFamily),
                                                     ),
                                                     elevation: 3,
-                                                    borderSide: BorderSide(
+                                                    borderSide: const BorderSide(
                                                       color: Colors.transparent,
                                                       width: 1,
                                                     ),
@@ -1111,7 +1112,7 @@ class _LoginCreateAccountPageWidgetState
                               ),
                             ),
                             Align(
-                              alignment: Alignment(0, 0),
+                              alignment: const Alignment(0, 0),
                               child: FlutterFlowButtonTabBar(
                                 useToggleButtonStyle: true,
                                 labelStyle: FlutterFlowTheme.of(context)
@@ -1155,13 +1156,13 @@ class _LoginCreateAccountPageWidgetState
                                 borderWidth: 2,
                                 borderRadius: 12,
                                 elevation: 0,
-                                labelPadding: EdgeInsetsDirectional.fromSTEB(
+                                labelPadding: const EdgeInsetsDirectional.fromSTEB(
                                     16, 0, 16, 0),
-                                buttonMargin: EdgeInsetsDirectional.fromSTEB(
+                                buttonMargin: const EdgeInsetsDirectional.fromSTEB(
                                     12, 0, 12, 0),
-                                padding: EdgeInsetsDirectional.fromSTEB(
+                                padding: const EdgeInsetsDirectional.fromSTEB(
                                     16, 0, 16, 0),
-                                tabs: [
+                                tabs: const [
                                   Tab(
                                     text: 'Create Account',
                                   ),

@@ -1,16 +1,8 @@
-import '/flutter_flow/flutter_flow_animations.dart';
-import '/flutter_flow/flutter_flow_button_tabbar.dart';
-import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
-import '/flutter_flow/flutter_flow_widgets.dart';
-import 'dart:math';
 import 'loginpage_widget.dart'
     show LoginPageWidget;
 import 'package:flutter/material.dart';
-import 'package:flutter/scheduler.dart';
-import 'package:flutter_animate/flutter_animate.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:provider/provider.dart';
+import 'package:supplies_manage/model/sign_in_sign_up.dart';
 
 class LoginCreateAccountPageModel
     extends FlutterFlowModel<LoginPageWidget> {
@@ -47,6 +39,24 @@ class LoginCreateAccountPageModel
   TextEditingController? passwordTextController;
   late bool passwordVisibility;
   String? Function(BuildContext, String?)? passwordTextControllerValidator;
+
+  Future<bool> createAccountSuccess() async {
+    try{
+      await createAccount(emailAddressCreateTextController.text, passwordCreateTextController.text);
+      return true;
+    }catch(e) {
+      return false;
+    }
+  }
+
+  Future<bool> signInSuccess() async {
+    try{
+      await signInWithEmail(emailAddressTextController.text, passwordTextController.text);
+      return true;
+    } catch(e) {
+      return false;
+    }
+  }
 
   @override
   void initState(BuildContext context) {
