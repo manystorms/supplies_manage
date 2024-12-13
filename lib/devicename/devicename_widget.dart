@@ -9,10 +9,10 @@ import 'devicename_model.dart';
 export 'devicename_model.dart';
 
 class DevicenameWidget extends StatefulWidget {
-  final int indexNum;
+  final int suppliesNum;
 
   @immutable
-  const DevicenameWidget({required this.indexNum});
+  const DevicenameWidget({required this.suppliesNum});
 
   @override
   State<DevicenameWidget> createState() => _DevicenameWidgetState();
@@ -60,7 +60,7 @@ class _DevicenameWidgetState extends State<DevicenameWidget> {
         title: Padding(
           padding: const EdgeInsets.only(top: 2.0),
           child: Text(
-            ' ${name[widget.indexNum]}',
+            ' ${name[widget.suppliesNum]}',
             style: FlutterFlowTheme.of(context).headlineMedium.override(
               fontFamily: 'Pretendard',
               letterSpacing: 0.0,
@@ -122,7 +122,7 @@ class _DevicenameWidgetState extends State<DevicenameWidget> {
                                 .secondaryBackground,
                           ),
                           child: Text(
-                            '전체 수량: ${amount[widget.indexNum]}',
+                            '전체 수량: ${amount[widget.suppliesNum]}',
                             style: FlutterFlowTheme.of(context)
                                 .bodyMedium
                                 .override(
@@ -142,7 +142,7 @@ class _DevicenameWidgetState extends State<DevicenameWidget> {
                                 .secondaryBackground,
                           ),
                           child: Text(
-                            '대여 가능 수량 : ${availableAmount[widget.indexNum]}',
+                            '대여 가능 수량 : ${availableAmount[widget.suppliesNum]}',
                             style: FlutterFlowTheme.of(context)
                                 .bodyMedium
                                 .override(
@@ -295,7 +295,7 @@ class _DevicenameWidgetState extends State<DevicenameWidget> {
                                     () => _model.countControllerValue = count),
                             minimum: 1,
                             maximum:
-                            availableAmount[widget.indexNum], // 가변 최대 수량 설정
+                            availableAmount[widget.suppliesNum], // 가변 최대 수량 설정
                             stepSize: 1,
                           ),
                         ),

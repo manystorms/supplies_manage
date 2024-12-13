@@ -71,10 +71,10 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
 
         FFRoute(
             name: 'devicename',
-            path: '/devicename/:indexNum',
+            path: '/devicename/:supplies',
             builder: (context, params) {
-              final indexNum = params.getParam<int>('indexNum', ParamType.int) ?? 0;
-              return DevicenameWidget(indexNum: indexNum);
+              final suppliesNum = params.getParam<int>('suppliesNum', ParamType.int) ?? 0;
+              return DevicenameWidget(suppliesNum: suppliesNum);
             }
         ),
         FFRoute(

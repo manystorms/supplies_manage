@@ -17,6 +17,7 @@ class DevicesearchModel extends FlutterFlowModel<DevicesearchWidget> {
       tabBarController != null ? tabBarController!.index : 0;
 
   late SuppliesRoomData suppliesRoomInfo;
+  bool getSuppliesData = false;
 
   Future<void> getSuppliesRoomData() async{
     suppliesRoomInfo = await SuppliesRoomData.getData(schoolName, suppliesRoom);
