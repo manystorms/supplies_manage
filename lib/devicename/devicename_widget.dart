@@ -4,7 +4,7 @@ import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:supplies_manage/variables_file.dart';
+import 'package:supplies_manage/devicesearch/devicesearch_model.dart';
 import 'devicename_model.dart';
 export 'devicename_model.dart';
 
@@ -29,6 +29,7 @@ class _DevicenameWidgetState extends State<DevicenameWidget> {
     _model = createModel(context, () => DevicenameModel());
 
     _model.textFieldFocusNode ??= FocusNode();
+    print(widget.suppliesNum);
   }
 
   @override
@@ -60,7 +61,7 @@ class _DevicenameWidgetState extends State<DevicenameWidget> {
         title: Padding(
           padding: const EdgeInsets.only(top: 2.0),
           child: Text(
-            ' ${name[widget.suppliesNum]}',
+            suppliesRoomInfo.name[widget.suppliesNum],
             style: FlutterFlowTheme.of(context).headlineMedium.override(
               fontFamily: 'Pretendard',
               letterSpacing: 0.0,
@@ -122,7 +123,7 @@ class _DevicenameWidgetState extends State<DevicenameWidget> {
                                 .secondaryBackground,
                           ),
                           child: Text(
-                            '전체 수량: ${amount[widget.suppliesNum]}',
+                            '전체 수량: ${suppliesRoomInfo.amount[widget.suppliesNum]}',
                             style: FlutterFlowTheme.of(context)
                                 .bodyMedium
                                 .override(
@@ -142,7 +143,7 @@ class _DevicenameWidgetState extends State<DevicenameWidget> {
                                 .secondaryBackground,
                           ),
                           child: Text(
-                            '대여 가능 수량 : ${availableAmount[widget.suppliesNum]}',
+                            '대여 가능 수량 : ${suppliesRoomInfo.availableAmount[widget.suppliesNum]}',
                             style: FlutterFlowTheme.of(context)
                                 .bodyMedium
                                 .override(
@@ -295,7 +296,7 @@ class _DevicenameWidgetState extends State<DevicenameWidget> {
                                     () => _model.countControllerValue = count),
                             minimum: 1,
                             maximum:
-                            availableAmount[widget.suppliesNum], // 가변 최대 수량 설정
+                            suppliesRoomInfo.availableAmount[widget.suppliesNum], // 가변 최대 수량 설정
                             stepSize: 1,
                           ),
                         ),

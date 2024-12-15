@@ -71,7 +71,7 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
 
         FFRoute(
             name: 'devicename',
-            path: '/devicename/:supplies',
+            path: '/devicename/:suppliesNum',
             builder: (context, params) {
               final suppliesNum = params.getParam<int>('suppliesNum', ParamType.int) ?? 0;
               return DevicenameWidget(suppliesNum: suppliesNum);

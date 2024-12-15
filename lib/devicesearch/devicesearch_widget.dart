@@ -249,10 +249,10 @@ class _DevicesearchWidgetState extends State<DevicesearchWidget>
                                   mainAxisSize: MainAxisSize.max,
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                    for(int i = 0; i < _model.suppliesRoomInfo.name.length; i++)
+                                    for(int i = 0; i < suppliesRoomInfo.name.length; i++)
                                       InkWell(
                                         onTap: () {
-                                          print('first_tap_search ${i}');
+                                          print('first_tap_search $i');
                                         },
                                         child: Padding(
                                           padding: const EdgeInsetsDirectional.fromSTEB(
@@ -288,7 +288,7 @@ class _DevicesearchWidgetState extends State<DevicesearchWidget>
                                                         .fromSTEB(
                                                         16.0, 0.0, 0.0, 0.0),
                                                     child: Text(
-                                                      _model.suppliesRoomInfo.name[i],
+                                                      suppliesRoomInfo.name[i],
                                                       style:
                                                       FlutterFlowTheme.of(context)
                                                           .bodyLarge
@@ -387,7 +387,7 @@ class _DevicesearchWidgetState extends State<DevicesearchWidget>
                                   mainAxisSize: MainAxisSize.max,
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                    for(int i = 0; i < _model.suppliesRoomInfo.name.length; i++)
+                                    for(int i = 0; i < suppliesRoomInfo.name.length; i++)
                                       InkWell(
                                         onTap: () {
                                           print('first_tap_search ${i}');
@@ -426,7 +426,7 @@ class _DevicesearchWidgetState extends State<DevicesearchWidget>
                                                         .fromSTEB(
                                                         16.0, 0.0, 0.0, 0.0),
                                                     child: Text(
-                                                      _model.suppliesRoomInfo.name[i],
+                                                      suppliesRoomInfo.name[i],
                                                       style:
                                                       FlutterFlowTheme.of(context)
                                                           .bodyLarge
@@ -526,7 +526,7 @@ class _DevicesearchWidgetState extends State<DevicesearchWidget>
                                   mainAxisSize: MainAxisSize.max,
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                    for(int i = 0; i < _model.suppliesRoomInfo.name.length; i++)
+                                    for(int i = 0; i < suppliesRoomInfo.name.length; i++)
                                       InkWell(
                                         onTap: () {
                                           print('first_tap_search ${i}');
@@ -565,7 +565,7 @@ class _DevicesearchWidgetState extends State<DevicesearchWidget>
                                                         .fromSTEB(
                                                         16.0, 0.0, 0.0, 0.0),
                                                     child: Text(
-                                                      _model.suppliesRoomInfo.name[i],
+                                                      suppliesRoomInfo.name[i],
                                                       style:
                                                       FlutterFlowTheme.of(context)
                                                           .bodyLarge
