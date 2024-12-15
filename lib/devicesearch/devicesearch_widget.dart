@@ -306,7 +306,6 @@ class _DevicesearchWidgetState extends State<DevicesearchWidget>
                                                     children: [
                                                       FFButtonWidget(
                                                         onPressed: () {
-                                                          print('실험 기구 검색에서 맵으로 이동하는 버튼');
                                                           context.push('/map1');
                                                         },
                                                         text: '위치',
@@ -390,7 +389,7 @@ class _DevicesearchWidgetState extends State<DevicesearchWidget>
                                     for(int i = 0; i < suppliesRoomInfo.name.length; i++)
                                       InkWell(
                                         onTap: () {
-                                          print('first_tap_search ${i}');
+                                          print('first_tap_search $i');
                                         },
                                         child: Padding(
                                           padding: const EdgeInsetsDirectional.fromSTEB(
@@ -444,7 +443,6 @@ class _DevicesearchWidgetState extends State<DevicesearchWidget>
                                                     children: [
                                                       FFButtonWidget(
                                                         onPressed: () {
-                                                          print('실험 기구 검색에서 맵으로 이동하는 버튼');
                                                           context.push('/map1');
                                                         },
                                                         text: '위치',
@@ -529,7 +527,7 @@ class _DevicesearchWidgetState extends State<DevicesearchWidget>
                                     for(int i = 0; i < suppliesRoomInfo.name.length; i++)
                                       InkWell(
                                         onTap: () {
-                                          print('first_tap_search ${i}');
+                                          print('first_tap_search $i');
                                         },
                                         child: Padding(
                                           padding: const EdgeInsetsDirectional.fromSTEB(

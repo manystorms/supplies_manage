@@ -5,6 +5,7 @@ import '/flutter_flow/flutter_flow_widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:supplies_manage/devicesearch/devicesearch_model.dart';
+import 'package:supplies_manage/show_alert.dart';
 import 'devicename_model.dart';
 export 'devicename_model.dart';
 
@@ -312,36 +313,10 @@ class _DevicenameWidgetState extends State<DevicenameWidget> {
               child: Padding(
                 padding: const EdgeInsetsDirectional.fromSTEB(0.0, 20.0, 0.0, 24.0),
                 child: FFButtonWidget(
-                  onPressed: () {
-                    print('대여항목 넘겨주는 버튼_devicename');
-                    showCupertinoDialog(
-                      //대여할지 물어보는 알림창 생성
-                        context: context,
-                        barrierDismissible: true,
-                        builder: (BuildContext context) {
-                          return AlertDialog(content: const Text('대여할까요?'), actions: [
-                            Center(
-                              child: Column(
-                                children: [
-                                  TextButton(
-                                    child: const Text('예'),
-                                    onPressed: () {
-                                      Navigator.of(context).pop();
-                                      context.pop(); // 인수 보내야 함
-                                    },
-                                  ),
-                                  const SizedBox(height: 12.0),
-                                  TextButton(
-                                    child: const Text('아니요'),
-                                    onPressed: () {
-                                      Navigator.of(context).pop();
-                                    },
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ]);
-                        });
+                  onPressed: () async {
+                    if (await showAlertWithTwoChoice(context, '대여하시겠습니까?', '예', '아니오') == true) {
+                      context.pop();
+                    }
                   },
                   text: '대여 하기',
                   options: FFButtonOptions(
