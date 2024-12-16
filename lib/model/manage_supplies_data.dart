@@ -2,6 +2,7 @@ import 'dart:typed_data';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:supplies_manage/model/user_data.dart';
 
 final FirebaseFirestore firestore = FirebaseFirestore.instance;
 
@@ -13,10 +14,10 @@ class ManageSuppliesData{
   final List<int?> availableAmount;
   final List<String?> location;
   final List<bool> consumable;
-  final List<int> imageNum;
+  final List<String?> imageUrl;
 
   ManageSuppliesData(this.schoolName, this.suppliesRoom, this.name, this.amount,
-      this.availableAmount, this.location, this.consumable, this.imageNum);
+      this.availableAmount, this.location, this.consumable, this.imageUrl);
 
   static Future<ManageSuppliesData> getData(String schoolName, String suppliesRoom) async{
     final documentSnapshot = await firestore.collection(schoolName).doc(suppliesRoom).get();
@@ -31,6 +32,7 @@ class ManageSuppliesData{
         List<String?> location = [];
         List<bool> consumable = [];
         List<int> imageNum = [];
+        List<String?> imageUrl = [];
 
         for (var supply in supplies) {
           name.add(supply['name']);
@@ -41,7 +43,16 @@ class ManageSuppliesData{
           imageNum.add(supply['imageNum']);
         }
 
-        return ManageSuppliesData(schoolName, suppliesRoom, name, amount, availableAmount, location, consumable, imageNum);
+        for(int i = 0; i < name.length; i++) {
+          if(imageNum[i] == 1) {
+            final imagePath = '$userSchoolName/$userSuppliesRoom/${name[i]}';
+            imageUrl.add(await FirebaseStorage.instance.ref(imagePath).getDownloadURL());
+          }else{
+            imageUrl.add(null);
+          }
+        }
+
+        return ManageSuppliesData(schoolName, suppliesRoom, name, amount, availableAmount, location, consumable, imageUrl);
       } else {
         throw Exception('error');
       }
@@ -70,9 +81,11 @@ class ManageSuppliesData{
   }
 
   Future<String>  inputImageData(int suppliesNum) async{
-    String imageUrl = await uploadImage('$schoolName/$suppliesRoom/${name[suppliesNum]+imageNum[suppliesNum].toString()}');
+    /*if(imageUrl[suppliesNum] == null) {
+      throw Exception('이미 이미지가 업로드 되었습니다');
+    }*/
 
-    imageNum[suppliesNum] += 1;
+    String imageUrl = await uploadImage('$schoolName/$suppliesRoom/${name[suppliesNum].toString()}');
 
     final documentSnapshot = firestore.collection(schoolName).doc(suppliesRoom);
 
@@ -81,7 +94,7 @@ class ManageSuppliesData{
       Map<String, dynamic>? data = currentData.data();
       if(data != null && data.containsKey('supplies')) {
         List<dynamic> supplies = data['supplies'];
-        supplies[suppliesNum]['imageNum'] = imageNum[suppliesNum];
+        supplies[suppliesNum]['imageNum'] = 1;
         await documentSnapshot.update({'supplies': supplies});
       }else{
         throw Exception('에러 발생: 데이터가 손상되었습니다. 관리자에게 문의하세요.');

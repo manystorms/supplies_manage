@@ -1,4 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_storage/firebase_storage.dart';
+import 'package:supplies_manage/model/user_data.dart';
 
 final FirebaseFirestore firestore = FirebaseFirestore.instance;
 
@@ -10,13 +12,13 @@ class SuppliesRoomData{
   final List<int?> availableAmount;
   final List<String?> location;
   final List<bool> consumable;
-  final List<int> imageNum;
+  final List<String?> imageUrl;
   final List<String> applicationUserName;
   final List<String> applicationSuppliesName;
   final List<int> applicationRentAmount;
 
   SuppliesRoomData(this.schoolName, this.suppliesRoom, this.name, this.amount, this.availableAmount, this.location,
-      this.consumable, this.imageNum, this.applicationUserName, this.applicationSuppliesName, this.applicationRentAmount);
+      this.consumable, this.imageUrl, this.applicationUserName, this.applicationSuppliesName, this.applicationRentAmount);
 
   static Future<SuppliesRoomData> getData(String schoolName, String suppliesRoom) async{
     final documentSnapshot = await firestore.collection(schoolName).doc(suppliesRoom).get();
@@ -30,6 +32,7 @@ class SuppliesRoomData{
       List<String?> location = [];
       List<bool> consumable = [];
       List<int> imageNum = [];
+      List<String?> imageUrl = [];
       List<String> applicationUserName = [];
       List<String> applicationSuppliesName = [];
       List<int> applicationRentAmount = [];
@@ -47,6 +50,15 @@ class SuppliesRoomData{
         }
       }
 
+      for(int i = 0; i < name.length; i++) {
+        if(imageNum[i] == 1) {
+          final imagePath = '$userSchoolName/$userSuppliesRoom/${name[i]}';
+          imageUrl.add(await FirebaseStorage.instance.ref(imagePath).getDownloadURL());
+        }else{
+          imageUrl.add(null);
+        }
+      }
+
       if (data != null && data.containsKey('applicationList')) {
         List<dynamic> applications = data['applicationList'];
 
@@ -58,7 +70,7 @@ class SuppliesRoomData{
       }
 
       return SuppliesRoomData(schoolName, suppliesRoom, name, amount, availableAmount,
-          location, consumable, imageNum, applicationUserName, applicationSuppliesName, applicationRentAmount);
+          location, consumable, imageUrl, applicationUserName, applicationSuppliesName, applicationRentAmount);
     }else{
       throw Exception('에러 발생: 데이터가 손상되었습니다.');
     }

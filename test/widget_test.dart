@@ -28,7 +28,7 @@ void main() async{
   print(suppliesRoomInfo.availableAmount);
   print(suppliesRoomInfo.location);
   print(suppliesRoomInfo.consumable);
-  print(suppliesRoomInfo.imageNum);
+  print(suppliesRoomInfo.imageUrl);
   print(suppliesRoomInfo.applicationUserName);
   print(suppliesRoomInfo.applicationSuppliesName);
   print(suppliesRoomInfo.applicationRentAmount);

@@ -1,11 +1,8 @@
-import '/flutter_flow/flutter_flow_count_controller.dart';
-import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
-import '/flutter_flow/flutter_flow_widgets.dart';
 import 'devicename_widget.dart' show DevicenameWidget;
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:provider/provider.dart';
+
+const defaultImage = 'https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FwpGLY%2FbtrwzcJvegQ%2FEQ5bmLOAbh1XCNImCShY50%2Fimg.png';
 
 class DevicenameModel extends FlutterFlowModel<DevicenameWidget> {
   ///  State fields for stateful widgets in this page.

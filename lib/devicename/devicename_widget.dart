@@ -3,7 +3,6 @@ import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:supplies_manage/devicesearch/devicesearch_model.dart';
 import 'package:supplies_manage/show_alert.dart';
 import 'devicename_model.dart';
@@ -30,7 +29,6 @@ class _DevicenameWidgetState extends State<DevicenameWidget> {
     _model = createModel(context, () => DevicenameModel());
 
     _model.textFieldFocusNode ??= FocusNode();
-    print(widget.suppliesNum);
   }
 
   @override
@@ -50,7 +48,6 @@ class _DevicenameWidgetState extends State<DevicenameWidget> {
         automaticallyImplyLeading: false,
         leading: InkWell(
           onTap: () {
-            print('뒤로가기_devicename');
             Navigator.pop(context);
           },
           child: Icon(
@@ -98,7 +95,7 @@ class _DevicenameWidgetState extends State<DevicenameWidget> {
                         child: AspectRatio(
                           aspectRatio: 3 / 4, // 비율 유지
                           child: Image.network(
-                            'https://images.unsplash.com/photo-1575052814086-f385e2e2ad1b?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Nnx8eW9nYXxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=800&q=60',
+                            suppliesRoomInfo.imageUrl[widget.suppliesNum]??defaultImage,
                             fit: BoxFit.cover,
                           ),
                         ),
@@ -314,11 +311,11 @@ class _DevicenameWidgetState extends State<DevicenameWidget> {
                 padding: const EdgeInsetsDirectional.fromSTEB(0.0, 20.0, 0.0, 24.0),
                 child: FFButtonWidget(
                   onPressed: () async {
-                    if (await showAlertWithTwoChoice(context, '대여하시겠습니까?', '예', '아니오') == true) {
+                    if (await showAlertWithTwoChoice(context, '대여 신청하시겠습니까?', '예', '아니오') == true && context.mounted) {
                       context.pop();
                     }
                   },
-                  text: '대여 하기',
+                  text: '대여 신청',
                   options: FFButtonOptions(
                     width: 300.0,
                     height: 60.0,

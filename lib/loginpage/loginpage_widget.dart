@@ -658,7 +658,7 @@ class _LoginCreateAccountPageWidgetState
                                                     .fromSTEB(0, 0, 0, 16),
                                                 child: FFButtonWidget(
                                                   onPressed: () async {
-                                                    if(await _model.createAccountSuccess(context) == true) {
+                                                    if(await _model.createAccountSuccess(context) == true && context.mounted) {
                                                       context.push('/mainpage');
                                                     }
                                                   },
@@ -1054,7 +1054,7 @@ class _LoginCreateAccountPageWidgetState
                                                     .fromSTEB(0, 0, 0, 16),
                                                 child: FFButtonWidget(
                                                   onPressed: () async {
-                                                    if(await _model.signInSuccess(context) == true) {
+                                                    if(await _model.signInSuccess(context) == true && context.mounted) {
                                                       context.push('/mainpage');
                                                     }
                                                   },

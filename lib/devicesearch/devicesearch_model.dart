@@ -21,7 +21,7 @@ class DevicesearchModel extends FlutterFlowModel<DevicesearchWidget> {
   bool getSuppliesData = false;
 
   Future<void> getSuppliesRoomData() async{
-    suppliesRoomInfo = await SuppliesRoomData.getData(schoolName, suppliesRoom);
+    suppliesRoomInfo = await SuppliesRoomData.getData(userSchoolName, userSuppliesRoom);
   }
 
   @override
