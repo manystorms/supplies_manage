@@ -289,7 +289,7 @@ class _DevicenameWidgetState extends State<DevicenameWidget> {
                                 useGoogleFonts: false,
                               ),
                             ),
-                            count: _model.countControllerValue ??= 1,
+                            count: _model.countControllerValue,
                             updateCount: (count) => setState(
                                     () => _model.countControllerValue = count),
                             minimum: 1,
@@ -312,7 +312,13 @@ class _DevicenameWidgetState extends State<DevicenameWidget> {
                 child: FFButtonWidget(
                   onPressed: () async {
                     if (await showAlertWithTwoChoice(context, '대여 신청하시겠습니까?', '예', '아니오') == true && context.mounted) {
-                      context.pop();
+                      try{
+                        await _model.applicationRentButtonPressed(widget.suppliesNum);
+                        await showAlertWithoutChoice(context, '대여 완료되었습니다');
+                        context.pop();
+                      }catch(e){
+                        await showAlertWithoutChoice(context, '오류가 발생해 대여가 되지 않았습니다');
+                      }
                     }
                   },
                   text: '대여 신청',
