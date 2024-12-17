@@ -5,6 +5,7 @@ const userSchoolName = '물리준비실';
 const userSuppliesRoom = 'supplies';
 enum UserRole {student, admin}
 UserRole userRole = UserRole.student;
+String userName = 'No name';
 
 final FirebaseFirestore firestore = FirebaseFirestore.instance;
 
@@ -25,6 +26,8 @@ Future<User> signInWithEmail(String email, String password) async {
   List<String> adminUid = List<String>.from(userDoc['adminUid']);
 
   if(adminUid.contains(user.uid)) userRole = UserRole.admin;
+
+  userName = user.email??'No name';
 
   return userCredential.user!;
 }

@@ -2,6 +2,7 @@ import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
+import 'package:supplies_manage/model/sign_in_sign_up.dart';
 import 'mainpage_model.dart';
 export 'mainpage_model.dart';
 
@@ -110,10 +111,68 @@ class _MainpageWidgetState extends State<MainpageWidget> {
                             mainAxisSize: MainAxisSize.max,
                             mainAxisAlignment: MainAxisAlignment.end,
                             children: [
-                              Icon(
-                                Icons.account_circle,
-                                color: FlutterFlowTheme.of(context).secondaryBackground,
-                                size: 30,
+                              InkWell(
+                                onTap: () {
+                                  showDialog(
+                                      context: context,
+                                      builder: (BuildContext context) {
+                                        return Dialog(
+                                          child: Padding(
+                                            padding: const EdgeInsets.all(12),
+                                            child: Container(
+                                              width: 160,
+                                              height: 140,
+                                              decoration: BoxDecoration(
+                                                color: FlutterFlowTheme.of(context).secondaryBackground,
+                                                borderRadius: BorderRadius.circular(8),
+                                              ),
+                                              child: Padding(
+                                                padding: const EdgeInsets.all(12),
+                                                child: Column(
+                                                  mainAxisSize: MainAxisSize.max,
+                                                  mainAxisAlignment: MainAxisAlignment.center,
+                                                  children: [
+                                                    Icon(
+                                                      Icons.account_circle,
+                                                      color: FlutterFlowTheme.of(context).primaryText,
+                                                      size: 60,
+                                                    ),
+                                                    Padding(
+                                                      padding: const EdgeInsetsDirectional.fromSTEB(0, 4, 0, 0),
+                                                      child: Text(
+                                                        userName,
+                                                        style: FlutterFlowTheme.of(context).bodyMedium.override(
+                                                          fontFamily: 'Pretendard',
+                                                          letterSpacing: 0.0,
+                                                          useGoogleFonts: false,
+                                                        ),
+                                                      ),
+                                                    ),
+                                                    Padding(
+                                                      padding: const EdgeInsetsDirectional.fromSTEB(0, 4, 0, 0),
+                                                      child: Text(
+                                                        userRole.name,
+                                                        style: FlutterFlowTheme.of(context).labelSmall.override(
+                                                          fontFamily: 'Pretendard',
+                                                          letterSpacing: 0.0,
+                                                          useGoogleFonts: false,
+                                                        ),
+                                                      ),
+                                                    ),
+                                                  ],
+                                                ),
+                                              ),
+                                            ),
+                                          ),
+                                        );
+                                      }
+                                  );
+                                },
+                                child: Icon(
+                                  Icons.account_circle,
+                                  color: FlutterFlowTheme.of(context).secondaryBackground,
+                                  size: 30,
+                                ),
                               ),
                               const SizedBox(width: 10),
                               InkWell(
