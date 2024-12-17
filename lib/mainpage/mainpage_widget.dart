@@ -118,9 +118,8 @@ class _MainpageWidgetState extends State<MainpageWidget> {
                               const SizedBox(width: 10),
                               InkWell(
                                 onTap: () async{
-                                  if(await _model.logOutButtonPressed(context) && context.mounted) {
-                                    context.push('/loginpage');
-                                  }
+                                  await _model.logOutButtonPressed(context);
+                                  if(context.mounted) context.push('/loginpage');
                                 },
                                 child: Icon(
                                   Icons.logout_rounded,
