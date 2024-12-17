@@ -9,11 +9,6 @@ late SuppliesRoomData suppliesRoomInfo;
 class BorrowlabelModel extends FlutterFlowModel<BorrowlabelWidget> {
   ///  State fields for stateful widgets in this page.
 
-  // State field(s) for TabBar widget.
-  TabController? tabBarController;
-  int get tabBarCurrentIndex =>
-      tabBarController != null ? tabBarController!.index : 0;
-
   bool getSuppliesData = false;
 
   Future<void> getSuppliesRoomData() async{
@@ -24,7 +19,5 @@ class BorrowlabelModel extends FlutterFlowModel<BorrowlabelWidget> {
   void initState(BuildContext context) {}
 
   @override
-  void dispose() {
-    tabBarController?.dispose();
-  }
+  void dispose() {}
 }

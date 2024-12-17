@@ -13,10 +13,6 @@ class DevicesearchModel extends FlutterFlowModel<DevicesearchWidget> {
   FocusNode? searchBarFocusNode;
   TextEditingController? searchBarTextController;
   String? Function(BuildContext, String?)? searchBarTextControllerValidator;
-  // State field(s) for TabBar widget.
-  TabController? tabBarController;
-  int get tabBarCurrentIndex =>
-      tabBarController != null ? tabBarController!.index : 0;
 
   bool getSuppliesData = false;
 
@@ -31,7 +27,5 @@ class DevicesearchModel extends FlutterFlowModel<DevicesearchWidget> {
   void dispose() {
     searchBarFocusNode?.dispose();
     searchBarTextController?.dispose();
-
-    tabBarController?.dispose();
   }
 }
