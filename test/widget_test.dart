@@ -7,7 +7,7 @@ import 'package:supplies_manage/model/manage_supplies_data.dart';
 
 late ManageSuppliesData manageSuppliesDataInfo;
 
-void main() async{
+void test() async{
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
