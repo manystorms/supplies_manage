@@ -77,7 +77,6 @@ class SuppliesRoomData{
   }
 
   Future<void> rentSupplies(int suppliesNum, int rentAmount, String userName, String rentReason) async {
-    //현재 상태 업데이트 필요. 변경사항 없는지 체크
     if(amount[suppliesNum] == null || availableAmount[suppliesNum] == null) return;
 
     if((availableAmount[suppliesNum]??0) < rentAmount) {
