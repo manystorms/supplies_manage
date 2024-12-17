@@ -1,13 +1,21 @@
-import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
-import '/flutter_flow/flutter_flow_widgets.dart';
 import 'mainpage_widget.dart' show MainpageWidget;
-import 'package:auto_size_text/auto_size_text.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:supplies_manage/show_alert.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:provider/provider.dart';
 
 class MainpageModel extends FlutterFlowModel<MainpageWidget> {
+  Future<bool> logOutButtonPressed(BuildContext context) async{
+    try{
+      await FirebaseAuth.instance.signOut();
+      if(context.mounted) await showAlertWithoutChoice(context, '로그아웃되었습니다');
+      return true;
+    }catch(e){
+      if(context.mounted) await showAlertWithoutChoice(context, '에러 발생: 로그아웃 실패');
+      return false;
+    }
+  }
+
   @override
   void initState(BuildContext context) {}
 

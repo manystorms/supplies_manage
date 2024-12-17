@@ -60,41 +60,79 @@ class _MainpageWidgetState extends State<MainpageWidget> {
                   decoration: const BoxDecoration(
                     color: Color(0x9A1D2428),
                   ),
-                  child: Padding(
-                    padding:
-                    const EdgeInsetsDirectional.fromSTEB(16.0, 64.0, 16.0, 12.0),
-                    child: Column(
-                      mainAxisSize: MainAxisSize.max,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Padding(
-                          padding: const EdgeInsetsDirectional.fromSTEB(
-                              0.0, 0.0, 0.0, 8.0),
-                          child: Text(
-                            '물리 준비실 물품 대여',
-                            style: FlutterFlowTheme.of(context)
-                                .displaySmall
-                                .override(
-                              fontFamily: 'Moneygraphy',
-                              color: Colors.white,
-                              letterSpacing: 0.0,
-                              fontWeight: FontWeight.bold,
-                              useGoogleFonts: false,
+                  child: Stack(
+                    children: [
+                      Stack(
+                        children: [
+                          Padding(
+                            padding:
+                            const EdgeInsetsDirectional.fromSTEB(16.0, 64.0, 16.0, 12.0),
+                            child: Column(
+                              mainAxisSize: MainAxisSize.max,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Padding(
+                                  padding: const EdgeInsetsDirectional.fromSTEB(
+                                      0.0, 0.0, 0.0, 8.0),
+                                  child: Text(
+                                    '물리 준비실 물품 대여',
+                                    style: FlutterFlowTheme.of(context)
+                                        .displaySmall
+                                        .override(
+                                      fontFamily: 'Moneygraphy',
+                                      color: Colors.white,
+                                      letterSpacing: 0.0,
+                                      fontWeight: FontWeight.bold,
+                                      useGoogleFonts: false,
+                                    ),
+                                  ),
+                                ),
+                                Text(
+                                  '물리 준비실 물품 파악 및 신청',
+                                  style:
+                                  FlutterFlowTheme.of(context).labelMedium.override(
+                                    fontFamily: 'Pretendard',
+                                    color: const Color(0xBEFFFFFF),
+                                    letterSpacing: 0.0,
+                                    useGoogleFonts: false,
+                                  ),
+                                ),
+                              ],
                             ),
                           ),
-                        ),
-                        Text(
-                          '물리 준비실 물품 파악 및 신청',
-                          style:
-                          FlutterFlowTheme.of(context).labelMedium.override(
-                            fontFamily: 'Pretendard',
-                            color: const Color(0xBEFFFFFF),
-                            letterSpacing: 0.0,
-                            useGoogleFonts: false,
+                        ],
+                      ),
+                      Align(
+                        alignment: const AlignmentDirectional(1, -1),
+                        child: Padding(
+                          padding: const EdgeInsetsDirectional.fromSTEB(0, 15, 10, 0),
+                          child: Row(
+                            mainAxisSize: MainAxisSize.max,
+                            mainAxisAlignment: MainAxisAlignment.end,
+                            children: [
+                              Icon(
+                                Icons.account_circle,
+                                color: FlutterFlowTheme.of(context).secondaryBackground,
+                                size: 30,
+                              ),
+                              const SizedBox(width: 10),
+                              InkWell(
+                                onTap: () async{
+                                  if(await _model.logOutButtonPressed(context) && context.mounted) {
+                                    context.push('/loginpage');
+                                  }
+                                },
+                                child: Icon(
+                                  Icons.logout_rounded,
+                                  color: FlutterFlowTheme.of(context).secondaryBackground,
+                                  size: 30,
+                                ),
+                              )
+                            ],
                           ),
                         ),
-                      ],
-                    ),
+                      )
+                    ],
                   ),
                 ),
               ),
