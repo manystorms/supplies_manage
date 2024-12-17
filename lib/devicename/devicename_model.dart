@@ -11,15 +11,16 @@ class DevicenameModel extends FlutterFlowModel<DevicenameWidget> {
 
   // State field(s) for TextField widget.
   FocusNode? textFieldFocusNode;
-  TextEditingController? textController;
+  TextEditingController textController = TextEditingController();
   String? Function(BuildContext, String?)? textControllerValidator;
   // State field(s) for CountController widget.
   int countControllerValue = 1;
 
   Future<void> applicationRentButtonPressed(int suppliesNum) async {
-      User? user = FirebaseAuth.instance.currentUser;
-      if(user == null || user.email == null) throw Exception('에러 발생: 데이터가 손상되었습니다. 관리자에게 문의하세요');
-      await suppliesRoomInfo.rentSupplies(suppliesNum, 1, user.email??'');
+    User? user = FirebaseAuth.instance.currentUser;
+    if(user == null || user.email == null) throw Exception('에러 발생: 데이터가 손상되었습니다. 관리자에게 문의하세요');
+
+    await suppliesRoomInfo.rentSupplies(suppliesNum, countControllerValue, user.email??'', textController.text);
   }
 
   @override
@@ -28,6 +29,6 @@ class DevicenameModel extends FlutterFlowModel<DevicenameWidget> {
   @override
   void dispose() {
     textFieldFocusNode?.dispose();
-    textController?.dispose();
+    textController.dispose();
   }
 }

@@ -76,7 +76,7 @@ class SuppliesRoomData{
     }
   }
 
-  Future<void> rentSupplies(int suppliesNum, int rentAmount, String userName) async {
+  Future<void> rentSupplies(int suppliesNum, int rentAmount, String userName, String rentReason) async {
     //현재 상태 업데이트 필요. 변경사항 없는지 체크
     if(amount[suppliesNum] == null || availableAmount[suppliesNum] == null) return;
 
@@ -93,11 +93,22 @@ class SuppliesRoomData{
       Map<String, dynamic>? data = currentData.data();
       if(data != null && data.containsKey('supplies')) {
         List<dynamic> applicationList = data['applicationList'];
-        applicationList.add({
-          'userName': userName,
-          'suppliesName': name[suppliesNum],
-          'rentAmount': rentAmount
-        });
+
+        if(rentReason == '') {
+          applicationList.add({
+            'userName': userName,
+            'suppliesName': name[suppliesNum],
+            'rentAmount': rentAmount
+          });
+        }else{
+          applicationList.add({
+            'userName': userName,
+            'suppliesName': name[suppliesNum],
+            'rentAmount': rentAmount,
+            'rentReason': rentReason
+          });
+        }
+
 
         List<dynamic> supplies = data['supplies'];
         supplies[suppliesNum]['availableAmount'] = availableAmount[suppliesNum];
