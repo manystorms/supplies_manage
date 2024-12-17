@@ -2,7 +2,7 @@ import '/flutter_flow/flutter_flow_util.dart';
 import 'devicesearch_widget.dart' show DevicesearchWidget;
 import 'package:flutter/material.dart';
 import 'package:supplies_manage/model/supplies_room_data.dart';
-import 'package:supplies_manage/model/user_data.dart';
+import 'package:supplies_manage/model/sign_in_sign_up.dart';
 
 late SuppliesRoomData suppliesRoomInfo;
 

@@ -85,6 +85,7 @@ class LoginCreateAccountPageModel
   Future<bool> signInSuccess(BuildContext context) async {
     try{
       await signInWithEmail(emailAddressTextController.text, passwordTextController.text);
+      if(context.mounted && userRole == UserRole.admin) await showAlertWithoutChoice(context, '관리자 계정입니다');
       return true;
     } on FirebaseAuthException catch (e) {
       if(context.mounted) {
