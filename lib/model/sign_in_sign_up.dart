@@ -25,6 +25,7 @@ Future<User> signInWithEmail(String email, String password) async {
 
   List<String> adminUid = List<String>.from(userDoc['adminUid']);
 
+  userRole = UserRole.student;
   if(adminUid.contains(user.uid)) userRole = UserRole.admin;
 
   userName = user.email??'No name';
@@ -42,5 +43,18 @@ Future<User> createAccount(String email, String password) async {
     return userCredential.user!;
   }else{
     throw('No User Data');
+  }
+}
+
+Future<bool> isSessionExpired() async {
+  try{
+    User? user = FirebaseAuth.instance.currentUser;
+
+    if(user == null) return true;
+
+    await user.getIdToken(true);
+    return false;
+  }catch(e) {
+    return true;
   }
 }

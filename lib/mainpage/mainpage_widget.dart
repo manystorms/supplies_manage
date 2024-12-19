@@ -176,10 +176,7 @@ class _MainpageWidgetState extends State<MainpageWidget> {
                               ),
                               const SizedBox(width: 10),
                               InkWell(
-                                onTap: () async{
-                                  await _model.logOutButtonPressed(context);
-                                  if(context.mounted) context.push('/loginpage');
-                                },
+                                onTap: () => _model.logOutButtonOnTap(context),
                                 child: Icon(
                                   Icons.logout_rounded,
                                   color: FlutterFlowTheme.of(context).secondaryBackground,
@@ -200,10 +197,7 @@ class _MainpageWidgetState extends State<MainpageWidget> {
                   mainAxisSize: MainAxisSize.max,
                   children: [
                     InkWell(
-                      onTap: () {
-                        print('실험기구 검색창으로 이동하는 버튼_mainpage');
-                        context.push('/devicesearch');
-                      },
+                      onTap: () => _model.deviceSearchOnTap(context),
                       child: Padding(
                         padding:
                         const EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 8.0),
@@ -282,10 +276,7 @@ class _MainpageWidgetState extends State<MainpageWidget> {
                       ),
                     ),
                     InkWell(
-                      onTap: () {
-                        print('신청 목록으로 이동하는 버튼_mainpage');
-                        context.push('/borrowlabel');
-                      },
+                      onTap: () => _model.borrowlavelOnTap(context),
                       child: Padding(
                         padding:
                         const EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 8.0),

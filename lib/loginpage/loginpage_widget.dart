@@ -738,7 +738,7 @@ class _LoginCreateAccountPageWidgetState
                                                 ),
                                               ),
                                             Text(
-                                              'Welcome Back',
+                                              'Welcome',
                                               textAlign: TextAlign.start,
                                               style:
                                               FlutterFlowTheme.of(context)
