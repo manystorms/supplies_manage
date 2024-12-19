@@ -99,7 +99,7 @@ class _DevicesearchWidgetState extends State<DevicesearchWidget>
                           textCapitalization: TextCapitalization.words,
                           obscureText: false,
                           decoration: InputDecoration(
-                            labelText: 'Search for your items...',
+                            labelText: '물품 검색',
                             labelStyle: FlutterFlowTheme.of(context)
                                 .labelMedium
                                 .override(
