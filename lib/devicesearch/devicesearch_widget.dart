@@ -178,7 +178,7 @@ class _DevicesearchWidgetState extends State<DevicesearchWidget>
                           size: 30.0,
                         ),
                         onPressed: () {
-                          print('검색 버튼_devicesearch'); //검색버튼??
+                          print('검색 버튼_devicesearch');
                         },
                       ),
                     ),
@@ -193,134 +193,129 @@ class _DevicesearchWidgetState extends State<DevicesearchWidget>
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         for(int i = 0; i < suppliesRoomInfo.name.length; i++)
-                          InkWell(
-                            onTap: () {
-                              print('first_tap_search $i');
-                            },
-                            child: Padding(
-                              padding: const EdgeInsetsDirectional.fromSTEB(
-                                  16.0, 8.0, 16.0, 0.0),
-                              child: Container(
-                                width: double.infinity,
-                                decoration: BoxDecoration(
-                                  color: FlutterFlowTheme.of(context)
-                                      .primaryBackground,
-                                  borderRadius:
-                                  BorderRadius.circular(12.0),
-                                ),
-                                child: Padding(
-                                  padding: const EdgeInsetsDirectional.fromSTEB(
-                                      8.0, 8.0, 12.0, 8.0),
-                                  child: Row(
-                                    mainAxisSize: MainAxisSize.max,
-                                    crossAxisAlignment:
-                                    CrossAxisAlignment.center,
-                                    children: [
-                                      ClipRRect(
-                                        borderRadius:
-                                        BorderRadius.circular(8.0),
-                                        child: Image.network(
-                                          'https://static.nike.com/a/images/c_limit,w_592,f_auto/t_product_v1/7c5678f4-c28d-4862-a8d9-56750f839f12/zion-1-basketball-shoes-bJ0hLJ.png',
-                                          width: 70.0,
-                                          height: 70.0,
-                                          fit: BoxFit.cover,
+                          Padding(
+                            padding: const EdgeInsetsDirectional.fromSTEB(
+                                16.0, 8.0, 16.0, 0.0),
+                            child: Container(
+                              width: double.infinity,
+                              decoration: BoxDecoration(
+                                color: FlutterFlowTheme.of(context)
+                                    .primaryBackground,
+                                borderRadius:
+                                BorderRadius.circular(12.0),
+                              ),
+                              child: Padding(
+                                padding: const EdgeInsetsDirectional.fromSTEB(
+                                    8.0, 8.0, 12.0, 8.0),
+                                child: Row(
+                                  mainAxisSize: MainAxisSize.max,
+                                  crossAxisAlignment:
+                                  CrossAxisAlignment.center,
+                                  children: [
+                                    ClipRRect(
+                                      borderRadius:
+                                      BorderRadius.circular(8.0),
+                                      child: Image.network(
+                                        suppliesRoomInfo.imageUrl[i],
+                                        width: 120.0,
+                                        height: 70.0,
+                                        fit: BoxFit.cover,
+                                      ),
+                                    ),
+                                    Padding(
+                                      padding: const EdgeInsetsDirectional
+                                          .fromSTEB(
+                                          16.0, 0.0, 0.0, 0.0),
+                                      child: Text(
+                                        suppliesRoomInfo.name[i],
+                                        style:
+                                        FlutterFlowTheme.of(context)
+                                            .bodyLarge
+                                            .override(
+                                          fontFamily:
+                                          'Pretendard',
+                                          letterSpacing: 0.0,
+                                          useGoogleFonts: false,
                                         ),
                                       ),
-                                      Padding(
-                                        padding: const EdgeInsetsDirectional
-                                            .fromSTEB(
-                                            16.0, 0.0, 0.0, 0.0),
-                                        child: Text(
-                                          suppliesRoomInfo.name[i],
-                                          style:
-                                          FlutterFlowTheme.of(context)
-                                              .bodyLarge
-                                              .override(
-                                            fontFamily:
-                                            'Pretendard',
-                                            letterSpacing: 0.0,
-                                            useGoogleFonts: false,
+                                    ),
+                                    const Spacer(),    //남은 공간 모두 차지하여, 버튼 오른쪽으로 위치하도록.
+                                    Row(         //위치, 신청 버튼 수정 부분
+                                      mainAxisAlignment: MainAxisAlignment.end,
+                                      children: [
+                                        FFButtonWidget(
+                                          onPressed: () {
+                                            context.push('/map1');
+                                          },
+                                          text: '위치',
+                                          options: FFButtonOptions(
+                                            width: 75.0,
+                                            height: 70.0,
+                                            padding:
+                                            const EdgeInsetsDirectional
+                                                .fromSTEB(24.0, 0.0,
+                                                24.0, 0.0),
+                                            iconPadding:
+                                            const EdgeInsetsDirectional
+                                                .fromSTEB(0.0, 0.0,
+                                                0.0, 0.0),
+                                            color: FlutterFlowTheme.of(
+                                                context)
+                                                .primary,
+                                            textStyle: FlutterFlowTheme
+                                                .of(context)
+                                                .titleSmall
+                                                .override(
+                                              fontFamily:
+                                              'Pretendard',
+                                              letterSpacing: 0.0,
+                                              useGoogleFonts: false,
+                                            ),
+                                            elevation: 3.0,
+                                            borderSide: const BorderSide(
+                                              color: Colors.transparent,
+                                              width: 1.0,
+                                            ),
+                                            borderRadius:
+                                            BorderRadius.circular(
+                                                8.0),
                                           ),
                                         ),
-                                      ),
-                                      const Spacer(),    //남은 공간 모두 차지하여, 버튼 오른쪽으로 위치하도록.
-                                      Row(         //위치, 신청 버튼 수정 부분
-                                        mainAxisAlignment: MainAxisAlignment.end,
-                                        children: [
-                                          FFButtonWidget(
-                                            onPressed: () {
-                                              context.push('/map1');
-                                            },
-                                            text: '위치',
-                                            options: FFButtonOptions(
-                                              width: 75.0,
-                                              height: 70.0,
-                                              padding:
-                                              const EdgeInsetsDirectional
-                                                  .fromSTEB(24.0, 0.0,
-                                                  24.0, 0.0),
-                                              iconPadding:
-                                              const EdgeInsetsDirectional
-                                                  .fromSTEB(0.0, 0.0,
-                                                  0.0, 0.0),
-                                              color: FlutterFlowTheme.of(
-                                                  context)
-                                                  .primary,
-                                              textStyle: FlutterFlowTheme
-                                                  .of(context)
-                                                  .titleSmall
-                                                  .override(
-                                                fontFamily:
-                                                'Pretendard',
-                                                letterSpacing: 0.0,
-                                                useGoogleFonts: false,
-                                              ),
-                                              elevation: 3.0,
-                                              borderSide: const BorderSide(
-                                                color: Colors.transparent,
-                                                width: 1.0,
-                                              ),
-                                              borderRadius:
-                                              BorderRadius.circular(
-                                                  8.0),
+                                        const SizedBox(width: 12.0),
+                                        FFButtonWidget(
+                                          onPressed: () {
+                                            context.push('/devicename/$i');
+                                          },
+                                          text: '신청',
+                                          options: FFButtonOptions(
+                                            width: 75.0,
+                                            height: 70.0,
+                                            padding: const EdgeInsetsDirectional.fromSTEB(24.0, 0.0, 24.0, 0.0),
+                                            iconPadding:
+                                            const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
+                                            color: FlutterFlowTheme.of(context).primary,
+                                            textStyle: FlutterFlowTheme.of(context).titleSmall.override(
+                                              fontFamily: 'Pretendard',
+                                              color: Colors.white,
+                                              letterSpacing: 0.0,
+                                              useGoogleFonts: false,
                                             ),
-                                          ),
-                                          const SizedBox(width: 12.0),
-                                          FFButtonWidget(
-                                            onPressed: () {
-                                              context.push('/devicename/$i');
-                                            },
-                                            text: '신청',
-                                            options: FFButtonOptions(
-                                              width: 75.0,
-                                              height: 70.0,
-                                              padding: const EdgeInsetsDirectional.fromSTEB(24.0, 0.0, 24.0, 0.0),
-                                              iconPadding:
-                                              const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
-                                              color: FlutterFlowTheme.of(context).primary,
-                                              textStyle: FlutterFlowTheme.of(context).titleSmall.override(
-                                                fontFamily: 'Pretendard',
-                                                color: Colors.white,
-                                                letterSpacing: 0.0,
-                                                useGoogleFonts: false,
-                                              ),
-                                              elevation: 3.0,
-                                              borderSide: const BorderSide(
-                                                color: Colors.transparent,
-                                                width: 1.0,
-                                              ),
-                                              borderRadius: BorderRadius.circular(8.0),
+                                            elevation: 3.0,
+                                            borderSide: const BorderSide(
+                                              color: Colors.transparent,
+                                              width: 1.0,
                                             ),
+                                            borderRadius: BorderRadius.circular(8.0),
                                           ),
-                                        ],
-                                      ),
+                                        ),
+                                      ],
+                                    ),
 
-                                    ],
-                                  ),
+                                  ],
                                 ),
                               ),
                             ),
-                          )
+                          ),
                       ],
                     ),
                   ),

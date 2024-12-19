@@ -95,7 +95,7 @@ class _DevicenameWidgetState extends State<DevicenameWidget> {
                         child: AspectRatio(
                           aspectRatio: 3 / 4, // 비율 유지
                           child: Image.network(
-                            suppliesRoomInfo.imageUrl[widget.suppliesNum]??defaultImage,
+                            suppliesRoomInfo.imageUrl[widget.suppliesNum],
                             fit: BoxFit.cover,
                           ),
                         ),

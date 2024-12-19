@@ -4,8 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:supplies_manage/devicesearch/devicesearch_model.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
-const defaultImage = 'https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FwpGLY%2FbtrwzcJvegQ%2FEQ5bmLOAbh1XCNImCShY50%2Fimg.png';
-
 class DevicenameModel extends FlutterFlowModel<DevicenameWidget> {
   ///  State fields for stateful widgets in this page.
 

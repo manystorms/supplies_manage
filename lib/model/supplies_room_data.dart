@@ -4,6 +4,8 @@ import 'package:supplies_manage/model/sign_in_sign_up.dart';
 
 final FirebaseFirestore firestore = FirebaseFirestore.instance;
 
+const defaultImage = 'https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FwpGLY%2FbtrwzcJvegQ%2FEQ5bmLOAbh1XCNImCShY50%2Fimg.png';
+
 class SuppliesRoomData{
   final String schoolName;
   final String suppliesRoom;
@@ -12,7 +14,7 @@ class SuppliesRoomData{
   final List<int?> availableAmount;
   final List<String?> location;
   final List<bool> consumable;
-  final List<String?> imageUrl;
+  final List<String> imageUrl;
   final List<String> applicationUserName;
   final List<String> applicationSuppliesName;
   final List<int> applicationRentAmount;
@@ -32,7 +34,7 @@ class SuppliesRoomData{
       List<String?> location = [];
       List<bool> consumable = [];
       List<int> imageNum = [];
-      List<String?> imageUrl = [];
+      List<String> imageUrl = [];
       List<String> applicationUserName = [];
       List<String> applicationSuppliesName = [];
       List<int> applicationRentAmount = [];
@@ -55,7 +57,7 @@ class SuppliesRoomData{
           final imagePath = '$userSchoolName/$userSuppliesRoom/${name[i]}';
           imageUrl.add(await FirebaseStorage.instance.ref(imagePath).getDownloadURL());
         }else{
-          imageUrl.add(null);
+          imageUrl.add(defaultImage);
         }
       }
 
