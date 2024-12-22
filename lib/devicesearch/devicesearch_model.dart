@@ -15,9 +15,18 @@ class DevicesearchModel extends FlutterFlowModel<DevicesearchWidget> {
   String? Function(BuildContext, String?)? searchBarTextControllerValidator;
 
   bool getSuppliesData = false;
+  String? searchTarget;
 
   Future<void> getSuppliesRoomData() async{
     suppliesRoomInfo = await SuppliesRoomData.getData(userSchoolName, userSuppliesRoom);
+  }
+
+  bool isSearchTargetSupplies(int index) {
+    if(searchTarget == null || suppliesRoomInfo.name[index].contains(searchTarget??'')) {
+      return true;
+    }else{
+      return false;
+    }
   }
 
   @override

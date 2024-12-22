@@ -178,7 +178,10 @@ class _DevicesearchWidgetState extends State<DevicesearchWidget>
                           size: 30.0,
                         ),
                         onPressed: () {
-                          print('검색 버튼_devicesearch');
+                          setState(() {
+                            _model.searchTarget
+                              = (_model.searchBarTextController.text.isEmpty)? null:_model.searchBarTextController.text;
+                          });
                         },
                       ),
                     ),
