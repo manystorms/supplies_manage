@@ -3,6 +3,7 @@ import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import 'package:flutter/material.dart';
+import 'package:supplies_manage/model/sign_in_sign_up.dart';
 import 'devicesearch_model.dart';
 export 'devicesearch_model.dart';
 
@@ -76,7 +77,22 @@ class _DevicesearchWidgetState extends State<DevicesearchWidget>
                     useGoogleFonts: false,
                   ),
             ),
-            actions: const [],
+            actions: [
+              if(userRole == UserRole.admin)
+                Padding(
+                  padding: const EdgeInsetsDirectional.fromSTEB(0, 0, 15, 0),
+                  child: InkWell(
+                    onTap: () {
+                      print('a');
+                    },
+                    child: const Icon(
+                      Icons.add_rounded,
+                      color: Colors.grey,
+                      size: 24,
+                    ),
+                  )
+                ),
+            ],
             centerTitle: false,
             elevation: 0.0,
           ),
