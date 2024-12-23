@@ -4,7 +4,9 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:supplies_manage/pages/loginpage/loginpage_widget.dart';
 import 'package:supplies_manage/pages/mainpage/mainpage_widget.dart';
+import 'package:supplies_manage/pages/rent_apply_list/rent_apply_list_widget.dart';
 import 'package:supplies_manage/pages/rent_supplies/rent_supplies_widget.dart';
+import 'package:supplies_manage/pages/user_rent_list/user_rent_list_widget.dart';
 
 import '/index.dart';
 import '/flutter_flow/flutter_flow_util.dart';
@@ -43,7 +45,7 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
         FFRoute(
           name: 'devicesearch',
           path: '/devicesearch',
-          builder: (context, params) => const DevicesearchWidget(),
+          builder: (context, params) => const RentApplyListWidget(),
         ),
 
         FFRoute(
@@ -61,7 +63,7 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
         FFRoute(
           name: 'borrowlabel',
           path: '/borrowlabel',
-          builder: (context, params) => const BorrowlabelWidget(),
+          builder: (context, params) => const UserRentListWidget(),
         ),
 
         FFRoute(

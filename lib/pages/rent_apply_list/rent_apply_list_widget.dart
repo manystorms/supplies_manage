@@ -4,19 +4,19 @@ import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:supplies_manage/model/sign_in_sign_up.dart';
-import 'devicesearch_model.dart';
-export 'devicesearch_model.dart';
+import 'rent_apply_list_model.dart';
+export 'rent_apply_list_model.dart';
 
-class DevicesearchWidget extends StatefulWidget {
-  const DevicesearchWidget({super.key});
+class RentApplyListWidget extends StatefulWidget {
+  const RentApplyListWidget({super.key});
 
   @override
-  State<DevicesearchWidget> createState() => _DevicesearchWidgetState();
+  State<RentApplyListWidget> createState() => _RentApplyListWidgetState();
 }
 
-class _DevicesearchWidgetState extends State<DevicesearchWidget>
+class _RentApplyListWidgetState extends State<RentApplyListWidget>
     with TickerProviderStateMixin {
-  late DevicesearchModel _model;
+  late RentApplyListModel _model;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
@@ -29,7 +29,7 @@ class _DevicesearchWidgetState extends State<DevicesearchWidget>
   @override
   void initState(){
     super.initState();
-    _model = createModel(context, () => DevicesearchModel());
+    _model = createModel(context, () => RentApplyListModel());
 
     _model.searchBarTextController ??= TextEditingController();
     _model.searchBarFocusNode ??= FocusNode();

@@ -1,7 +1,7 @@
 import '/flutter_flow/flutter_flow_util.dart';
 import 'rent_supplies_widget.dart' show RentSuppliesWidget;
 import 'package:flutter/material.dart';
-import 'package:supplies_manage/pages/devicesearch/devicesearch_model.dart';
+import 'package:supplies_manage/pages/rent_apply_list/rent_apply_list_model.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 class DevicenameModel extends FlutterFlowModel<RentSuppliesWidget> {

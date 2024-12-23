@@ -3,7 +3,7 @@ import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import 'package:flutter/material.dart';
-import 'package:supplies_manage/pages/devicesearch/devicesearch_model.dart';
+import 'package:supplies_manage/pages/rent_apply_list/rent_apply_list_model.dart';
 import 'package:supplies_manage/show_alert.dart';
 import 'rent_supplies_model.dart';
 export 'rent_supplies_model.dart';
@@ -15,10 +15,10 @@ class RentSuppliesWidget extends StatefulWidget {
   const RentSuppliesWidget({required this.suppliesNum});
 
   @override
-  State<RentSuppliesWidget> createState() => _DevicenameWidgetState();
+  State<RentSuppliesWidget> createState() => _RentSuppliesWidgetState();
 }
 
-class _DevicenameWidgetState extends State<RentSuppliesWidget> {
+class _RentSuppliesWidgetState extends State<RentSuppliesWidget> {
   late DevicenameModel _model;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();

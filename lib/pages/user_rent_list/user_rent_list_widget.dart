@@ -4,19 +4,19 @@ import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'borrowlabel_model.dart';
-export 'borrowlabel_model.dart';
+import 'user_rent_list_model.dart';
+export 'user_rent_list_model.dart';
 
-class BorrowlabelWidget extends StatefulWidget {
-  const BorrowlabelWidget({super.key});
+class UserRentListWidget extends StatefulWidget {
+  const UserRentListWidget({super.key});
 
   @override
-  State<BorrowlabelWidget> createState() => _BorrowlabelWidgetState();
+  State<UserRentListWidget> createState() => _UserRentListWidgetState();
 }
 
-class _BorrowlabelWidgetState extends State<BorrowlabelWidget>
+class _UserRentListWidgetState extends State<UserRentListWidget>
     with TickerProviderStateMixin {
-  late BorrowlabelModel _model;
+  late UserRentListModel _model;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
   String? userName;
@@ -30,7 +30,7 @@ class _BorrowlabelWidgetState extends State<BorrowlabelWidget>
   @override
   void initState() {
     super.initState();
-    _model = createModel(context, () => BorrowlabelModel());
+    _model = createModel(context, () => UserRentListModel());
 
     getSuppliesRoomData();
 
