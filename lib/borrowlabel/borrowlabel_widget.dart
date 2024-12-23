@@ -124,7 +124,7 @@ class _BorrowlabelWidgetState extends State<BorrowlabelWidget>
                                         borderRadius:
                                         BorderRadius.circular(8.0),
                                         child: Image.network(
-                                          'https://static.nike.com/a/images/c_limit,w_592,f_auto/t_product_v1/7c5678f4-c28d-4862-a8d9-56750f839f12/zion-1-basketball-shoes-bJ0hLJ.png',
+                                          _model.getImageUrl(i),
                                           width: 70.0,
                                           height: 70.0,
                                           fit: BoxFit.cover,
@@ -192,12 +192,13 @@ class _BorrowlabelWidgetState extends State<BorrowlabelWidget>
                                           ),
                                           const SizedBox(width: 12.0),
                                           FFButtonWidget(
-                                            onPressed: () {
-                                              print('반납하는 버튼'); //이후 경로 코딩해야함
+                                            onPressed: () async{
+                                              await _model.rentCancelOnTap(context, i);
+                                              setState(() {});
                                             },
-                                            text: '반납',
+                                            text: '신청 취소',
                                             options: FFButtonOptions(
-                                              width: 75.0,
+                                              width: 95.0,
                                               height: 70.0,
                                               padding: const EdgeInsetsDirectional.fromSTEB(24.0, 0.0, 24.0, 0.0),
                                               iconPadding:

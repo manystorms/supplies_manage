@@ -18,9 +18,11 @@ class SuppliesRoomData{
   final List<String> applicationUserName;
   final List<String> applicationSuppliesName;
   final List<int> applicationRentAmount;
+  final List<String?> applicationRentReason;
+  final DocumentSnapshot<Map<String, dynamic>> backUpDocumentSnapshot;
 
-  SuppliesRoomData(this.schoolName, this.suppliesRoom, this.name, this.amount, this.availableAmount, this.location,
-      this.consumable, this.imageUrl, this.applicationUserName, this.applicationSuppliesName, this.applicationRentAmount);
+  SuppliesRoomData(this.schoolName, this.suppliesRoom, this.name, this.amount, this.availableAmount, this.location, this.consumable,
+      this.imageUrl, this.applicationUserName, this.applicationSuppliesName, this.applicationRentAmount, this.applicationRentReason, this.backUpDocumentSnapshot);
 
   static Future<SuppliesRoomData> getData(String schoolName, String suppliesRoom) async{
     final documentSnapshot = await firestore.collection(schoolName).doc(suppliesRoom).get();
@@ -38,6 +40,7 @@ class SuppliesRoomData{
       List<String> applicationUserName = [];
       List<String> applicationSuppliesName = [];
       List<int> applicationRentAmount = [];
+      List<String?> applicationRentReason = [];
 
       if (data != null && data.containsKey('supplies')) {
         List<dynamic> supplies = data['supplies'];
@@ -68,14 +71,14 @@ class SuppliesRoomData{
           applicationUserName.add(application['userName']);
           applicationSuppliesName.add(application['suppliesName']);
           applicationRentAmount.add(application['rentAmount']);
+          applicationRentReason.add(application['rentReason']);
         }
       }
 
-      return SuppliesRoomData(schoolName, suppliesRoom, name, amount, availableAmount,
-          location, consumable, imageUrl, applicationUserName, applicationSuppliesName, applicationRentAmount);
-    }else{
-      throw Exception('에러 발생: 데이터가 손상되었습니다.');
+      return SuppliesRoomData(schoolName, suppliesRoom, name, amount, availableAmount, location,
+          consumable, imageUrl, applicationUserName, applicationSuppliesName, applicationRentAmount, applicationRentReason, documentSnapshot);
     }
+    throw Exception('에러 발생: 데이터가 손상되었습니다.');
   }
 
   Future<void> rentSupplies(int suppliesNum, int rentAmount, String userName, String rentReason) async {
@@ -88,8 +91,12 @@ class SuppliesRoomData{
     availableAmount[suppliesNum] = (availableAmount[suppliesNum]??0) - rentAmount;
 
     final documentSnapshot = firestore.collection(schoolName).doc(suppliesRoom);
-
     final currentData = await documentSnapshot.get();
+
+    if(currentData != backUpDocumentSnapshot) {
+      throw Exception('에러 발생: 데이터가 변경되었습니다.\n새로고침을 하고 다시 시도하세요.');
+    }
+
     if(currentData.exists) {
       Map<String, dynamic>? data = currentData.data();
       if(data != null && data.containsKey('supplies')) {
@@ -110,31 +117,64 @@ class SuppliesRoomData{
           });
         }
 
-
         List<dynamic> supplies = data['supplies'];
         supplies[suppliesNum]['availableAmount'] = availableAmount[suppliesNum];
 
         await documentSnapshot.update({'applicationList': applicationList, 'supplies': supplies});
-      }else{
-        throw Exception('에러 발생: 데이터가 손상되었습니다. 관리자에게 문의하세요.');
+        return;
       }
     }
+    throw Exception('에러 발생: 데이터가 손상되었습니다. 관리자에게 문의하세요.');
   }
 
-  Future<void> rentCancel(String userName) async {
-    final applicatioinNum = applicationUserName.indexOf(userName);
-    if(applicatioinNum == -1) throw Exception('준비물을 예약한 적이 없습니다.');
-
-    final suppliesNum = name.indexOf(applicationSuppliesName[applicatioinNum]);
-    if(availableAmount[suppliesNum] != null) {
-      availableAmount[suppliesNum] = (availableAmount[suppliesNum]??0)+applicationRentAmount[applicatioinNum];
+  Future<void> rentCancel(int applicationNum) async {
+    final applicationName = applicationSuppliesName[applicationNum];
+    final suppliesNum = name.indexOf(applicationName);
+    if(suppliesNum == -1) {
+      throw Exception('에러 발생: 데이터가 손상되었습니다.');
     }
 
-    applicationUserName.removeAt(applicatioinNum);
-    applicationSuppliesName.removeAt(applicatioinNum);
-    applicationRentAmount.removeAt(applicatioinNum);
+    Map<String, dynamic> removedApplication = {};
+    if(applicationRentReason[applicationNum] == null) {
+      removedApplication = {
+        'rentAmount': applicationRentAmount[applicationNum],
+        'suppliesName': applicationSuppliesName[applicationNum],
+        'userName': applicationUserName[applicationNum]
+      };
+    }else{
+      removedApplication = {
+        'rentAmount': applicationRentAmount[applicationNum],
+        'suppliesName': applicationSuppliesName[applicationNum],
+        'userName': applicationUserName[applicationNum],
+        'rentReason':applicationRentReason[applicationNum]
+      };
+    }
 
 
+    final documentSnapshot = firestore.collection(schoolName).doc(suppliesRoom);
+    final currentData = await documentSnapshot.get();
+
+    /*if(currentData != backUpDocumentSnapshot) {
+      throw Exception('에러 발생: 데이터가 변경되었습니다.\n새로고침을 하고 다시 시도하세요.');
+    }*/
+
+    if (!currentData.exists) {
+      throw Exception('에러 발생: 데이터가 손상되었습니다.');
+    }
+
+    final Map<String, dynamic>? data = currentData.data();
+    if (data == null || !data.containsKey('supplies')) {
+      throw Exception('에러 발생: 데이터가 손상되었습니다.');
+    }
+
+    List<dynamic> supplies = data['supplies'];
+    supplies[suppliesNum]['availableAmount'] = availableAmount[suppliesNum]??0+applicationRentAmount[applicationNum];
+
+
+    await documentSnapshot.update({
+      'supplies': supplies,
+      "applicationList": FieldValue.arrayRemove([removedApplication])
+    });
   }
 
   /*Future<void> sendUpdateData() async{
