@@ -51,7 +51,7 @@ class _DevicenameWidgetState extends State<DevicenameWidget> {
             Navigator.pop(context);
           },
           child: Icon(
-            Icons.chevron_left_rounded,
+            Icons.arrow_back_rounded,
             color: FlutterFlowTheme.of(context).primaryText,
             size: 35.0,
           ),
