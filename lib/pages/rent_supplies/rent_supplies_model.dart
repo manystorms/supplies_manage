@@ -1,10 +1,10 @@
 import '/flutter_flow/flutter_flow_util.dart';
-import 'devicename_widget.dart' show DevicenameWidget;
+import 'rent_supplies_widget.dart' show RentSuppliesWidget;
 import 'package:flutter/material.dart';
-import 'package:supplies_manage/devicesearch/devicesearch_model.dart';
+import 'package:supplies_manage/pages/devicesearch/devicesearch_model.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
-class DevicenameModel extends FlutterFlowModel<DevicenameWidget> {
+class DevicenameModel extends FlutterFlowModel<RentSuppliesWidget> {
   ///  State fields for stateful widgets in this page.
 
   // State field(s) for TextField widget.

@@ -3,22 +3,22 @@ import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import 'package:flutter/material.dart';
-import 'package:supplies_manage/devicesearch/devicesearch_model.dart';
+import 'package:supplies_manage/pages/devicesearch/devicesearch_model.dart';
 import 'package:supplies_manage/show_alert.dart';
-import 'devicename_model.dart';
-export 'devicename_model.dart';
+import 'rent_supplies_model.dart';
+export 'rent_supplies_model.dart';
 
-class DevicenameWidget extends StatefulWidget {
+class RentSuppliesWidget extends StatefulWidget {
   final int suppliesNum;
 
   @immutable
-  const DevicenameWidget({required this.suppliesNum});
+  const RentSuppliesWidget({required this.suppliesNum});
 
   @override
-  State<DevicenameWidget> createState() => _DevicenameWidgetState();
+  State<RentSuppliesWidget> createState() => _DevicenameWidgetState();
 }
 
-class _DevicenameWidgetState extends State<DevicenameWidget> {
+class _DevicenameWidgetState extends State<RentSuppliesWidget> {
   late DevicenameModel _model;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();

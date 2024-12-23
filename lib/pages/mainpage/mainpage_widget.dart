@@ -6,22 +6,22 @@ import 'package:supplies_manage/model/sign_in_sign_up.dart';
 import 'mainpage_model.dart';
 export 'mainpage_model.dart';
 
-class MainpageWidget extends StatefulWidget {
-  const MainpageWidget({super.key});
+class MainPageWidget extends StatefulWidget {
+  const MainPageWidget({super.key});
 
   @override
-  State<MainpageWidget> createState() => _MainpageWidgetState();
+  State<MainPageWidget> createState() => _MainPageWidgetState();
 }
 
-class _MainpageWidgetState extends State<MainpageWidget> {
-  late MainpageModel _model;
+class _MainPageWidgetState extends State<MainPageWidget> {
+  late MainPageModel _model;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   void initState() {
     super.initState();
-    _model = createModel(context, () => MainpageModel());
+    _model = createModel(context, () => MainPageModel());
   }
 
   @override

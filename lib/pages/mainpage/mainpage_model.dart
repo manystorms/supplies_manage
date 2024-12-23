@@ -1,5 +1,5 @@
 import '/flutter_flow/flutter_flow_util.dart';
-import 'mainpage_widget.dart' show MainpageWidget;
+import 'mainpage_widget.dart' show MainPageWidget;
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:supplies_manage/show_alert.dart';
 import 'package:supplies_manage/model/sign_in_sign_up.dart';
@@ -19,7 +19,7 @@ List<TileInfo> tile = [
   TileInfo('대여 현황', '/ㄴㅇ', UserRole.admin)
 ];
 
-class MainpageModel extends FlutterFlowModel<MainpageWidget> {
+class MainPageModel extends FlutterFlowModel<MainPageWidget> {
   void logOutButtonOnTap(BuildContext context) async{
     try{
       await FirebaseAuth.instance.signOut();

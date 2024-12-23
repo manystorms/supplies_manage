@@ -1,18 +1,13 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
-import 'package:page_transition/page_transition.dart';
 import 'package:provider/provider.dart';
-import 'package:supplies_manage/loginpage/loginpage_widget.dart';
+import 'package:supplies_manage/pages/loginpage/loginpage_widget.dart';
+import 'package:supplies_manage/pages/mainpage/mainpage_widget.dart';
+import 'package:supplies_manage/pages/rent_supplies/rent_supplies_widget.dart';
 
 import '/index.dart';
-import '/main.dart';
-import '/flutter_flow/flutter_flow_theme.dart';
-import '/flutter_flow/lat_lng.dart';
-import '/flutter_flow/place.dart';
 import '/flutter_flow/flutter_flow_util.dart';
-import 'serialization_util.dart';
 
 export 'package:go_router/go_router.dart';
 export 'serialization_util.dart';
@@ -37,36 +32,36 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
       initialLocation: '/',
       debugLogDiagnostics: true,
       refreshListenable: appStateNotifier,
-      errorBuilder: (context, state) => LoginPageWidget(),
+      errorBuilder: (context, state) => const LoginPageWidget(),
       routes: [
         FFRoute(
           name: '_initialize',
           path: '/',
-          builder: (context, _) => LoginPageWidget(),
+          builder: (context, _) => const LoginPageWidget(),
         ),
 
         FFRoute(
           name: 'devicesearch',
           path: '/devicesearch',
-          builder: (context, params) => DevicesearchWidget(),
+          builder: (context, params) => const DevicesearchWidget(),
         ),
 
         FFRoute(
           name: 'loginpage',
           path: '/loginpage',
-          builder: (context, params) => LoginPageWidget(),
+          builder: (context, params) => const LoginPageWidget(),
         ),
 
         FFRoute(
           name: 'mainpage',
           path: '/mainpage',
-          builder: (context, params) => MainpageWidget(),
+          builder: (context, params) => const MainPageWidget(),
         ),
 
         FFRoute(
           name: 'borrowlabel',
           path: '/borrowlabel',
-          builder: (context, params) => BorrowlabelWidget(),
+          builder: (context, params) => const BorrowlabelWidget(),
         ),
 
         FFRoute(
@@ -74,18 +69,18 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
             path: '/devicename/:suppliesNum',
             builder: (context, params) {
               final suppliesNum = params.getParam<int>('suppliesNum', ParamType.int) ?? 0;
-              return DevicenameWidget(suppliesNum: suppliesNum);
+              return RentSuppliesWidget(suppliesNum: suppliesNum);
             }
         ),
         FFRoute(
           name: 'map1',
           path: '/map1',
-          builder: (context, params) => Map1Widget(),
+          builder: (context, params) => const Map1Widget(),
         ),
         FFRoute(
           name: 'map2',
           path: '/map2',
-          builder: (context, params) => Map2Widget(),
+          builder: (context, params) => const Map2Widget(),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
     );
@@ -249,7 +244,7 @@ class TransitionInfo {
   final Duration duration;
   final Alignment? alignment;
 
-  static TransitionInfo appDefault() => TransitionInfo(hasTransition: false);
+  static TransitionInfo appDefault() => const TransitionInfo(hasTransition: false);
 }
 
 class RootPageContext {
