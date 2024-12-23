@@ -3,18 +3,17 @@ import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import 'package:flutter/material.dart';
-import 'package:supplies_manage/model/sign_in_sign_up.dart';
-import 'rent_apply_list_model.dart';
-export 'rent_apply_list_model.dart';
+import 'rent_status_list_model.dart';
+export 'rent_status_list_model.dart';
 
-class RentApplyListWidget extends StatefulWidget {
-  const RentApplyListWidget({super.key});
+class RentStatusListWidget extends StatefulWidget {
+  const RentStatusListWidget({super.key});
 
   @override
-  State<RentApplyListWidget> createState() => _RentApplyListWidgetState();
+  State<RentStatusListWidget> createState() => _RentStatusListWidgetState();
 }
 
-class _RentApplyListWidgetState extends State<RentApplyListWidget>
+class _RentStatusListWidgetState extends State<RentStatusListWidget>
     with TickerProviderStateMixin {
   late RentApplyListModel _model;
 
@@ -72,12 +71,26 @@ class _RentApplyListWidgetState extends State<RentApplyListWidget>
             title: Text(
               '실험 기구 검색',
               style: FlutterFlowTheme.of(context).titleLarge.override(
-                    fontFamily: 'Pretendard',
-                    letterSpacing: 0.0,
-                    useGoogleFonts: false,
-                  ),
+                fontFamily: 'Pretendard',
+                letterSpacing: 0.0,
+                useGoogleFonts: false,
+              ),
             ),
-            actions: const [],
+            actions: [
+              Padding(
+                  padding: const EdgeInsetsDirectional.fromSTEB(0, 0, 15, 0),
+                  child: InkWell(
+                    onTap: () {
+                      print('a');
+                    },
+                    child: const Icon(
+                      Icons.add_rounded,
+                      color: Colors.grey,
+                      size: 24,
+                    ),
+                  )
+              ),
+            ],
             centerTitle: false,
             elevation: 0.0,
           ),
@@ -104,17 +117,17 @@ class _RentApplyListWidgetState extends State<RentApplyListWidget>
                             labelStyle: FlutterFlowTheme.of(context)
                                 .labelMedium
                                 .override(
-                                  fontFamily: 'Pretendard',
-                                  letterSpacing: 0.0,
-                                  useGoogleFonts: false,
-                                ),
+                              fontFamily: 'Pretendard',
+                              letterSpacing: 0.0,
+                              useGoogleFonts: false,
+                            ),
                             hintStyle: FlutterFlowTheme.of(context)
                                 .labelMedium
                                 .override(
-                                  fontFamily: 'Pretendard',
-                                  letterSpacing: 0.0,
-                                  useGoogleFonts: false,
-                                ),
+                              fontFamily: 'Pretendard',
+                              letterSpacing: 0.0,
+                              useGoogleFonts: false,
+                            ),
                             enabledBorder: OutlineInputBorder(
                               borderSide: BorderSide(
                                 color: FlutterFlowTheme.of(context).alternate,
@@ -145,7 +158,7 @@ class _RentApplyListWidgetState extends State<RentApplyListWidget>
                             ),
                             filled: true,
                             fillColor:
-                                FlutterFlowTheme.of(context).primaryBackground,
+                            FlutterFlowTheme.of(context).primaryBackground,
                             contentPadding: const EdgeInsetsDirectional.fromSTEB(
                                 24.0, 24.0, 20.0, 24.0),
                             prefixIcon: Icon(
@@ -155,11 +168,11 @@ class _RentApplyListWidgetState extends State<RentApplyListWidget>
                             ),
                           ),
                           style:
-                              FlutterFlowTheme.of(context).bodyMedium.override(
-                                    fontFamily: 'Pretendard',
-                                    letterSpacing: 0.0,
-                                    useGoogleFonts: false,
-                                  ),
+                          FlutterFlowTheme.of(context).bodyMedium.override(
+                            fontFamily: 'Pretendard',
+                            letterSpacing: 0.0,
+                            useGoogleFonts: false,
+                          ),
                           validator: _model.searchBarTextControllerValidator
                               .asValidator(context),
                         ),
@@ -167,7 +180,7 @@ class _RentApplyListWidgetState extends State<RentApplyListWidget>
                     ),
                     Padding(
                       padding:
-                          const EdgeInsetsDirectional.fromSTEB(0.0, 12.0, 12.0, 0.0),
+                      const EdgeInsetsDirectional.fromSTEB(0.0, 12.0, 12.0, 0.0),
                       child: FlutterFlowIconButton(
                         borderColor: Colors.transparent,
                         borderRadius: 30.0,
@@ -181,7 +194,7 @@ class _RentApplyListWidgetState extends State<RentApplyListWidget>
                         onPressed: () {
                           setState(() {
                             _model.searchTarget
-                              = (_model.searchBarTextController.text.isEmpty)? null:_model.searchBarTextController.text;
+                            = (_model.searchBarTextController.text.isEmpty)? null:_model.searchBarTextController.text;
                           });
                         },
                       ),
@@ -290,7 +303,7 @@ class _RentApplyListWidgetState extends State<RentApplyListWidget>
                                           onPressed: () {
                                             context.push('/rentsupplies/$i');
                                           },
-                                          text: '신청',
+                                          text: '수정',
                                           options: FFButtonOptions(
                                             width: 75.0,
                                             height: 70.0,
@@ -314,7 +327,6 @@ class _RentApplyListWidgetState extends State<RentApplyListWidget>
                                         ),
                                       ],
                                     ),
-
                                   ],
                                 ),
                               ),
