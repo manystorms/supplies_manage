@@ -93,9 +93,9 @@ class SuppliesRoomData{
     final documentSnapshot = firestore.collection(schoolName).doc(suppliesRoom);
     final currentData = await documentSnapshot.get();
 
-    if(currentData != backUpDocumentSnapshot) {
+    /*if(currentData != backUpDocumentSnapshot) {
       throw Exception('에러 발생: 데이터가 변경되었습니다.\n새로고침을 하고 다시 시도하세요.');
-    }
+    }*/
 
     if(currentData.exists) {
       Map<String, dynamic>? data = currentData.data();
@@ -168,7 +168,14 @@ class SuppliesRoomData{
     }
 
     List<dynamic> supplies = data['supplies'];
-    supplies[suppliesNum]['availableAmount'] = availableAmount[suppliesNum]??0+applicationRentAmount[applicationNum];
+    if(availableAmount[suppliesNum] != null) {
+      availableAmount[suppliesNum] = (availableAmount[suppliesNum]??0)+applicationRentAmount[applicationNum];
+      supplies[suppliesNum]['availableAmount'] = availableAmount[suppliesNum];
+    }
+    applicationRentAmount.removeAt(applicationNum);
+    applicationSuppliesName.removeAt(applicationNum);
+    applicationUserName.removeAt(applicationNum);
+    applicationRentReason.removeAt(applicationNum);
 
 
     await documentSnapshot.update({
