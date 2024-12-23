@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:supplies_manage/pages/rent_apply_list/rent_apply_list_model.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
-class DevicenameModel extends FlutterFlowModel<RentSuppliesWidget> {
+class RentSuppliesModel extends FlutterFlowModel<RentSuppliesWidget> {
   ///  State fields for stateful widgets in this page.
 
   // State field(s) for TextField widget.

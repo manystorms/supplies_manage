@@ -43,8 +43,8 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
         ),
 
         FFRoute(
-          name: 'devicesearch',
-          path: '/devicesearch',
+          name: 'rentapplylist',
+          path: '/rentapplylist',
           builder: (context, params) => const RentApplyListWidget(),
         ),
 
@@ -61,14 +61,14 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
         ),
 
         FFRoute(
-          name: 'borrowlabel',
-          path: '/borrowlabel',
+          name: 'userrentlist',
+          path: '/userrentlist',
           builder: (context, params) => const UserRentListWidget(),
         ),
 
         FFRoute(
-            name: 'devicename',
-            path: '/devicename/:suppliesNum',
+            name: 'rentsupplies',
+            path: '/rentsupplies/:suppliesNum',
             builder: (context, params) {
               final suppliesNum = params.getParam<int>('suppliesNum', ParamType.int) ?? 0;
               return RentSuppliesWidget(suppliesNum: suppliesNum);

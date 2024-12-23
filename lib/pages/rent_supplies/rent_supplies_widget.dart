@@ -19,14 +19,14 @@ class RentSuppliesWidget extends StatefulWidget {
 }
 
 class _RentSuppliesWidgetState extends State<RentSuppliesWidget> {
-  late DevicenameModel _model;
+  late RentSuppliesModel _model;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   void initState() {
     super.initState();
-    _model = createModel(context, () => DevicenameModel());
+    _model = createModel(context, () => RentSuppliesModel());
 
     _model.textFieldFocusNode ??= FocusNode();
   }

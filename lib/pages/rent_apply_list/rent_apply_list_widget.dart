@@ -303,7 +303,7 @@ class _RentApplyListWidgetState extends State<RentApplyListWidget>
                                         const SizedBox(width: 12.0),
                                         FFButtonWidget(
                                           onPressed: () {
-                                            context.push('/devicename/$i');
+                                            context.push('/rentsupplies/$i');
                                           },
                                           text: '신청',
                                           options: FFButtonOptions(

@@ -14,8 +14,8 @@ class TileInfo{
 }
 
 List<TileInfo> tile = [
-  TileInfo('물품 검색', '/devicesearch', UserRole.student),
-  TileInfo('내 대여 목록', '/borrowlabel', UserRole.student),
+  TileInfo('물품 검색', '/rentapplylist', UserRole.student),
+  TileInfo('내 대여 목록', '/userrentlist', UserRole.student),
   TileInfo('대여 현황', '/ㄴㅇ', UserRole.admin)
 ];
 
