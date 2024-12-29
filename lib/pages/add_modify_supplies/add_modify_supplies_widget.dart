@@ -425,8 +425,8 @@ class _AddModifySuppliesWidgetState extends State<AddModifySuppliesWidget> {
                                     padding: const EdgeInsetsDirectional.fromSTEB(
                                         16, 12, 16, 12),
                                     child: FFButtonWidget(
-                                      onPressed: () {
-                                        print('addModifyComplete pressed ...');
+                                      onPressed: () async{
+                                        await _model.uploadImageButtonOnTap(context);
                                       },
                                       text: '사진 업로드',
                                       icon: const Icon(

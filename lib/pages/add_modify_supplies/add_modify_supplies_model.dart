@@ -31,6 +31,14 @@ class AddModifySuppliesModel extends FlutterFlowModel<AddModifySuppliesWidget> {
   // State field(s) for checkConsumable widget.
   bool checkConsumableValue = false;
 
+  Future<void> uploadImageButtonOnTap(BuildContext context) async{
+    try{
+      await suppliesRoomInfo.getImage();
+    }catch(e) {
+      if(context.mounted) await showAlertWithoutChoice(context, '에러 발생: 다시 시도하세요');
+    }
+  }
+
   Future<void> completeButtonOnTap(BuildContext context) async{
     if(suppliesNameTextController.text.isEmpty) {
       await showAlertWithoutChoice(context, '준비물의 이름을 입력하세요');

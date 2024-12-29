@@ -37,6 +37,7 @@ class ManageSuppliesData extends SuppliesRoomData{
         applicationRentReason,
         backUpDocumentSnapshot,
   );
+  XFile? imageFile;
 
   static Future<ManageSuppliesData> getData(String schoolName, String suppliesRoom) async{
     final documentSnapshot = await firestore.collection(schoolName).doc(suppliesRoom).get();
@@ -109,16 +110,28 @@ class ManageSuppliesData extends SuppliesRoomData{
       'consumable': inputConsumable
     };
 
-    await documentSnapshot.update({
+    await documentSnapshot.set({
       'supplies': FieldValue.arrayUnion([inputSuppliesData])
-    });
+    }, SetOptions(merge: true));
+
+    name.add(inputName);
+    amount.add(inputAmount);
+    availableAmount.add(inputAmount);
+    location.add(inputLocation);
+    consumable.add(inputConsumable);
+    imageUrl.add(defaultImage);
+
+    imageUrl.last = await inputImageData(name.length-1);
+  }
+
+  Future<void> getImage() async{
+    final ImagePicker picker = ImagePicker();
+    imageFile = await picker.pickImage(source: ImageSource.gallery);
+
+    if (imageFile == null) throw Exception('error: there is no image');
   }
 
   Future<String>  inputImageData(int suppliesNum) async{
-    /*if(imageUrl[suppliesNum] == null) {
-      throw Exception('이미 이미지가 업로드 되었습니다');
-    }*/
-
     String imageUrl = await uploadImage('$schoolName/$suppliesRoom/${name[suppliesNum].toString()}');
 
     final documentSnapshot = firestore.collection(schoolName).doc(suppliesRoom);
@@ -139,12 +152,10 @@ class ManageSuppliesData extends SuppliesRoomData{
   }
 
   Future<String> uploadImage(String filePath) async {
-    final ImagePicker picker = ImagePicker();
-    final XFile? image = await picker.pickImage(source: ImageSource.gallery);
+    final tempImage = imageFile;
+    if (tempImage == null) throw Exception('에러 발생');
 
-    if (image == null) throw('error: there is no image');
-
-    Uint8List fileBytes = await image.readAsBytes();
+    Uint8List fileBytes = await tempImage.readAsBytes();
 
     TaskSnapshot snapshot = await FirebaseStorage.instance
         .ref(filePath)
