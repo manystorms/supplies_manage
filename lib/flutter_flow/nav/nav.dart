@@ -3,10 +3,6 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:supplies_manage/pages/loginpage/loginpage_widget.dart';
-import 'package:supplies_manage/pages/mainpage/mainpage_widget.dart';
-import 'package:supplies_manage/pages/rent_apply_list/rent_apply_list_widget.dart';
-import 'package:supplies_manage/pages/rent_supplies/rent_supplies_widget.dart';
-import 'package:supplies_manage/pages/user_rent_list/user_rent_list_widget.dart';
 
 import '/index.dart';
 import '/flutter_flow/flutter_flow_util.dart';
@@ -59,13 +55,11 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           path: '/mainpage',
           builder: (context, params) => const MainPageWidget(),
         ),
-
         FFRoute(
           name: 'userrentlist',
           path: '/userrentlist',
           builder: (context, params) => const UserRentListWidget(),
         ),
-
         FFRoute(
             name: 'rentsupplies',
             path: '/rentsupplies/:suppliesNum',
@@ -73,6 +67,11 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
               final suppliesNum = params.getParam<int>('suppliesNum', ParamType.int) ?? 0;
               return RentSuppliesWidget(suppliesNum: suppliesNum);
             }
+        ),
+        FFRoute(
+          name: 'rentstatuslist',
+          path: '/rentstatuslist',
+          builder: (context, params) => const RentStatusListWidget(),
         ),
         FFRoute(
           name: 'map1',

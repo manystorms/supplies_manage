@@ -69,7 +69,7 @@ class _RentStatusListWidgetState extends State<RentStatusListWidget>
               },
             ),
             title: Text(
-              '실험 기구 검색',
+              '실험 기구 추가/수정',
               style: FlutterFlowTheme.of(context).titleLarge.override(
                 fontFamily: 'Pretendard',
                 letterSpacing: 0.0,
