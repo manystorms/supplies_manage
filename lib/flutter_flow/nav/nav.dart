@@ -56,6 +56,11 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           builder: (context, params) => const MainPageWidget(),
         ),
         FFRoute(
+          name: 'totalrentlist',
+          path: '/totalrentlist',
+          builder: (context, params) => const TotalRentListWidget(),
+        ),
+        FFRoute(
           name: 'userrentlist',
           path: '/userrentlist',
           builder: (context, params) => const UserRentListWidget(),
