@@ -37,13 +37,16 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           path: '/',
           builder: (context, _) => const LoginPageWidget(),
         ),
-
+        FFRoute(
+          name: 'addmodifysupplies',
+          path: '/addmodifysupplies',
+          builder: (context, params) => const AddModifySuppliesWidget(),
+        ),
         FFRoute(
           name: 'rentapplylist',
           path: '/rentapplylist',
           builder: (context, params) => const RentApplyListWidget(),
         ),
-
         FFRoute(
           name: 'loginpage',
           path: '/loginpage',
