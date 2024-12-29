@@ -53,6 +53,16 @@ class _AddModifySuppliesWidgetState extends State<AddModifySuppliesWidget> {
         appBar: AppBar(
           backgroundColor: FlutterFlowTheme.of(context).secondaryBackground,
           automaticallyImplyLeading: false,
+          leading: InkWell(
+            onTap: () {
+              context.pop();
+            },
+            child: Icon(
+              Icons.arrow_back,
+              color: FlutterFlowTheme.of(context).primaryText,
+              size: 24,
+            ),
+          ),
           title: Column(
             mainAxisSize: MainAxisSize.max,
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -214,8 +224,7 @@ class _AddModifySuppliesWidgetState extends State<AddModifySuppliesWidget> {
                                   Material(
                                     color: Colors.transparent,
                                     child: SwitchListTile.adaptive(
-                                      value: _model.checkIsInputAmountValue ??=
-                                      true,
+                                      value: _model.checkIsInputAmountValue,
                                       onChanged: (newValue) async {
                                         safeSetState(() =>
                                         _model.checkIsInputAmountValue =
@@ -379,8 +388,7 @@ class _AddModifySuppliesWidgetState extends State<AddModifySuppliesWidget> {
                                   Material(
                                     color: Colors.transparent,
                                     child: SwitchListTile.adaptive(
-                                      value: _model.checkConsumableValue ??=
-                                      true,
+                                      value: _model.checkConsumableValue,
                                       onChanged: (newValue) async {
                                         safeSetState(() => _model
                                             .checkConsumableValue = newValue);
@@ -459,6 +467,52 @@ class _AddModifySuppliesWidgetState extends State<AddModifySuppliesWidget> {
                                       ),
                                     ),
                                   ),
+                                  Padding(
+                                    padding: const EdgeInsetsDirectional.fromSTEB(
+                                        16, 12, 16, 12),
+                                    child: FFButtonWidget(
+                                      onPressed: () {
+                                        print('addModifyComplete pressed ...');
+                                      },
+                                      text: '위치 입력',
+                                      icon: const Icon(
+                                        Icons.map_rounded,
+                                        size: 20,
+                                      ),
+                                      options: FFButtonOptions(
+                                        width: double.infinity,
+                                        height: 48,
+                                        padding: const EdgeInsetsDirectional.fromSTEB(
+                                            24, 0, 24, 0),
+                                        iconPadding:
+                                        const EdgeInsetsDirectional.fromSTEB(
+                                            0, 0, 0, 0),
+                                        color: FlutterFlowTheme.of(context)
+                                            .primary,
+                                        textStyle: FlutterFlowTheme.of(context)
+                                            .titleSmall
+                                            .override(
+                                          fontFamily:
+                                          FlutterFlowTheme.of(context)
+                                              .titleSmallFamily,
+                                          color: Colors.white,
+                                          letterSpacing: 0.0,
+                                          useGoogleFonts: GoogleFonts
+                                              .asMap()
+                                              .containsKey(
+                                              FlutterFlowTheme.of(
+                                                  context)
+                                                  .titleSmallFamily),
+                                        ),
+                                        elevation: 3,
+                                        borderSide: const BorderSide(
+                                          color: Colors.transparent,
+                                          width: 1,
+                                        ),
+                                        borderRadius: BorderRadius.circular(8),
+                                      ),
+                                    ),
+                                  ),
                                 ]
                                     .divide(const SizedBox(height: 12))
                                     .addToEnd(const SizedBox(height: 32)),
@@ -481,8 +535,12 @@ class _AddModifySuppliesWidgetState extends State<AddModifySuppliesWidget> {
                       Padding(
                         padding: const EdgeInsetsDirectional.fromSTEB(16, 12, 16, 12),
                         child: FFButtonWidget(
-                          onPressed: () {
-                            print('addModifyComplete pressed ...');
+                          onPressed: () async{
+                            try{
+                              await _model.completeButtonOnTap(context);
+                            }catch(e) {
+                              setState(() {});
+                            }
                           },
                           text: '완료',
                           options: FFButtonOptions(
