@@ -1,7 +1,6 @@
 import '/flutter_flow/flutter_flow_util.dart';
 import 'total_rent_list_widget.dart' show TotalRentListWidget;
 import 'package:flutter/material.dart';
-import 'package:supplies_manage/show_alert.dart';
 import 'package:supplies_manage/model/supplies_room_data.dart';
 import 'package:supplies_manage/model/sign_in_sign_up.dart';
 
