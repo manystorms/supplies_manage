@@ -151,6 +151,12 @@ class _UserRentListWidgetState extends State<UserRentListWidget>
                                       Row(         //위치, 신청 버튼 수정 부분
                                         mainAxisAlignment: MainAxisAlignment.end,
                                         children: [
+                                          Text(
+                                            '대여 신청 수량: ${suppliesRoomInfo.applicationRentAmount[i]}\n'
+                                                '대여 사유: ${suppliesRoomInfo.applicationRentReason[i]??'없음'}\n'
+                                                '현재 상태: ${suppliesRoomInfo.applicationRentState[i]}'
+                                          ),
+                                          const SizedBox(width: 16),
                                           FFButtonWidget(
                                             onPressed: () {
                                               print('실험 기구 검색에서 맵으로 이동하는 버튼');

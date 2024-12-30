@@ -4,7 +4,7 @@ import 'package:supplies_manage/model/sign_in_sign_up.dart';
 
 final FirebaseFirestore firestore = FirebaseFirestore.instance;
 
-const defaultImage = 'https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FwpGLY%2FbtrwzcJvegQ%2FEQ5bmLOAbh1XCNImCShY50%2Fimg.png';
+const defaultImage = 'https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FbnOSHZ%2FbtrLTB8V5DQ%2FnlaUCKg7kzbp7PbVKy63Qk%2Fimg.png';
 
 class SuppliesRoomData{
   final String schoolName;
@@ -19,10 +19,11 @@ class SuppliesRoomData{
   final List<String> applicationSuppliesName;
   final List<int> applicationRentAmount;
   final List<String?> applicationRentReason;
+  final List<String> applicationRentState;
   final DocumentSnapshot<Map<String, dynamic>> backUpDocumentSnapshot;
 
-  SuppliesRoomData(this.schoolName, this.suppliesRoom, this.name, this.amount, this.availableAmount, this.location, this.consumable,
-      this.imageUrl, this.applicationUserName, this.applicationSuppliesName, this.applicationRentAmount, this.applicationRentReason, this.backUpDocumentSnapshot);
+  SuppliesRoomData(this.schoolName, this.suppliesRoom, this.name, this.amount, this.availableAmount, this.location, this.consumable, this.imageUrl,
+      this.applicationUserName, this.applicationSuppliesName, this.applicationRentAmount, this.applicationRentReason, this.applicationRentState, this.backUpDocumentSnapshot);
 
   static Future<SuppliesRoomData> getData(String schoolName, String suppliesRoom) async{
     final documentSnapshot = await firestore.collection(schoolName).doc(suppliesRoom).get();
@@ -41,6 +42,7 @@ class SuppliesRoomData{
       List<String> applicationSuppliesName = [];
       List<int> applicationRentAmount = [];
       List<String?> applicationRentReason = [];
+      List<String> applicationRentState = [];
 
       if (data != null && data.containsKey('supplies')) {
         List<dynamic> supplies = data['supplies'];
@@ -72,11 +74,12 @@ class SuppliesRoomData{
           applicationSuppliesName.add(application['suppliesName']);
           applicationRentAmount.add(application['rentAmount']);
           applicationRentReason.add(application['rentReason']);
+          applicationRentState.add(application['rentState']);
         }
       }
 
-      return SuppliesRoomData(schoolName, suppliesRoom, name, amount, availableAmount, location,
-          consumable, imageUrl, applicationUserName, applicationSuppliesName, applicationRentAmount, applicationRentReason, documentSnapshot);
+      return SuppliesRoomData(schoolName, suppliesRoom, name, amount, availableAmount, location, consumable,
+          imageUrl, applicationUserName, applicationSuppliesName, applicationRentAmount, applicationRentReason, applicationRentState, documentSnapshot);
     }
     throw Exception('에러 발생: 데이터가 손상되었습니다.');
   }
@@ -106,14 +109,16 @@ class SuppliesRoomData{
           applicationList.add({
             'userName': userName,
             'suppliesName': name[suppliesNum],
-            'rentAmount': rentAmount
+            'rentAmount': rentAmount,
+            'rentState': '대여 신청'
           });
         }else{
           applicationList.add({
             'userName': userName,
             'suppliesName': name[suppliesNum],
             'rentAmount': rentAmount,
-            'rentReason': rentReason
+            'rentReason': rentReason,
+            'rentState': '대여 신청'
           });
         }
 
@@ -139,14 +144,16 @@ class SuppliesRoomData{
       removedApplication = {
         'rentAmount': applicationRentAmount[applicationNum],
         'suppliesName': applicationSuppliesName[applicationNum],
-        'userName': applicationUserName[applicationNum]
+        'userName': applicationUserName[applicationNum],
+        'rentState': applicationRentState[applicationNum]
       };
     }else{
       removedApplication = {
         'rentAmount': applicationRentAmount[applicationNum],
         'suppliesName': applicationSuppliesName[applicationNum],
         'userName': applicationUserName[applicationNum],
-        'rentReason':applicationRentReason[applicationNum]
+        'rentReason':applicationRentReason[applicationNum],
+        'rentState': applicationRentState[applicationNum]
       };
     }
 
@@ -176,6 +183,7 @@ class SuppliesRoomData{
     applicationSuppliesName.removeAt(applicationNum);
     applicationUserName.removeAt(applicationNum);
     applicationRentReason.removeAt(applicationNum);
+    applicationRentState.removeAt(applicationNum);
 
 
     await documentSnapshot.update({

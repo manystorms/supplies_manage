@@ -151,7 +151,8 @@ class _TotalRentListWidgetState extends State<TotalRentListWidget>
                                     Text(
                                       '대여 신청자: ${suppliesRoomInfo.applicationUserName[i]}\n'
                                           '대여 수량: ${suppliesRoomInfo.applicationRentAmount[i]}\n'
-                                          '대여 사유: ${suppliesRoomInfo.applicationRentReason[i]}'
+                                          '대여 사유: ${suppliesRoomInfo.applicationRentReason[i]??'없음'}\n'
+                                          '현재 상태: ${suppliesRoomInfo.applicationRentState[i]}'
                                     ),
                                     const SizedBox(width: 10)
                                   ],

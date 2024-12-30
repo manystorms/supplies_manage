@@ -260,6 +260,10 @@ class _RentStatusListWidgetState extends State<RentStatusListWidget>
                                     Row(         //위치, 신청 버튼 수정 부분
                                       mainAxisAlignment: MainAxisAlignment.end,
                                       children: [
+                                        Text(
+                                          '수량: ${suppliesRoomInfo.amount[i]}\n대여 가능 수량: ${suppliesRoomInfo.availableAmount[i]}'
+                                        ),
+                                        const SizedBox(width: 16),
                                         FFButtonWidget(
                                           onPressed: () {
                                             context.push('/map1');
@@ -300,8 +304,10 @@ class _RentStatusListWidgetState extends State<RentStatusListWidget>
                                         ),
                                         const SizedBox(width: 12.0),
                                         FFButtonWidget(
-                                          onPressed: () {
-                                            context.push('/rentsupplies/$i');
+                                          onPressed: () async {
+                                            setState(() {
+                                              context.push('/rentsupplies/$i');
+                                            });
                                           },
                                           text: '수정',
                                           options: FFButtonOptions(

@@ -3,7 +3,6 @@ import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import 'package:flutter/material.dart';
-import 'package:supplies_manage/model/sign_in_sign_up.dart';
 import 'rent_apply_list_model.dart';
 export 'rent_apply_list_model.dart';
 
@@ -247,6 +246,11 @@ class _RentApplyListWidgetState extends State<RentApplyListWidget>
                                     Row(         //위치, 신청 버튼 수정 부분
                                       mainAxisAlignment: MainAxisAlignment.end,
                                       children: [
+                                        Text(
+                                            '수량: ${suppliesRoomInfo.amount[i]}\n'
+                                                '대여 가능 수량: ${suppliesRoomInfo.availableAmount[i]}'
+                                        ),
+                                        const SizedBox(width: 16),
                                         FFButtonWidget(
                                           onPressed: () {
                                             context.push('/map1');
@@ -287,8 +291,10 @@ class _RentApplyListWidgetState extends State<RentApplyListWidget>
                                         ),
                                         const SizedBox(width: 12.0),
                                         FFButtonWidget(
-                                          onPressed: () {
-                                            context.push('/rentsupplies/$i');
+                                          onPressed: () async {
+                                            setState(() {
+                                              context.push('/rentsupplies/$i');
+                                            });
                                           },
                                           text: '신청',
                                           options: FFButtonOptions(

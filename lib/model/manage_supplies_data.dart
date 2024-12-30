@@ -21,6 +21,7 @@ class ManageSuppliesData extends SuppliesRoomData{
       List<String> applicationSuppliesName,
       List<int> applicationRentAmount,
       List<String?> applicationRentReason,
+      List<String> applicationRentState,
       DocumentSnapshot<Map<String, dynamic>> backUpDocumentSnapshot,
       ) : super(
         schoolName,
@@ -35,6 +36,7 @@ class ManageSuppliesData extends SuppliesRoomData{
         applicationSuppliesName,
         applicationRentAmount,
         applicationRentReason,
+        applicationRentState,
         backUpDocumentSnapshot,
   );
   XFile? imageFile;
@@ -56,6 +58,7 @@ class ManageSuppliesData extends SuppliesRoomData{
       List<String> applicationSuppliesName = [];
       List<int> applicationRentAmount = [];
       List<String?> applicationRentReason = [];
+      List<String> applicationRentState = [];
 
       if (data != null && data.containsKey('supplies')) {
         List<dynamic> supplies = data['supplies'];
@@ -87,11 +90,12 @@ class ManageSuppliesData extends SuppliesRoomData{
           applicationSuppliesName.add(application['suppliesName']);
           applicationRentAmount.add(application['rentAmount']);
           applicationRentReason.add(application['rentReason']);
+          applicationRentState.add(application['rentState']);
         }
       }
 
-      return ManageSuppliesData(schoolName, suppliesRoom, name, amount, availableAmount, location,
-          consumable, imageUrl, applicationUserName, applicationSuppliesName, applicationRentAmount, applicationRentReason, documentSnapshot);
+      return ManageSuppliesData(schoolName, suppliesRoom, name, amount, availableAmount, location, consumable,
+          imageUrl, applicationUserName, applicationSuppliesName, applicationRentAmount, applicationRentReason, applicationRentState, documentSnapshot);
     }
     throw Exception('에러 발생: 데이터가 손상되었습니다.');
   }
