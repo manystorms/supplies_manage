@@ -43,6 +43,11 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           builder: (context, params) => const AddModifySuppliesWidget(),
         ),
         FFRoute(
+          name: 'supplieskiosk',
+          path: '/supplieskiosk',
+          builder: (context, params) => const SuppliesKioskWidget(),
+        ),
+        FFRoute(
           name: 'rentapplylist',
           path: '/rentapplylist',
           builder: (context, params) => const RentApplyListWidget(),

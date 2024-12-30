@@ -80,9 +80,7 @@ class _RentStatusListWidgetState extends State<RentStatusListWidget>
               Padding(
                   padding: const EdgeInsetsDirectional.fromSTEB(0, 0, 15, 0),
                   child: InkWell(
-                    onTap: () {
-                      _model.addModifySuppliesButtonOnTap(context);
-                    },
+                    onTap: () => _model.addModifySuppliesButtonOnTap(context),
                     child: const Icon(
                       Icons.add_rounded,
                       color: Colors.grey,
@@ -307,7 +305,7 @@ class _RentStatusListWidgetState extends State<RentStatusListWidget>
                                         FFButtonWidget(
                                           onPressed: () async {
                                             setState(() {
-                                              context.push('/rentsupplies/$i');
+                                              print('a');
                                             });
                                           },
                                           text: '수정',

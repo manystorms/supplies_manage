@@ -44,15 +44,17 @@ class AddModifySuppliesModel extends FlutterFlowModel<AddModifySuppliesWidget> {
 
     if(suppliesNameTextController.text.isEmpty) {
       await showAlertWithoutChoice(context, '준비물의 이름을 입력하세요');
+      return;
     }else if((inputSuppliesAmount == null || inputSuppliesAmount <= 0) && checkIsInputAmountValue == true) {
       await showAlertWithoutChoice(context, '준비물의 수량은 자연수만 가능합니다');
+      return;
     }
 
     try{
       await suppliesRoomInfo.inputData(
         suppliesNameTextController.text,
         inputSuppliesAmount,
-        'asd',
+        'asd',//location
         checkConsumableValue
       );
       if(context.mounted) context.pop();

@@ -13,7 +13,7 @@ class LoginCreateAccountPageModel
   // State field(s) for TabBar widget.
   TabController? tabBarController;
   int get tabBarCurrentIndex =>
-      tabBarController != null ? tabBarController!.index : 0;
+      tabBarController != null ? tabBarController!.index : 1;
 
   // State field(s) for emailAddress_Create widget.
   FocusNode? emailAddressCreateFocusNode;
