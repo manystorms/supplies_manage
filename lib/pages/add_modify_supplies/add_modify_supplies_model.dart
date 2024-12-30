@@ -40,15 +40,20 @@ class AddModifySuppliesModel extends FlutterFlowModel<AddModifySuppliesWidget> {
   }
 
   Future<void> completeButtonOnTap(BuildContext context) async{
+    final inputSuppliesAmount = int.tryParse(suppliesAmountTextController.text);
+
     if(suppliesNameTextController.text.isEmpty) {
       await showAlertWithoutChoice(context, '준비물의 이름을 입력하세요');
       throw Exception('에러 발생: 준비물의 이름을 입력하세요');
+    }else if(inputSuppliesAmount == null || inputSuppliesAmount <= 0) {
+      await showAlertWithoutChoice(context, '준비물의 수량은 자연수만 가능합니다');
+      throw Exception('에러 발생: 준비물의 수량은 자연수만 가능합니다');
     }
 
     try{
       await suppliesRoomInfo.inputData(
         suppliesNameTextController.text,
-        1,
+        inputSuppliesAmount,
         'asd',
         checkConsumableValue
       );

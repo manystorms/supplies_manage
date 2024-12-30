@@ -283,6 +283,7 @@ class _AddModifySuppliesWidgetState extends State<AddModifySuppliesWidget> {
                                     textCapitalization:
                                     TextCapitalization.words,
                                     obscureText: false,
+                                    enabled: (_model.checkIsInputAmountValue)? true:false,
                                     decoration: InputDecoration(
                                       labelText: '수량',
                                       labelStyle: FlutterFlowTheme.of(context)
