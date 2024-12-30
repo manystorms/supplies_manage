@@ -386,7 +386,7 @@ class _AddModifySuppliesWidgetState extends State<AddModifySuppliesWidget> {
                                         .suppliesAmountTextControllerValidator
                                         .asValidator(context),
                                   ),
-                                  Material(
+                                  /*Material(
                                     color: Colors.transparent,
                                     child: SwitchListTile.adaptive(
                                       value: _model.checkConsumableValue,
@@ -421,7 +421,7 @@ class _AddModifySuppliesWidgetState extends State<AddModifySuppliesWidget> {
                                       controlAffinity:
                                       ListTileControlAffinity.trailing,
                                     ),
-                                  ),
+                                  ),*/
                                   Padding(
                                     padding: const EdgeInsetsDirectional.fromSTEB(
                                         16, 12, 16, 12),

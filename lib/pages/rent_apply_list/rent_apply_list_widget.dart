@@ -247,8 +247,8 @@ class _RentApplyListWidgetState extends State<RentApplyListWidget>
                                       mainAxisAlignment: MainAxisAlignment.end,
                                       children: [
                                         Text(
-                                            '수량: ${suppliesRoomInfo.amount[i]}\n'
-                                                '대여 가능 수량: ${suppliesRoomInfo.availableAmount[i]}'
+                                            '수량: ${suppliesRoomInfo.amount[i]??'입력되지 않음'}\n'
+                                                '대여 가능 수량: ${suppliesRoomInfo.availableAmount[i]??'입력되지 않음'}'
                                         ),
                                         const SizedBox(width: 16),
                                         FFButtonWidget(
