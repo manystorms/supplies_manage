@@ -24,6 +24,12 @@ class _SuppliesKioskWidgetState extends State<SuppliesKioskWidget>
 
   final animationsMap = <String, AnimationInfo>{};
 
+  void getSuppliesRoomData() async{
+    await _model.getSuppliesRoomData();
+    _model.getSuppliesData = true;
+    setState(() {});
+  }
+
   @override
   void initState() {
     super.initState();
@@ -31,6 +37,8 @@ class _SuppliesKioskWidgetState extends State<SuppliesKioskWidget>
 
     _model.searchBarTextController ??= TextEditingController();
     _model.searchBarFocusNode ??= FocusNode();
+
+    getSuppliesRoomData();
 
     _model.tabBarController = TabController(
       vsync: this,
@@ -103,6 +111,16 @@ class _SuppliesKioskWidgetState extends State<SuppliesKioskWidget>
           child: AppBar(
             backgroundColor: FlutterFlowTheme.of(context).secondaryBackground,
             automaticallyImplyLeading: false,
+            leading: InkWell(
+              onTap: () {
+                Navigator.pop(context);
+              },
+              child: Icon(
+                Icons.arrow_back_rounded,
+                color: FlutterFlowTheme.of(context).primaryText,
+                size: 35.0,
+              ),
+            ),
             title: Text(
               '물품/대여 반납',
               style: FlutterFlowTheme.of(context).titleLarge.override(
@@ -111,18 +129,7 @@ class _SuppliesKioskWidgetState extends State<SuppliesKioskWidget>
                 useGoogleFonts: false,
               ),
             ),
-            actions: [
-              Icon(
-                Icons.arrow_back,
-                color: FlutterFlowTheme.of(context).primaryText,
-                size: 24,
-              ),
-              Icon(
-                Icons.arrow_back,
-                color: FlutterFlowTheme.of(context).primaryText,
-                size: 24,
-              ),
-            ],
+            actions: const [],
             centerTitle: false,
             elevation: 0,
           ),
@@ -242,24 +249,76 @@ class _SuppliesKioskWidgetState extends State<SuppliesKioskWidget>
                                 child: Padding(
                                   padding: const EdgeInsetsDirectional.fromSTEB(
                                       24, 16, 24, 0),
-                                  child: SingleChildScrollView(
-                                    child: Column(
-                                      mainAxisSize: MainAxisSize.max,
-                                      crossAxisAlignment:
-                                      CrossAxisAlignment.start,
-                                      children: [
-                                        Text(
-                                          'Hello World',
-                                          style: FlutterFlowTheme.of(context)
-                                              .bodyMedium
-                                              .override(
-                                            fontFamily: 'Pretendard',
-                                            letterSpacing: 0.0,
-                                            useGoogleFonts: false,
-                                          ),
-                                        ),
-                                      ],
-                                    ),
+                                  child: _model.getSuppliesData == false
+                                    ? const CircularProgressIndicator():
+                                              SingleChildScrollView(
+                                              child: Column(
+                                              mainAxisSize: MainAxisSize.max,
+                                              crossAxisAlignment: CrossAxisAlignment.start,
+                                              children: [
+                                                for(int i = 0; i < suppliesRoomInfo.applicationUserName.length; i++)
+                                                  if(suppliesRoomInfo.applicationRentState[i] == '대여 신청')
+                                                    Padding(
+                                                      padding: const EdgeInsetsDirectional.fromSTEB(
+                                                          16.0, 8.0, 16.0, 0.0),
+                                                      child: Container(
+                                                        width: double.infinity,
+                                                        decoration: BoxDecoration(
+                                                          color: FlutterFlowTheme.of(context)
+                                                              .primaryBackground,
+                                                          borderRadius:
+                                                          BorderRadius.circular(12.0),
+                                                        ),
+                                                        child: Padding(
+                                                          padding: const EdgeInsetsDirectional.fromSTEB(
+                                                              8.0, 8.0, 12.0, 8.0),
+                                                          child: Row(
+                                                            mainAxisSize: MainAxisSize.max,
+                                                            crossAxisAlignment:
+                                                            CrossAxisAlignment.center,
+                                                            children: [
+                                                              ClipRRect(
+                                                                borderRadius:
+                                                                BorderRadius.circular(8.0),
+                                                                child: Image.network(
+                                                                  _model.getImageUrl(i),
+                                                                  width: 70.0,
+                                                                  height: 70.0,
+                                                                  fit: BoxFit.cover,
+                                                                ),
+                                                              ),
+                                                              Padding(
+                                                                padding: const EdgeInsetsDirectional
+                                                                    .fromSTEB(
+                                                                    16.0, 0.0, 0.0, 0.0),
+                                                                child: Text(
+                                                                  suppliesRoomInfo.applicationSuppliesName[i],
+                                                                  style:
+                                                                  FlutterFlowTheme.of(context)
+                                                                      .bodyLarge
+                                                                      .override(
+                                                                    fontFamily:
+                                                                    'Pretendard',
+                                                                    letterSpacing: 0.0,
+                                                                    useGoogleFonts: false,
+                                                                  ),
+                                                                ),
+                                                              ),
+                                                              const Spacer(),
+                                                              const SizedBox(width: 15),
+                                                              Text(
+                                                                  '대여 신청자: ${suppliesRoomInfo.applicationUserName[i]}\n'
+                                                                      '대여 수량: ${suppliesRoomInfo.applicationRentAmount[i]}\n'
+                                                                      '현재 상태: ${suppliesRoomInfo.applicationRentState[i]}'
+                                                              ),
+                                                              const SizedBox(width: 10)
+                                                            ],
+                                                          ),
+                                                        ),
+                                                      ),
+                                                    ),
+                                              ],
+                                            ),
                                   ).animateOnPageLoad(animationsMap[
                                   'columnOnPageLoadAnimation1']!),
                                 ),
@@ -269,28 +328,74 @@ class _SuppliesKioskWidgetState extends State<SuppliesKioskWidget>
                                 child: Padding(
                                   padding: const EdgeInsetsDirectional.fromSTEB(
                                       24, 16, 24, 0),
-                                  child: SingleChildScrollView(
+                                  child: _model.getSuppliesData == false
+                                      ? const CircularProgressIndicator():
+                                  SingleChildScrollView(
                                     child: Column(
                                       mainAxisSize: MainAxisSize.max,
-                                      crossAxisAlignment:
-                                      CrossAxisAlignment.start,
+                                      crossAxisAlignment: CrossAxisAlignment.start,
                                       children: [
-                                        Padding(
-                                          padding:
-                                          const EdgeInsetsDirectional.fromSTEB(
-                                              0, 4, 0, 24),
-                                          child: Text(
-                                            'Fill out the information below in order to access your account.',
-                                            textAlign: TextAlign.start,
-                                            style: FlutterFlowTheme.of(context)
-                                                .labelMedium
-                                                .override(
-                                              fontFamily: 'Pretendard',
-                                              letterSpacing: 0.0,
-                                              useGoogleFonts: false,
+                                        for(int i = 0; i < suppliesRoomInfo.applicationUserName.length; i++)
+                                          if(suppliesRoomInfo.applicationRentState[i] == '대여 중')
+                                            Padding(
+                                              padding: const EdgeInsetsDirectional.fromSTEB(
+                                                  16.0, 8.0, 16.0, 0.0),
+                                              child: Container(
+                                                width: double.infinity,
+                                                decoration: BoxDecoration(
+                                                  color: FlutterFlowTheme.of(context)
+                                                      .primaryBackground,
+                                                  borderRadius:
+                                                  BorderRadius.circular(12.0),
+                                                ),
+                                                child: Padding(
+                                                  padding: const EdgeInsetsDirectional.fromSTEB(
+                                                      8.0, 8.0, 12.0, 8.0),
+                                                  child: Row(
+                                                    mainAxisSize: MainAxisSize.max,
+                                                    crossAxisAlignment:
+                                                    CrossAxisAlignment.center,
+                                                    children: [
+                                                      ClipRRect(
+                                                        borderRadius:
+                                                        BorderRadius.circular(8.0),
+                                                        child: Image.network(
+                                                          _model.getImageUrl(i),
+                                                          width: 70.0,
+                                                          height: 70.0,
+                                                          fit: BoxFit.cover,
+                                                        ),
+                                                      ),
+                                                      Padding(
+                                                        padding: const EdgeInsetsDirectional
+                                                            .fromSTEB(
+                                                            16.0, 0.0, 0.0, 0.0),
+                                                        child: Text(
+                                                          suppliesRoomInfo.applicationSuppliesName[i],
+                                                          style:
+                                                          FlutterFlowTheme.of(context)
+                                                              .bodyLarge
+                                                              .override(
+                                                            fontFamily:
+                                                            'Pretendard',
+                                                            letterSpacing: 0.0,
+                                                            useGoogleFonts: false,
+                                                          ),
+                                                        ),
+                                                      ),
+                                                      const Spacer(),
+                                                      const SizedBox(width: 15),
+                                                      Text(
+                                                          '대여 신청자: ${suppliesRoomInfo.applicationUserName[i]}\n'
+                                                              '대여 수량: ${suppliesRoomInfo.applicationRentAmount[i]}\n'
+                                                              '현재 상태: ${suppliesRoomInfo.applicationRentState[i]}'
+                                                      ),
+                                                      const SizedBox(width: 10)
+                                                    ],
+                                                  ),
+                                                ),
+                                              ),
                                             ),
-                                          ),
-                                        ),
                                       ],
                                     ),
                                   ).animateOnPageLoad(animationsMap[
@@ -339,10 +444,10 @@ class _SuppliesKioskWidgetState extends State<SuppliesKioskWidget>
                             const EdgeInsetsDirectional.fromSTEB(16, 0, 16, 0),
                             tabs: const [
                               Tab(
-                                text: 'Create Account',
+                                text: '대여',
                               ),
                               Tab(
-                                text: 'Log In',
+                                text: '반납',
                               ),
                             ],
                             controller: _model.tabBarController,

@@ -3,7 +3,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 
 const userSchoolName = '물리준비실';
 const userSuppliesRoom = 'supplies';
-enum UserRole {student, admin}
+enum UserRole {student, admin, kiosk}
 UserRole userRole = UserRole.student;
 String userName = 'No name';
 
@@ -24,9 +24,15 @@ Future<User> signInWithEmail(String email, String password) async {
   }
 
   List<String> adminUid = List<String>.from(userDoc['adminUid']);
+  List<String> kioskUid = List<String>.from(userDoc['kioskUid']);
 
-  userRole = UserRole.student;
-  if(adminUid.contains(user.uid)) userRole = UserRole.admin;
+  if(adminUid.contains(user.uid)) {
+    userRole = UserRole.admin;
+  }else if(kioskUid.contains(user.uid)){
+    userRole = UserRole.kiosk;
+  }else{
+    userRole = UserRole.student;
+  }
 
   userName = user.email??'No name';
 
