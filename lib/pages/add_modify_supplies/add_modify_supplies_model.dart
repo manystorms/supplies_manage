@@ -44,10 +44,8 @@ class AddModifySuppliesModel extends FlutterFlowModel<AddModifySuppliesWidget> {
 
     if(suppliesNameTextController.text.isEmpty) {
       await showAlertWithoutChoice(context, '준비물의 이름을 입력하세요');
-      throw Exception('에러 발생: 준비물의 이름을 입력하세요');
-    }else if(inputSuppliesAmount == null || inputSuppliesAmount <= 0) {
+    }else if((inputSuppliesAmount == null || inputSuppliesAmount <= 0) && checkIsInputAmountValue == true) {
       await showAlertWithoutChoice(context, '준비물의 수량은 자연수만 가능합니다');
-      throw Exception('에러 발생: 준비물의 수량은 자연수만 가능합니다');
     }
 
     try{

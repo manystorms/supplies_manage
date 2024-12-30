@@ -121,7 +121,7 @@ class ManageSuppliesData extends SuppliesRoomData{
     consumable.add(inputConsumable);
     imageUrl.add(defaultImage);
 
-    imageUrl.last = await inputImageData(name.length-1);
+    if(imageFile != null) imageUrl.last = await inputImageData(name.length-1);
   }
 
   Future<void> getImage() async{

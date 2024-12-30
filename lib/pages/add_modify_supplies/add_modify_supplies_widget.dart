@@ -537,11 +537,8 @@ class _AddModifySuppliesWidgetState extends State<AddModifySuppliesWidget> {
                         padding: const EdgeInsetsDirectional.fromSTEB(16, 12, 16, 12),
                         child: FFButtonWidget(
                           onPressed: () async{
-                            try{
-                              await _model.completeButtonOnTap(context);
-                            }catch(e) {
-                              setState(() {});
-                            }
+                            await _model.completeButtonOnTap(context);
+                            setState(() {});
                           },
                           text: '완료',
                           options: FFButtonOptions(
