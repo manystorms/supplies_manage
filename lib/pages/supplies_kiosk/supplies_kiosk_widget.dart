@@ -3,6 +3,7 @@ import '/flutter_flow/flutter_flow_button_tabbar.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
+import '/flutter_flow/flutter_flow_widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 
@@ -311,7 +312,34 @@ class _SuppliesKioskWidgetState extends State<SuppliesKioskWidget>
                                                                       '대여 수량: ${suppliesRoomInfo.applicationRentAmount[i]}\n'
                                                                       '현재 상태: ${suppliesRoomInfo.applicationRentState[i]}'
                                                               ),
-                                                              const SizedBox(width: 10)
+                                                              const SizedBox(width: 10),
+                                                              FFButtonWidget(
+                                                                onPressed: () async {
+                                                                  await _model.rentButtonOnTap(context, i);
+                                                                  setState(() {});
+                                                                },
+                                                                text: '대여',
+                                                                options: FFButtonOptions(
+                                                                  width: 75.0,
+                                                                  height: 70.0,
+                                                                  padding: const EdgeInsetsDirectional.fromSTEB(24.0, 0.0, 24.0, 0.0),
+                                                                  iconPadding:
+                                                                  const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
+                                                                  color: FlutterFlowTheme.of(context).primary,
+                                                                  textStyle: FlutterFlowTheme.of(context).titleSmall.override(
+                                                                    fontFamily: 'Pretendard',
+                                                                    color: Colors.white,
+                                                                    letterSpacing: 0.0,
+                                                                    useGoogleFonts: false,
+                                                                  ),
+                                                                  elevation: 3.0,
+                                                                  borderSide: const BorderSide(
+                                                                    color: Colors.transparent,
+                                                                    width: 1.0,
+                                                                  ),
+                                                                  borderRadius: BorderRadius.circular(8.0),
+                                                                ),
+                                                              ),
                                                             ],
                                                           ),
                                                         ),
@@ -390,7 +418,34 @@ class _SuppliesKioskWidgetState extends State<SuppliesKioskWidget>
                                                               '대여 수량: ${suppliesRoomInfo.applicationRentAmount[i]}\n'
                                                               '현재 상태: ${suppliesRoomInfo.applicationRentState[i]}'
                                                       ),
-                                                      const SizedBox(width: 10)
+                                                      const SizedBox(width: 10),
+                                                      FFButtonWidget(
+                                                        onPressed: () async {
+                                                          await _model.returnButtonOnTap(context, i);
+                                                          setState(() {});
+                                                        },
+                                                        text: '반납',
+                                                        options: FFButtonOptions(
+                                                          width: 75.0,
+                                                          height: 70.0,
+                                                          padding: const EdgeInsetsDirectional.fromSTEB(24.0, 0.0, 24.0, 0.0),
+                                                          iconPadding:
+                                                          const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
+                                                          color: FlutterFlowTheme.of(context).primary,
+                                                          textStyle: FlutterFlowTheme.of(context).titleSmall.override(
+                                                            fontFamily: 'Pretendard',
+                                                            color: Colors.white,
+                                                            letterSpacing: 0.0,
+                                                            useGoogleFonts: false,
+                                                          ),
+                                                          elevation: 3.0,
+                                                          borderSide: const BorderSide(
+                                                            color: Colors.transparent,
+                                                            width: 1.0,
+                                                          ),
+                                                          borderRadius: BorderRadius.circular(8.0),
+                                                        ),
+                                                      ),
                                                     ],
                                                   ),
                                                 ),
