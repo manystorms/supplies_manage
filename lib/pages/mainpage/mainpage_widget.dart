@@ -168,18 +168,18 @@ class _MainPageWidgetState extends State<MainPageWidget> {
                                       }
                                   );
                                 },
-                                child: Icon(
+                                child: const Icon(
                                   Icons.account_circle,
-                                  color: FlutterFlowTheme.of(context).secondaryBackground,
+                                  color: Colors.white,
                                   size: 30,
                                 ),
                               ),
                               const SizedBox(width: 10),
                               InkWell(
                                 onTap: () => _model.logOutButtonOnTap(context),
-                                child: Icon(
+                                child: const Icon(
                                   Icons.logout_rounded,
-                                  color: FlutterFlowTheme.of(context).secondaryBackground,
+                                  color: Colors.white,
                                   size: 30,
                                 ),
                               )

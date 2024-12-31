@@ -81,8 +81,10 @@ class _RentStatusListWidgetState extends State<RentStatusListWidget>
                   padding: const EdgeInsetsDirectional.fromSTEB(0, 0, 15, 0),
                   child: InkWell(
                     onTap: () {
-                      _model.addModifySuppliesButtonOnTap(context);
-                      setState(() {});
+                      if(_model.getSuppliesData == true) {
+                        _model.addModifySuppliesButtonOnTap(context);
+                        setState(() {});
+                      }
                     },
                     child: const Icon(
                       Icons.add_rounded,

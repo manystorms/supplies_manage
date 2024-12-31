@@ -1,9 +1,9 @@
+import 'package:supplies_manage/pages/rent_status_list/rent_status_list_model.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-
 import 'add_modify_supplies_model.dart';
 export 'add_modify_supplies_model.dart';
 
@@ -424,14 +424,14 @@ class _AddModifySuppliesWidgetState extends State<AddModifySuppliesWidget> {
                                   ),*/
                                   Padding(
                                     padding: const EdgeInsetsDirectional.fromSTEB(
-                                        16, 12, 16, 12),
+                                        8, 6, 8, 6),
                                     child: FFButtonWidget(
-                                      onPressed: () async{
-                                        await _model.uploadImageButtonOnTap(context);
+                                      onPressed: () {
+                                        print('a');
                                       },
-                                      text: '사진 업로드',
+                                      text: '위치 입력',
                                       icon: const Icon(
-                                        Icons.camera_alt,
+                                        Icons.map_rounded,
                                         size: 20,
                                       ),
                                       options: FFButtonOptions(
@@ -470,14 +470,15 @@ class _AddModifySuppliesWidgetState extends State<AddModifySuppliesWidget> {
                                   ),
                                   Padding(
                                     padding: const EdgeInsetsDirectional.fromSTEB(
-                                        16, 12, 16, 12),
+                                        8, 6, 8, 6),
                                     child: FFButtonWidget(
-                                      onPressed: () {
-                                        print('addModifyComplete pressed ...');
+                                      onPressed: () async{
+                                        await _model.uploadImageButtonOnTap(context);
+                                        setState(() {});
                                       },
-                                      text: '위치 입력',
+                                      text: (suppliesRoomInfo.imageFile == null)?'사진 선택':'사진이 이미 선택되었습니다',
                                       icon: const Icon(
-                                        Icons.map_rounded,
+                                        Icons.camera_alt,
                                         size: 20,
                                       ),
                                       options: FFButtonOptions(
