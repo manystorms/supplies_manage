@@ -94,75 +94,77 @@ class _TotalRentListWidgetState extends State<TotalRentListWidget>
                     child: CircularProgressIndicator(),
                   )
                 else
-                  SingleChildScrollView(
-                    child: Column(
-                      mainAxisSize: MainAxisSize.max,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        for(int i = 0; i < suppliesRoomInfo.applicationUserName.length; i++)
-                          Padding(
-                            padding: const EdgeInsetsDirectional.fromSTEB(
-                                16.0, 8.0, 16.0, 0.0),
-                            child: Container(
-                              width: double.infinity,
-                              decoration: BoxDecoration(
-                                color: FlutterFlowTheme.of(context)
-                                    .primaryBackground,
-                                borderRadius:
-                                BorderRadius.circular(12.0),
-                              ),
-                              child: Padding(
-                                padding: const EdgeInsetsDirectional.fromSTEB(
-                                    8.0, 8.0, 12.0, 8.0),
-                                child: Row(
-                                  mainAxisSize: MainAxisSize.max,
-                                  crossAxisAlignment:
-                                  CrossAxisAlignment.center,
-                                  children: [
-                                    ClipRRect(
-                                      borderRadius:
-                                      BorderRadius.circular(8.0),
-                                      child: Image.network(
-                                        _model.getImageUrl(i),
-                                        width: 70.0,
-                                        height: 70.0,
-                                        fit: BoxFit.cover,
-                                      ),
-                                    ),
-                                    Padding(
-                                      padding: const EdgeInsetsDirectional
-                                          .fromSTEB(
-                                          16.0, 0.0, 0.0, 0.0),
-                                      child: Text(
-                                        suppliesRoomInfo.applicationSuppliesName[i],
-                                        style:
-                                        FlutterFlowTheme.of(context)
-                                            .bodyLarge
-                                            .override(
-                                          fontFamily:
-                                          'Pretendard',
-                                          letterSpacing: 0.0,
-                                          useGoogleFonts: false,
+                  Flexible(
+                    child: SingleChildScrollView(
+                      child: Column(
+                        mainAxisSize: MainAxisSize.max,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          for(int i = 0; i < suppliesRoomInfo.applicationUserName.length; i++)
+                            Padding(
+                              padding: const EdgeInsetsDirectional.fromSTEB(
+                                  16.0, 8.0, 16.0, 0.0),
+                              child: Container(
+                                width: double.infinity,
+                                decoration: BoxDecoration(
+                                  color: FlutterFlowTheme.of(context)
+                                      .primaryBackground,
+                                  borderRadius:
+                                  BorderRadius.circular(12.0),
+                                ),
+                                child: Padding(
+                                  padding: const EdgeInsetsDirectional.fromSTEB(
+                                      8.0, 8.0, 12.0, 8.0),
+                                  child: Row(
+                                    mainAxisSize: MainAxisSize.max,
+                                    crossAxisAlignment:
+                                    CrossAxisAlignment.center,
+                                    children: [
+                                      ClipRRect(
+                                        borderRadius:
+                                        BorderRadius.circular(8.0),
+                                        child: Image.network(
+                                          _model.getImageUrl(i),
+                                          width: 70.0,
+                                          height: 70.0,
+                                          fit: BoxFit.cover,
                                         ),
                                       ),
-                                    ),
-                                    const Spacer(),
-                                    const SizedBox(width: 15),
-                                    Text(
-                                      '대여 신청자: ${suppliesRoomInfo.applicationUserName[i]}\n'
-                                          '대여 수량: ${suppliesRoomInfo.applicationRentAmount[i]}\n'
-                                          '대여 사유: ${suppliesRoomInfo.applicationRentReason[i]??'없음'}\n'
-                                          '현재 상태: ${suppliesRoomInfo.applicationRentState[i]}'
-                                    ),
-                                    const SizedBox(width: 10)
-                                  ],
+                                      Padding(
+                                        padding: const EdgeInsetsDirectional
+                                            .fromSTEB(
+                                            16.0, 0.0, 0.0, 0.0),
+                                        child: Text(
+                                          suppliesRoomInfo.applicationSuppliesName[i],
+                                          style:
+                                          FlutterFlowTheme.of(context)
+                                              .bodyLarge
+                                              .override(
+                                            fontFamily:
+                                            'Pretendard',
+                                            letterSpacing: 0.0,
+                                            useGoogleFonts: false,
+                                          ),
+                                        ),
+                                      ),
+                                      const Spacer(),
+                                      const SizedBox(width: 15),
+                                      Text(
+                                          '대여 신청자: ${suppliesRoomInfo.applicationUserName[i]}\n'
+                                              '대여 수량: ${suppliesRoomInfo.applicationRentAmount[i]}\n'
+                                              '대여 사유: ${suppliesRoomInfo.applicationRentReason[i]??'없음'}\n'
+                                              '현재 상태: ${suppliesRoomInfo.applicationRentState[i]}'
+                                      ),
+                                      const SizedBox(width: 10)
+                                    ],
+                                  ),
                                 ),
                               ),
                             ),
-                          ),
-                      ],
+                        ],
+                      ),
                     ),
-                  ),
+                  )
               ],
             ),
           ],
