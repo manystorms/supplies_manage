@@ -1,6 +1,7 @@
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 import 'map_model.dart';
 export 'map_model.dart';
@@ -56,7 +57,7 @@ class _MapWidgetState extends State<MapWidget> {
               ),
             ),
             title: Text(
-              '지도 - 물리실',
+              '지도',
               style: FlutterFlowTheme.of(context).titleLarge.override(
                 fontFamily: 'Pretendard',
                 letterSpacing: 0.0,
@@ -72,103 +73,139 @@ class _MapWidgetState extends State<MapWidget> {
           mainAxisSize: MainAxisSize.max,
           children: [
             Container(
-              width: 1000,
               height: 50,
-              decoration: BoxDecoration(
-                color: FlutterFlowTheme.of(context).tertiary,
-                borderRadius: const BorderRadius.only(
+              decoration: const BoxDecoration(
+                color: Colors.blue,
+                borderRadius: BorderRadius.only(
                   bottomLeft: Radius.circular(10),
                   bottomRight: Radius.circular(10),
                   topLeft: Radius.circular(10),
                   topRight: Radius.circular(10),
                 ),
               ),
+              alignment: Alignment.center,
+              child: Text(
+                '창문',
+                textAlign: TextAlign.start,
+                style:
+                FlutterFlowTheme.of(context)
+                    .labelMedium
+                    .override(
+                  fontFamily:
+                  FlutterFlowTheme.of(
+                      context)
+                      .labelMediumFamily,
+                  letterSpacing: 0.0,
+                  useGoogleFonts: GoogleFonts
+                      .asMap()
+                      .containsKey(
+                      FlutterFlowTheme.of(
+                          context)
+                          .labelMediumFamily),
+                ),
+              ),
             ),
+            const SizedBox(height: 15,),
             Row(
               mainAxisSize: MainAxisSize.max,
-              mainAxisAlignment: MainAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Container(
-                  width: 75,
-                  height: 100,
-                  decoration: BoxDecoration(
-                    color: FlutterFlowTheme.of(context).primary,
-                    borderRadius: const BorderRadius.only(
-                      bottomLeft: Radius.circular(0),
-                      bottomRight: Radius.circular(0),
-                      topLeft: Radius.circular(25),
-                      topRight: Radius.circular(25),
-                    ),
-                    border: Border.all(
-                      color: Colors.black,
-                      width: 5,
-                    ),
-                  ),
-                ),
-                Container(
-                  width: 50,
-                  height: 100,
-                  decoration: BoxDecoration(
-                    color: FlutterFlowTheme.of(context).secondaryBackground,
-                  ),
-                ),
-                Container(
-                  width: 75,
-                  height: 100,
-                  decoration: BoxDecoration(
-                    color: FlutterFlowTheme.of(context).primary,
-                    borderRadius: const BorderRadius.only(
-                      bottomLeft: Radius.circular(0),
-                      bottomRight: Radius.circular(0),
-                      topLeft: Radius.circular(25),
-                      topRight: Radius.circular(0),
-                    ),
-                    border: Border.all(
-                      width: 5,
+                Expanded(
+                  flex: 3,
+                  child: Container(
+                    height: 100,
+                    decoration: BoxDecoration(
+                      color: FlutterFlowTheme.of(context).primary,
+                      borderRadius: const BorderRadius.only(
+                        bottomLeft: Radius.circular(0),
+                        bottomRight: Radius.circular(0),
+                        topLeft: Radius.circular(25),
+                        topRight: Radius.circular(25),
+                      ),
+                      border: Border.all(
+                        color: Colors.black,
+                        width: 5,
+                      ),
                     ),
                   ),
                 ),
-                Container(
-                  width: 75,
-                  height: 100,
-                  decoration: BoxDecoration(
-                    color: FlutterFlowTheme.of(context).primary,
-                    borderRadius: const BorderRadius.only(
-                      bottomLeft: Radius.circular(0),
-                      bottomRight: Radius.circular(0),
-                      topLeft: Radius.circular(0),
-                      topRight: Radius.circular(25),
-                    ),
-                    border: Border.all(
-                      width: 5,
+                Expanded(
+                  flex: 2,
+                  child: Container(
+                    height: 100,
+                    decoration: BoxDecoration(
+                      color: FlutterFlowTheme.of(context).secondaryBackground,
                     ),
                   ),
                 ),
-                Container(
-                  width: 50,
-                  height: 100,
-                  decoration: BoxDecoration(
-                    color: FlutterFlowTheme.of(context).secondaryBackground,
+                Expanded(
+                  flex: 3,
+                  child: Container(
+                    height: 100,
+                    decoration: BoxDecoration(
+                      color: FlutterFlowTheme.of(context).primary,
+                      borderRadius: const BorderRadius.only(
+                        bottomLeft: Radius.circular(0),
+                        bottomRight: Radius.circular(0),
+                        topLeft: Radius.circular(25),
+                        topRight: Radius.circular(25),
+                      ),
+                      border: Border.all(
+                        color: Colors.black,
+                        width: 5,
+                      ),
+                    ),
                   ),
                 ),
-                Container(
-                  width: 75,
-                  height: 100,
-                  decoration: BoxDecoration(
-                    color: FlutterFlowTheme.of(context).primary,
-                    borderRadius: const BorderRadius.only(
-                      bottomLeft: Radius.circular(0),
-                      bottomRight: Radius.circular(0),
-                      topLeft: Radius.circular(25),
-                      topRight: Radius.circular(25),
+                Expanded(
+                  flex: 3,
+                  child: Container(
+                    height: 100,
+                    decoration: BoxDecoration(
+                      color: FlutterFlowTheme.of(context).primary,
+                      borderRadius: const BorderRadius.only(
+                        bottomLeft: Radius.circular(0),
+                        bottomRight: Radius.circular(0),
+                        topLeft: Radius.circular(25),
+                        topRight: Radius.circular(25),
+                      ),
+                      border: Border.all(
+                        color: Colors.black,
+                        width: 5,
+                      ),
                     ),
-                    border: Border.all(
-                      width: 5,
+                  ),
+                ),
+                Expanded(
+                  flex: 2,
+                  child: Container(
+                    height: 100,
+                    decoration: BoxDecoration(
+                      color: FlutterFlowTheme.of(context).secondaryBackground,
+                    ),
+                  ),
+                ),
+                Expanded(
+                  flex: 3,
+                  child: Container(
+                    height: 100,
+                    decoration: BoxDecoration(
+                      color: FlutterFlowTheme.of(context).primary,
+                      borderRadius: const BorderRadius.only(
+                        bottomLeft: Radius.circular(0),
+                        bottomRight: Radius.circular(0),
+                        topLeft: Radius.circular(25),
+                        topRight: Radius.circular(25),
+                      ),
+                      border: Border.all(
+                        color: Colors.black,
+                        width: 5,
+                      ),
                     ),
                   ),
                 ),
               ],
-            ),
+            )
           ],
         ),
       ),
