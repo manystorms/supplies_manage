@@ -87,15 +87,10 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           builder: (context, params) => const RentStatusListWidget(),
         ),
         FFRoute(
-          name: 'map1',
-          path: '/map1',
-          builder: (context, params) => const Map1Widget(),
+          name: 'map',
+          path: '/map',
+          builder: (context, params) => const MapWidget(),
         ),
-        FFRoute(
-          name: 'map2',
-          path: '/map2',
-          builder: (context, params) => const Map2Widget(),
-        )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
     );
 

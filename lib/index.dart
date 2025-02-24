@@ -7,7 +7,6 @@ export 'package:supplies_manage/pages/rent_supplies/rent_supplies_widget.dart' s
 export 'package:supplies_manage/pages/rent_status_list/rent_status_list_widget.dart' show RentStatusListWidget;
 export 'package:supplies_manage/pages/add_modify_supplies/add_modify_supplies_widget.dart' show AddModifySuppliesWidget;
 export 'package:supplies_manage/pages/supplies_kiosk/supplies_kiosk_widget.dart' show SuppliesKioskWidget;
-export 'pages/map1/map1_widget.dart' show Map1Widget;
-export 'pages/map2/map2_widget.dart' show Map2Widget;
+export 'package:supplies_manage/pages/map/map_widget.dart' show MapWidget;
 
 //만든 페이지를 불러오는 코드인듯!
