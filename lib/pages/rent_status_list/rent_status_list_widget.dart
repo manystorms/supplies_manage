@@ -3,7 +3,9 @@ import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import 'package:flutter/material.dart';
-import 'rent_status_list_model.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:supplies_manage/pages/rent_status_list/rent_status_list_model.dart';
+import 'package:google_fonts/google_fonts.dart';
 export 'rent_status_list_model.dart';
 
 class RentStatusListWidget extends StatefulWidget {
@@ -32,6 +34,10 @@ class _RentStatusListWidgetState extends State<RentStatusListWidget>
 
     _model.searchBarTextController ??= TextEditingController();
     _model.searchBarFocusNode ??= FocusNode();
+
+    _model.suppliesAmountTextController ??= TextEditingController();
+    _model.suppliesAmountFocusNode ??= FocusNode();
+
     getSuppliesRoomData();
   }
 
@@ -69,7 +75,7 @@ class _RentStatusListWidgetState extends State<RentStatusListWidget>
               },
             ),
             title: Text(
-              '실험 기구 추가/수정',
+              '물품 추가/수정',
               style: FlutterFlowTheme.of(context).titleLarge.override(
                 fontFamily: 'Pretendard',
                 letterSpacing: 0.0,
@@ -80,9 +86,9 @@ class _RentStatusListWidgetState extends State<RentStatusListWidget>
               Padding(
                   padding: const EdgeInsetsDirectional.fromSTEB(0, 0, 15, 0),
                   child: InkWell(
-                    onTap: () {
+                    onTap: () async {
                       if(_model.getSuppliesData == true) {
-                        _model.addModifySuppliesButtonOnTap(context);
+                        await _model.addModifySuppliesButtonOnTap(context);
                         setState(() {});
                       }
                     },
@@ -309,10 +315,9 @@ class _RentStatusListWidgetState extends State<RentStatusListWidget>
                                             ),
                                             const SizedBox(width: 12.0),
                                             FFButtonWidget(
-                                              onPressed: () async {
-                                                setState(() {
-                                                  print('a');
-                                                });
+                                              onPressed: () async{
+                                                await modifySupplies(context, i);
+                                                setState(() {});
                                               },
                                               text: '수정',
                                               options: FFButtonOptions(
@@ -352,6 +357,193 @@ class _RentStatusListWidgetState extends State<RentStatusListWidget>
           ],
         ),
       ),
+    );
+  }
+
+  Future<void> modifySupplies(BuildContext context, int index) {
+    _model.checkIsInputAmountValue = true;
+
+    return showCupertinoDialog<bool>(
+      context: context,
+      barrierDismissible: true,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          content: const Text('수정/삭제'),
+          actions: [
+            Center(
+              child: Column(
+                children: [
+                  Material(
+                    color: Colors.transparent,
+                    child: SwitchListTile.adaptive(
+                      value: _model.checkIsInputAmountValue,
+                      onChanged: (newValue) async {
+                        safeSetState(() =>
+                        _model.checkIsInputAmountValue =
+                            newValue);
+                      },
+                      title: Text(
+                        '수량 저장 여부',
+                        style: FlutterFlowTheme.of(context)
+                            .titleLarge
+                            .override(
+                          fontFamily:
+                          FlutterFlowTheme.of(context)
+                              .titleLargeFamily,
+                          letterSpacing: 0.0,
+                          useGoogleFonts: GoogleFonts
+                              .asMap()
+                              .containsKey(
+                              FlutterFlowTheme.of(
+                                  context)
+                                  .titleLargeFamily),
+                        ),
+                      ),
+                      subtitle: Text(
+                        '물품의 수량도 저장할 예정인가요?',
+                        style: FlutterFlowTheme.of(context)
+                            .labelMedium
+                            .override(
+                          fontFamily:
+                          FlutterFlowTheme.of(context)
+                              .labelMediumFamily,
+                          letterSpacing: 0.0,
+                          useGoogleFonts: GoogleFonts
+                              .asMap()
+                              .containsKey(
+                              FlutterFlowTheme.of(
+                                  context)
+                                  .labelMediumFamily),
+                        ),
+                      ),
+                      tileColor: FlutterFlowTheme.of(context)
+                          .secondaryBackground,
+                      activeColor: FlutterFlowTheme.of(context)
+                          .alternate,
+                      activeTrackColor:
+                      FlutterFlowTheme.of(context).primary,
+                      dense: false,
+                      controlAffinity:
+                      ListTileControlAffinity.trailing,
+                    ),
+                  ),
+                  TextFormField(
+                    controller:
+                    _model.suppliesAmountTextController,
+                    focusNode: _model.suppliesAmountFocusNode,
+                    autofocus: true,
+                    textCapitalization:
+                    TextCapitalization.words,
+                    obscureText: false,
+                    enabled: (_model.checkIsInputAmountValue)? true:false,
+                    decoration: InputDecoration(
+                      labelText: '수량',
+                      labelStyle: FlutterFlowTheme.of(context)
+                          .labelLarge
+                          .override(
+                        fontFamily:
+                        FlutterFlowTheme.of(context)
+                            .labelLargeFamily,
+                        letterSpacing: 0.0,
+                        useGoogleFonts: GoogleFonts.asMap()
+                            .containsKey(
+                            FlutterFlowTheme.of(context)
+                                .labelLargeFamily),
+                      ),
+                      hintStyle: FlutterFlowTheme.of(context)
+                          .labelMedium
+                          .override(
+                        fontFamily:
+                        FlutterFlowTheme.of(context)
+                            .labelMediumFamily,
+                        letterSpacing: 0.0,
+                        useGoogleFonts: GoogleFonts.asMap()
+                            .containsKey(
+                            FlutterFlowTheme.of(context)
+                                .labelMediumFamily),
+                      ),
+                      errorStyle: FlutterFlowTheme.of(context)
+                          .bodyMedium
+                          .override(
+                        fontFamily:
+                        FlutterFlowTheme.of(context)
+                            .bodyMediumFamily,
+                        color: FlutterFlowTheme.of(context)
+                            .error,
+                        fontSize: 12,
+                        letterSpacing: 0.0,
+                        useGoogleFonts: GoogleFonts.asMap()
+                            .containsKey(
+                            FlutterFlowTheme.of(context)
+                                .bodyMediumFamily),
+                      ),
+                      enabledBorder: OutlineInputBorder(
+                        borderSide: BorderSide(
+                          color: FlutterFlowTheme.of(context)
+                              .alternate,
+                          width: 2,
+                        ),
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                      focusedBorder: OutlineInputBorder(
+                        borderSide: BorderSide(
+                          color: FlutterFlowTheme.of(context)
+                              .primary,
+                          width: 2,
+                        ),
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                      errorBorder: OutlineInputBorder(
+                        borderSide: BorderSide(
+                          color: FlutterFlowTheme.of(context)
+                              .error,
+                          width: 2,
+                        ),
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                      focusedErrorBorder: OutlineInputBorder(
+                        borderSide: BorderSide(
+                          color: FlutterFlowTheme.of(context)
+                              .error,
+                          width: 2,
+                        ),
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                      filled: true,
+                      fillColor: (_model.suppliesAmountFocusNode
+                          ?.hasFocus ??
+                          false)
+                          ? FlutterFlowTheme.of(context).accent1
+                          : FlutterFlowTheme.of(context)
+                          .secondaryBackground,
+                      contentPadding:
+                      const EdgeInsetsDirectional.fromSTEB(
+                          16, 20, 16, 20),
+                    ),
+                    style: FlutterFlowTheme.of(context)
+                        .bodyLarge
+                        .override(
+                      fontFamily:
+                      FlutterFlowTheme.of(context)
+                          .bodyLargeFamily,
+                      letterSpacing: 0.0,
+                      useGoogleFonts: GoogleFonts.asMap()
+                          .containsKey(
+                          FlutterFlowTheme.of(context)
+                              .bodyLargeFamily),
+                    ),
+                    cursorColor:
+                    FlutterFlowTheme.of(context).primary,
+                    validator: _model
+                        .suppliesAmountTextControllerValidator
+                        .asValidator(context),
+                  ),
+                ],
+              ),
+            ),
+          ],
+        );
+      },
     );
   }
 }

@@ -231,7 +231,7 @@ class _AddModifySuppliesWidgetState extends State<AddModifySuppliesWidget> {
                                         newValue);
                                       },
                                       title: Text(
-                                        '수량 입력 여부',
+                                        '수량 저장 여부',
                                         style: FlutterFlowTheme.of(context)
                                             .titleLarge
                                             .override(
@@ -248,7 +248,7 @@ class _AddModifySuppliesWidgetState extends State<AddModifySuppliesWidget> {
                                         ),
                                       ),
                                       subtitle: Text(
-                                        '수량도 입력할 예정인가요?',
+                                        '물품의 수량도 저장할 예정인가요?',
                                         style: FlutterFlowTheme.of(context)
                                             .labelMedium
                                             .override(

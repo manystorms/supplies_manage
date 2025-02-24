@@ -105,107 +105,107 @@ class _MapWidgetState extends State<MapWidget> {
                 ),
               ),
             ),
-            const SizedBox(height: 15,),
-            Row(
-              mainAxisSize: MainAxisSize.max,
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Expanded(
-                  flex: 3,
-                  child: Container(
-                    height: 100,
-                    decoration: BoxDecoration(
-                      color: FlutterFlowTheme.of(context).primary,
-                      borderRadius: const BorderRadius.only(
-                        bottomLeft: Radius.circular(0),
-                        bottomRight: Radius.circular(0),
-                        topLeft: Radius.circular(25),
-                        topRight: Radius.circular(25),
-                      ),
-                      border: Border.all(
-                        color: Colors.black,
-                        width: 5,
-                      ),
-                    ),
-                  ),
-                ),
-                Expanded(
-                  flex: 2,
-                  child: Container(
-                    height: 100,
-                    decoration: BoxDecoration(
-                      color: FlutterFlowTheme.of(context).secondaryBackground,
-                    ),
-                  ),
-                ),
-                Expanded(
-                  flex: 3,
-                  child: Container(
-                    height: 100,
-                    decoration: BoxDecoration(
-                      color: FlutterFlowTheme.of(context).primary,
-                      borderRadius: const BorderRadius.only(
-                        bottomLeft: Radius.circular(0),
-                        bottomRight: Radius.circular(0),
-                        topLeft: Radius.circular(25),
-                        topRight: Radius.circular(25),
-                      ),
-                      border: Border.all(
-                        color: Colors.black,
-                        width: 5,
+            for(int i = 1; i <= 4; i++)
+              Row(
+                mainAxisSize: MainAxisSize.max,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Expanded(
+                    flex: 3,
+                    child: Container(
+                      height: 100,
+                      decoration: BoxDecoration(
+                        color: FlutterFlowTheme.of(context).primary,
+                        borderRadius: BorderRadius.only(
+                          bottomLeft: Radius.circular((i == 4)? 25:0),
+                          bottomRight: Radius.circular((i == 4)? 25:0),
+                          topLeft: Radius.circular((i == 1)? 25:0),
+                          topRight: Radius.circular((i == 1)? 25:0),
+                        ),
+                        border: Border.all(
+                          color: Colors.black,
+                          width: 5,
+                        ),
                       ),
                     ),
                   ),
-                ),
-                Expanded(
-                  flex: 3,
-                  child: Container(
-                    height: 100,
-                    decoration: BoxDecoration(
-                      color: FlutterFlowTheme.of(context).primary,
-                      borderRadius: const BorderRadius.only(
-                        bottomLeft: Radius.circular(0),
-                        bottomRight: Radius.circular(0),
-                        topLeft: Radius.circular(25),
-                        topRight: Radius.circular(25),
-                      ),
-                      border: Border.all(
-                        color: Colors.black,
-                        width: 5,
+                  Expanded(
+                    flex: 2,
+                    child: Container(
+                      height: 100,
+                      decoration: BoxDecoration(
+                        color: FlutterFlowTheme.of(context).secondaryBackground,
                       ),
                     ),
                   ),
-                ),
-                Expanded(
-                  flex: 2,
-                  child: Container(
-                    height: 100,
-                    decoration: BoxDecoration(
-                      color: FlutterFlowTheme.of(context).secondaryBackground,
-                    ),
-                  ),
-                ),
-                Expanded(
-                  flex: 3,
-                  child: Container(
-                    height: 100,
-                    decoration: BoxDecoration(
-                      color: FlutterFlowTheme.of(context).primary,
-                      borderRadius: const BorderRadius.only(
-                        bottomLeft: Radius.circular(0),
-                        bottomRight: Radius.circular(0),
-                        topLeft: Radius.circular(25),
-                        topRight: Radius.circular(25),
-                      ),
-                      border: Border.all(
-                        color: Colors.black,
-                        width: 5,
+                  Expanded(
+                    flex: 3,
+                    child: Container(
+                      height: 100,
+                      decoration: BoxDecoration(
+                        color: FlutterFlowTheme.of(context).primary,
+                        borderRadius: BorderRadius.only(
+                          bottomLeft: Radius.circular((i == 4)? 25:0),
+                          bottomRight: const Radius.circular(0),
+                          topLeft: Radius.circular((i == 1)? 25:0),
+                          topRight: const Radius.circular(0),
+                        ),
+                        border: Border.all(
+                          color: Colors.black,
+                          width: 5,
+                        ),
                       ),
                     ),
                   ),
-                ),
-              ],
-            )
+                  Expanded(
+                    flex: 3,
+                    child: Container(
+                      height: 100,
+                      decoration: BoxDecoration(
+                        color: FlutterFlowTheme.of(context).primary,
+                        borderRadius: BorderRadius.only(
+                          bottomLeft: const Radius.circular(0),
+                          bottomRight: Radius.circular((i == 4)? 25:0),
+                          topLeft: const Radius.circular(0),
+                          topRight: Radius.circular((i == 1)? 25:0),
+                        ),
+                        border: Border.all(
+                          color: Colors.black,
+                          width: 5,
+                        ),
+                      ),
+                    ),
+                  ),
+                  Expanded(
+                    flex: 2,
+                    child: Container(
+                      height: 100,
+                      decoration: BoxDecoration(
+                        color: FlutterFlowTheme.of(context).secondaryBackground,
+                      ),
+                    ),
+                  ),
+                  Expanded(
+                    flex: 3,
+                    child: Container(
+                      height: 100,
+                      decoration: BoxDecoration(
+                        color: FlutterFlowTheme.of(context).primary,
+                        borderRadius: BorderRadius.only(
+                          bottomLeft: Radius.circular((i == 4)? 25:0),
+                          bottomRight: Radius.circular((i == 4)? 25:0),
+                          topLeft: Radius.circular((i == 1)? 25:0),
+                          topRight: Radius.circular((i == 1)? 25:0),
+                        ),
+                        border: Border.all(
+                          color: Colors.black,
+                          width: 5,
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              )
           ],
         ),
       ),

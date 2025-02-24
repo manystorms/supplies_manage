@@ -17,6 +17,12 @@ class RentApplyListModel extends FlutterFlowModel<RentStatusListWidget> {
   bool getSuppliesData = false;
   String? searchTarget;
 
+  bool checkIsInputAmountValue = true;
+  FocusNode? suppliesAmountFocusNode;
+  TextEditingController? suppliesAmountTextController;
+  String? Function(BuildContext, String?)?
+  suppliesAmountTextControllerValidator;
+
   Future<void> getSuppliesRoomData() async{
     suppliesRoomInfo = await ManageSuppliesData.getData(userSchoolName, userSuppliesRoom);
   }
