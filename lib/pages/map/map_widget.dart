@@ -7,7 +7,10 @@ import 'map_model.dart';
 export 'map_model.dart';
 
 class MapWidget extends StatefulWidget {
-  const MapWidget({super.key});
+  final String locationData;
+
+  @immutable
+  const MapWidget({required this.locationData});
 
   @override
   State<MapWidget> createState() => _MapWidgetState();
@@ -22,6 +25,8 @@ class _MapWidgetState extends State<MapWidget> {
   void initState() {
     super.initState();
     _model = createModel(context, () => MapModel());
+
+    _model.processLocationData(widget.locationData);
   }
 
   @override

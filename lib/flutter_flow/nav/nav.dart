@@ -88,8 +88,11 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
         ),
         FFRoute(
           name: 'map',
-          path: '/map',
-          builder: (context, params) => const MapWidget(),
+          path: '/map/:locationData',
+          builder: (context, params) {
+            final locationData = params.getParam<String>('locationData', ParamType.String) ?? 'noData';
+            return MapWidget(locationData: locationData);
+          }
         ),
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
     );

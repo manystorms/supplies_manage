@@ -427,7 +427,7 @@ class _AddModifySuppliesWidgetState extends State<AddModifySuppliesWidget> {
                                         8, 6, 8, 6),
                                     child: FFButtonWidget(
                                       onPressed: () {
-                                        print('a');
+                                        _model.getLocationButtonOnTap(context);
                                       },
                                       text: '위치 입력',
                                       icon: const Icon(
