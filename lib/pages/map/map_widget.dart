@@ -117,66 +117,26 @@ class _MapWidgetState extends State<MapWidget> {
                 children: [
                   Expanded(
                     flex: 3,
-                    child: Container(
-                      height: 100,
-                      decoration: BoxDecoration(
-                        color: FlutterFlowTheme.of(context).primary,
-                        borderRadius: BorderRadius.only(
-                          bottomLeft: Radius.circular((i == 4)? 25:0),
-                          bottomRight: Radius.circular((i == 4)? 25:0),
-                          topLeft: Radius.circular((i == 1)? 25:0),
-                          topRight: Radius.circular((i == 1)? 25:0),
-                        ),
-                        border: Border.all(
-                          color: Colors.black,
-                          width: 5,
-                        ),
-                      ),
-                    ),
-                  ),
-                  Expanded(
-                    flex: 2,
-                    child: Container(
-                      height: 100,
-                      decoration: BoxDecoration(
-                        color: FlutterFlowTheme.of(context).secondaryBackground,
-                      ),
-                    ),
-                  ),
-                  Expanded(
-                    flex: 3,
-                    child: Container(
-                      height: 100,
-                      decoration: BoxDecoration(
-                        color: FlutterFlowTheme.of(context).primary,
-                        borderRadius: BorderRadius.only(
-                          bottomLeft: Radius.circular((i == 4)? 25:0),
-                          bottomRight: const Radius.circular(0),
-                          topLeft: Radius.circular((i == 1)? 25:0),
-                          topRight: const Radius.circular(0),
-                        ),
-                        border: Border.all(
-                          color: Colors.black,
-                          width: 5,
-                        ),
-                      ),
-                    ),
-                  ),
-                  Expanded(
-                    flex: 3,
-                    child: Container(
-                      height: 100,
-                      decoration: BoxDecoration(
-                        color: FlutterFlowTheme.of(context).primary,
-                        borderRadius: BorderRadius.only(
-                          bottomLeft: const Radius.circular(0),
-                          bottomRight: Radius.circular((i == 4)? 25:0),
-                          topLeft: const Radius.circular(0),
-                          topRight: Radius.circular((i == 1)? 25:0),
-                        ),
-                        border: Border.all(
-                          color: Colors.black,
-                          width: 5,
+                    child: InkWell(
+                      onTap: _model.getLocationMode ? () {
+                        _model.choiceColumn = i;
+                        _model.choiceRow = 1;
+                        setState(() {});
+                      } : null,
+                      child: Container(
+                        height: 100,
+                        decoration: BoxDecoration(
+                          color: (i == _model.choiceColumn && 1 == _model.choiceRow)? Colors.orangeAccent:Colors.blueAccent,
+                          borderRadius: BorderRadius.only(
+                            bottomLeft: Radius.circular((i == 4) ? 25 : 0),
+                            bottomRight: Radius.circular((i == 4) ? 25 : 0),
+                            topLeft: Radius.circular((i == 1) ? 25 : 0),
+                            topRight: Radius.circular((i == 1) ? 25 : 0),
+                          ),
+                          border: Border.all(
+                            color: Colors.black,
+                            width: 5,
+                          ),
                         ),
                       ),
                     ),
@@ -192,23 +152,91 @@ class _MapWidgetState extends State<MapWidget> {
                   ),
                   Expanded(
                     flex: 3,
-                    child: Container(
-                      height: 100,
-                      decoration: BoxDecoration(
-                        color: FlutterFlowTheme.of(context).primary,
-                        borderRadius: BorderRadius.only(
-                          bottomLeft: Radius.circular((i == 4)? 25:0),
-                          bottomRight: Radius.circular((i == 4)? 25:0),
-                          topLeft: Radius.circular((i == 1)? 25:0),
-                          topRight: Radius.circular((i == 1)? 25:0),
-                        ),
-                        border: Border.all(
-                          color: Colors.black,
-                          width: 5,
+                    child: InkWell(
+                      onTap: _model.getLocationMode ? () {
+                        _model.choiceColumn = i;
+                        _model.choiceRow = 2;
+                        setState(() {});
+                      } : null,
+                      child: Container(
+                        height: 100,
+                        decoration: BoxDecoration(
+                          color: (i == _model.choiceColumn && 2 == _model.choiceRow)? Colors.orangeAccent:Colors.blueAccent,
+                          borderRadius: BorderRadius.only(
+                            bottomLeft: Radius.circular((i == 4) ? 25 : 0),
+                            bottomRight: const Radius.circular(0),
+                            topLeft: Radius.circular((i == 1) ? 25 : 0),
+                            topRight: const Radius.circular(0),
+                          ),
+                          border: Border.all(
+                            color: Colors.black,
+                            width: 5,
+                          ),
                         ),
                       ),
                     ),
                   ),
+                  Expanded(
+                    flex: 3,
+                    child: InkWell(
+                      onTap: _model.getLocationMode ? () {
+                        _model.choiceColumn = i;
+                        _model.choiceRow = 3;
+                        setState(() {});
+                      } : null,
+                      child: Container(
+                        height: 100,
+                        decoration: BoxDecoration(
+                          color: (i == _model.choiceColumn && 3 == _model.choiceRow)? Colors.orangeAccent:Colors.blueAccent,
+                          borderRadius: BorderRadius.only(
+                            bottomLeft: const Radius.circular(0),
+                            bottomRight: Radius.circular((i == 4) ? 25 : 0),
+                            topLeft: const Radius.circular(0),
+                            topRight: Radius.circular((i == 1) ? 25 : 0),
+                          ),
+                          border: Border.all(
+                            color: Colors.black,
+                            width: 5,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                  Expanded(
+                    flex: 2,
+                    child: Container(
+                      height: 100,
+                      decoration: BoxDecoration(
+                        color: FlutterFlowTheme.of(context).secondaryBackground,
+                      ),
+                    ),
+                  ),
+                  Expanded(
+                    flex: 3,
+                    child: InkWell(
+                      onTap: _model.getLocationMode ? () {
+                        _model.choiceColumn = i;
+                        _model.choiceRow = 4;
+                        setState(() {});
+                      } : null,
+                      child: Container(
+                        height: 100,
+                        decoration: BoxDecoration(
+                          color: (i == _model.choiceColumn && 4 == _model.choiceRow)? Colors.orangeAccent:Colors.blueAccent,
+                          borderRadius: BorderRadius.only(
+                            bottomLeft: Radius.circular((i == 4) ? 25 : 0),
+                            bottomRight: Radius.circular((i == 4) ? 25 : 0),
+                            topLeft: Radius.circular((i == 1) ? 25 : 0),
+                            topRight: Radius.circular((i == 1) ? 25 : 0),
+                          ),
+                          border: Border.all(
+                            color: Colors.black,
+                            width: 5,
+                          ),
+                        ),
+                      ),
+                    ),
+                  )
                 ],
               )
           ],
