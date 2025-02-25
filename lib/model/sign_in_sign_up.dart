@@ -8,6 +8,7 @@ UserRole userRole = UserRole.student;
 String userName = 'No name';
 
 final FirebaseFirestore firestore = FirebaseFirestore.instance;
+final firebaseAuth = FirebaseAuth.instance;
 
 Future<User> signInWithEmail(String email, String password) async {
   UserCredential userCredential = await FirebaseAuth.instance.signInWithEmailAndPassword(
@@ -49,6 +50,26 @@ Future<User> createAccount(String email, String password) async {
     return userCredential.user!;
   }else{
     throw('No User Data');
+  }
+}
+
+Future<void> sendResetPasswordLink(String emailAddress) async {
+  try {
+    await firebaseAuth.sendPasswordResetEmail(email: emailAddress);
+  } on FirebaseAuthException catch (e) {
+    if (e.code == 'invalid-email') {
+      throw('잘못된 이메일 형식입니다');
+    } else if (e.code == 'user-not-found') {
+      throw('이 이메일 주소에 해당하는 사용자가 없습니다');
+    } else if (e.code == 'too-many-requests') {
+      throw('비밀번호 재설정 요청이 너무 많습니다\n잠시 후 다시 시도해주세요');
+    } else if (e.code == 'network-request-failed') {
+      throw('네트워크 연결에 실패했습니다');
+    } else {
+      throw('에러 발생');
+    }
+  }catch(e) {
+    throw('에러 발생');
   }
 }
 

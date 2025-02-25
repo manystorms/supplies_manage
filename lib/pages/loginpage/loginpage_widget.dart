@@ -1102,6 +1102,38 @@ class _LoginCreateAccountPageWidgetState
                                                 ),
                                               ),
                                             ),
+                                            // Generated code for this Button Widget...
+                                            Align(
+                                              alignment: const AlignmentDirectional(0, 0),
+                                              child: Padding(
+                                                padding: const EdgeInsetsDirectional.fromSTEB(0, 0, 0, 16),
+                                                child: FFButtonWidget(
+                                                  onPressed: () {
+                                                    context.push('/forgotpassword');
+                                                  },
+                                                  text: 'Forgot Password?',
+                                                  options: FFButtonOptions(
+                                                    height: 44,
+                                                    padding: const EdgeInsetsDirectional.fromSTEB(32, 0, 32, 0),
+                                                    iconPadding: const EdgeInsetsDirectional.fromSTEB(0, 0, 0, 0),
+                                                    color: FlutterFlowTheme.of(context).secondaryBackground,
+                                                    textStyle: FlutterFlowTheme.of(context).bodyMedium.override(
+                                                      fontFamily: 'Pretendard',
+                                                      letterSpacing: 0.0,
+                                                      fontWeight: FontWeight.bold,
+                                                      useGoogleFonts: false,
+                                                    ),
+                                                    elevation: 0,
+                                                    borderSide: BorderSide(
+                                                      color: FlutterFlowTheme.of(context).secondaryBackground,
+                                                      width: 2,
+                                                    ),
+                                                    borderRadius: BorderRadius.circular(40),
+                                                    hoverColor: FlutterFlowTheme.of(context).primaryBackground,
+                                                  ),
+                                                ),
+                                              ),
+                                            )
                                           ],
                                         ),
                                       ).animateOnPageLoad(animationsMap[
