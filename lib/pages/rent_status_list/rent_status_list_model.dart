@@ -1,3 +1,5 @@
+import 'package:supplies_manage/show_alert.dart';
+
 import '/flutter_flow/flutter_flow_util.dart';
 import 'rent_status_list_widget.dart' show RentStatusListWidget;
 import 'package:flutter/material.dart';
@@ -32,6 +34,14 @@ class RentApplyListModel extends FlutterFlowModel<RentStatusListWidget> {
       return true;
     }else{
       return false;
+    }
+  }
+
+  Future<void> showMapButtonOnTap(BuildContext context, int index) async {
+    if(suppliesRoomInfo.location[index] == null) {
+      await showAlertWithoutChoice(context, '위치 정보가 없습니다');
+    }else{
+      await context.push('/map/${suppliesRoomInfo.location[index]??'0-0-0'}');
     }
   }
 

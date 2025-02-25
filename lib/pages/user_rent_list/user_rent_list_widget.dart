@@ -160,8 +160,7 @@ class _UserRentListWidgetState extends State<UserRentListWidget>
                                               const SizedBox(width: 16),
                                               FFButtonWidget(
                                                 onPressed: () {
-                                                  print('실험 기구 검색에서 맵으로 이동하는 버튼');
-                                                  context.push('/map');
+                                                  _model.showMapButtonOnTap(context, i);
                                                 },
                                                 text: '위치',
                                                 options: FFButtonOptions(

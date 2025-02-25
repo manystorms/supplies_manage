@@ -277,7 +277,7 @@ class _RentStatusListWidgetState extends State<RentStatusListWidget>
                                             const SizedBox(width: 16),
                                             FFButtonWidget(
                                               onPressed: () {
-                                                context.push('/map');
+                                                _model.showMapButtonOnTap(context, i);
                                               },
                                               text: '위치',
                                               options: FFButtonOptions(

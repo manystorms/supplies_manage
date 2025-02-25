@@ -94,19 +94,19 @@ class _MapWidgetState extends State<MapWidget> {
                 textAlign: TextAlign.start,
                 style:
                 FlutterFlowTheme.of(context)
-                    .labelMedium
+                    .bodyLarge
                     .override(
                   fontFamily:
                   FlutterFlowTheme.of(
                       context)
-                      .labelMediumFamily,
+                      .bodyLargeFamily,
                   letterSpacing: 0.0,
                   useGoogleFonts: GoogleFonts
                       .asMap()
                       .containsKey(
                       FlutterFlowTheme.of(
                           context)
-                          .labelMediumFamily),
+                          .bodyLargeFamily),
                 ),
               ),
             ),
@@ -138,6 +138,28 @@ class _MapWidgetState extends State<MapWidget> {
                             width: 5,
                           ),
                         ),
+                        alignment: Alignment.center,
+                        child: (i == _model.choiceColumn && 1 == _model.choiceRow && !_model.getLocationMode) ? Text(
+                          '${_model.choiceFloor.toString()}층',
+                          textAlign: TextAlign.start,
+                          style:
+                          FlutterFlowTheme.of(context)
+                              .labelMedium
+                              .override(
+                            fontSize: 23,
+                            fontFamily:
+                            FlutterFlowTheme.of(
+                                context)
+                                .labelMediumFamily,
+                            letterSpacing: 0.0,
+                            useGoogleFonts: GoogleFonts
+                                .asMap()
+                                .containsKey(
+                                FlutterFlowTheme.of(
+                                    context)
+                                    .labelMediumFamily),
+                          ),
+                        ):null,
                       ),
                     ),
                   ),
@@ -173,6 +195,28 @@ class _MapWidgetState extends State<MapWidget> {
                             width: 5,
                           ),
                         ),
+                        alignment: Alignment.center,
+                        child: (i == _model.choiceColumn && 2 == _model.choiceRow && !_model.getLocationMode) ? Text(
+                          '${_model.choiceFloor.toString()}층',
+                          textAlign: TextAlign.start,
+                          style:
+                          FlutterFlowTheme.of(context)
+                              .labelMedium
+                              .override(
+                            fontSize: 23,
+                            fontFamily:
+                            FlutterFlowTheme.of(
+                                context)
+                                .labelMediumFamily,
+                            letterSpacing: 0.0,
+                            useGoogleFonts: GoogleFonts
+                                .asMap()
+                                .containsKey(
+                                FlutterFlowTheme.of(
+                                    context)
+                                    .labelMediumFamily),
+                          ),
+                        ):null,
                       ),
                     ),
                   ),
@@ -199,6 +243,28 @@ class _MapWidgetState extends State<MapWidget> {
                             width: 5,
                           ),
                         ),
+                        alignment: Alignment.center,
+                        child: (i == _model.choiceColumn && 3 == _model.choiceRow && !_model.getLocationMode) ? Text(
+                          '${_model.choiceFloor.toString()}층',
+                          textAlign: TextAlign.start,
+                          style:
+                          FlutterFlowTheme.of(context)
+                              .labelMedium
+                              .override(
+                            fontSize: 23,
+                            fontFamily:
+                            FlutterFlowTheme.of(
+                                context)
+                                .labelMediumFamily,
+                            letterSpacing: 0.0,
+                            useGoogleFonts: GoogleFonts
+                                .asMap()
+                                .containsKey(
+                                FlutterFlowTheme.of(
+                                    context)
+                                    .labelMediumFamily),
+                          ),
+                        ):null,
                       ),
                     ),
                   ),
@@ -234,6 +300,28 @@ class _MapWidgetState extends State<MapWidget> {
                             width: 5,
                           ),
                         ),
+                        alignment: Alignment.center,
+                        child: (i == _model.choiceColumn && 4 == _model.choiceRow && !_model.getLocationMode) ? Text(
+                          '${_model.choiceFloor.toString()}층',
+                          textAlign: TextAlign.start,
+                          style:
+                          FlutterFlowTheme.of(context)
+                              .labelMedium
+                              .override(
+                            fontSize: 23,
+                            fontFamily:
+                            FlutterFlowTheme.of(
+                                context)
+                                .labelMediumFamily,
+                            letterSpacing: 0.0,
+                            useGoogleFonts: GoogleFonts
+                                .asMap()
+                                .containsKey(
+                                FlutterFlowTheme.of(
+                                    context)
+                                    .labelMediumFamily),
+                          ),
+                        ):null,
                       ),
                     ),
                   )
