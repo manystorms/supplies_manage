@@ -7,7 +7,7 @@ class MapModel extends FlutterFlowModel<MapWidget> {
   bool getLocationMode = false;
   int choiceColumn = 0;
   int choiceRow = 0;
-  int choiceFloor = 0;
+  int choiceFloor = 1;
 
   void processLocationData(String locationData) {
     if(locationData == 'getLocationMode') {
