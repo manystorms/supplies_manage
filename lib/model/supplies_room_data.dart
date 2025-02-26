@@ -103,7 +103,7 @@ class SuppliesRoomData{
     if(currentData.exists) {
       Map<String, dynamic>? data = currentData.data();
       if(data != null && data.containsKey('supplies')) {
-        List<dynamic> applicationList = data['applicationList'];
+        List<dynamic> applicationList = data['applicationList']??[];
 
         if(rentReason == '') {
           applicationList.add({
@@ -122,7 +122,7 @@ class SuppliesRoomData{
           });
         }
 
-        List<dynamic> supplies = data['supplies'];
+        List<dynamic> supplies = data['supplies'] ??[];
         supplies[suppliesNum]['availableAmount'] = availableAmount[suppliesNum];
 
         await documentSnapshot.update({'applicationList': applicationList, 'supplies': supplies});

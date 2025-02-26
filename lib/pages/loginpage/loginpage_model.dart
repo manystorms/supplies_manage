@@ -103,12 +103,14 @@ class LoginCreateAccountPageModel
             showAlertWithoutChoice(context, '해당 계정이 비활성화 상태입니다');
             break;
           default:
+            debugPrint(e.toString());
             showAlertWithoutChoice(context, '에러가 발생했습니다. 관리자에게 문의하세요');
         }
       }
       return false;
     }catch(e) {
       if(context.mounted) {
+        debugPrint(e.toString());
         showAlertWithoutChoice(context, '에러가 발생했습니다. 관리자에게 문의하세요');
       }
       return false;

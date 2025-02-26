@@ -25,8 +25,16 @@ Future<User> signInWithEmail(String email, String password) async {
     throw Exception('에러 발생: 데이터를 가져오는 과정에서 오류가 생겼습니다');
   }
 
-  List<String> adminUid = List<String>.from(userDoc['adminUid']);
-  List<String> kioskUid = List<String>.from(userDoc['kioskUid']);
+  List<String> adminUid = [];
+  List<String> kioskUid = [];
+
+  if (userDoc['adminUid'] != null && userDoc['adminUid'] is List) {
+    adminUid = List<String>.from(userDoc['adminUid']);
+  }
+
+  if (userDoc['kioskUid'] != null && userDoc['kioskUid'] is List) {
+    kioskUid = List<String>.from(userDoc['kioskUid']);
+  }
 
   if(adminUid.contains(user.uid)) {
     userRole = UserRole.admin;

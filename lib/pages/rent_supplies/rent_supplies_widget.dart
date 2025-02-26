@@ -317,6 +317,7 @@ class _RentSuppliesWidgetState extends State<RentSuppliesWidget> {
                         await showAlertWithoutChoice(context, '대여 완료되었습니다');
                         context.pop();
                       }catch(e){
+                        debugPrint(e.toString());
                         await showAlertWithoutChoice(context, '오류가 발생해 대여가 되지 않았습니다');
                       }
                     }
