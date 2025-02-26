@@ -120,8 +120,8 @@ class _MainPageWidgetState extends State<MainPageWidget> {
                                           child: Padding(
                                             padding: const EdgeInsets.all(12),
                                             child: Container(
-                                              width: 160,
-                                              height: 140,
+                                              width: 210,
+                                              height: 160,
                                               decoration: BoxDecoration(
                                                 color: FlutterFlowTheme.of(context).secondaryBackground,
                                                 borderRadius: BorderRadius.circular(8),
@@ -152,6 +152,17 @@ class _MainPageWidgetState extends State<MainPageWidget> {
                                                       padding: const EdgeInsetsDirectional.fromSTEB(0, 4, 0, 0),
                                                       child: Text(
                                                         userRole.name,
+                                                        style: FlutterFlowTheme.of(context).labelSmall.override(
+                                                          fontFamily: 'Pretendard',
+                                                          letterSpacing: 0.0,
+                                                          useGoogleFonts: false,
+                                                        ),
+                                                      ),
+                                                    ),
+                                                    Padding(
+                                                      padding: const EdgeInsetsDirectional.fromSTEB(0, 4, 0, 0),
+                                                      child: SelectableText(
+                                                        userUid,
                                                         style: FlutterFlowTheme.of(context).labelSmall.override(
                                                           fontFamily: 'Pretendard',
                                                           letterSpacing: 0.0,

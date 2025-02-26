@@ -43,6 +43,11 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           builder: (context, params) => const AddModifySuppliesWidget(),
         ),
         FFRoute(
+          name: 'adduserrole',
+          path: '/adduserrole',
+          builder: (context, params) => const AddUserRoleWidget(),
+        ),
+        FFRoute(
           name: 'supplieskiosk',
           path: '/supplieskiosk',
           builder: (context, params) => const SuppliesKioskWidget(),

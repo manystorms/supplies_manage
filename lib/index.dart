@@ -9,5 +9,6 @@ export 'package:supplies_manage/pages/add_modify_supplies/add_modify_supplies_wi
 export 'package:supplies_manage/pages/supplies_kiosk/supplies_kiosk_widget.dart' show SuppliesKioskWidget;
 export 'package:supplies_manage/pages/map/map_widget.dart' show MapWidget;
 export 'package:supplies_manage/pages/forgot_password/forgot_password_widget.dart' show ForgotPasswordWidget;
+export 'package:supplies_manage/pages/add_user_role/add_user_role_widget.dart' show AddUserRoleWidget;
 
 //만든 페이지를 불러오는 코드인듯!

@@ -6,6 +6,7 @@ const userSuppliesRoom = 'supplies';
 enum UserRole {student, admin, kiosk}
 UserRole userRole = UserRole.student;
 String userName = 'No name';
+String userUid = 'No UID';
 
 final FirebaseFirestore firestore = FirebaseFirestore.instance;
 final firebaseAuth = FirebaseAuth.instance;
@@ -36,6 +37,7 @@ Future<User> signInWithEmail(String email, String password) async {
   }
 
   userName = user.email??'No name';
+  userUid = user.uid;
 
   return userCredential.user!;
 }

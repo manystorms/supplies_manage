@@ -4,28 +4,28 @@ import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import 'package:flutter/material.dart';
 
-import 'forgot_password_model.dart';
-export 'forgot_password_model.dart';
+import 'add_user_role_model.dart';
+export 'add_user_role_model.dart';
 
-class ForgotPasswordWidget extends StatefulWidget {
-  const ForgotPasswordWidget({super.key});
+class AddUserRoleWidget extends StatefulWidget {
+  const AddUserRoleWidget({super.key});
 
-  static String routeName = 'ForgotPassword';
-  static String routePath = '/forgotPassword';
+  static String routeName = 'AddUserRole';
+  static String routePath = '/addUserRole';
 
   @override
-  State<ForgotPasswordWidget> createState() => _ForgotPasswordWidgetState();
+  State<AddUserRoleWidget> createState() => _AddUserRoleWidgetState();
 }
 
-class _ForgotPasswordWidgetState extends State<ForgotPasswordWidget> {
-  late ForgotPasswordModel _model;
+class _AddUserRoleWidgetState extends State<AddUserRoleWidget> {
+  late AddUserRoleModel _model;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   void initState() {
     super.initState();
-    _model = createModel(context, () => ForgotPasswordModel());
+    _model = createModel(context, () => AddUserRoleModel());
 
     _model.emailAddressTextController ??= TextEditingController();
     _model.emailAddressFocusNode ??= FocusNode();
@@ -79,7 +79,7 @@ class _ForgotPasswordWidgetState extends State<ForgotPasswordWidget> {
               Padding(
                 padding: const EdgeInsetsDirectional.fromSTEB(16, 0, 0, 0),
                 child: Text(
-                  'Forgot Password',
+                  '관리자/키오스크 추가',
                   style: FlutterFlowTheme.of(context).headlineMedium.override(
                     fontFamily: 'Pretendard',
                     letterSpacing: 0.0,
@@ -90,7 +90,7 @@ class _ForgotPasswordWidgetState extends State<ForgotPasswordWidget> {
               Padding(
                 padding: const EdgeInsetsDirectional.fromSTEB(16, 8, 16, 16),
                 child: Text(
-                  '비밀번호를 잊으셨나요?\n이메일 주소를 입력하고 비밀번호를 초기화하세요. ',
+                  '관리자/키오스크 역할의 계정을 추가하세요',
                   style: FlutterFlowTheme.of(context).labelMedium.override(
                     fontFamily: 'Pretendard',
                     letterSpacing: 0.0,
@@ -114,7 +114,7 @@ class _ForgotPasswordWidgetState extends State<ForgotPasswordWidget> {
                         letterSpacing: 0.0,
                         useGoogleFonts: false,
                       ),
-                      hintText: 'Email',
+                      hintText: 'UID',
                       hintStyle:
                       FlutterFlowTheme.of(context).labelMedium.override(
                         fontFamily: 'Pretendard',
@@ -168,15 +168,30 @@ class _ForgotPasswordWidgetState extends State<ForgotPasswordWidget> {
                   ),
                 ),
               ),
+              DropdownButton<String>(
+                value: _model.selectedRole,
+                onChanged: (String? newValue) {
+                  setState(() {
+                    _model.selectedRole = newValue;
+                  });
+                },
+                items: _model.option.map<DropdownMenuItem<String>>((String value) {
+                  return DropdownMenuItem<String>(
+                    value: value,
+                    child: Text(value),
+                  );
+                }).toList(),
+              ),
               Align(
                 alignment: const AlignmentDirectional(0, 0),
                 child: Padding(
-                  padding: const EdgeInsetsDirectional.fromSTEB(16, 24, 16, 0),
+                  padding: const EdgeInsetsDirectional.fromSTEB(16, 30, 16, 0),
                   child: FFButtonWidget(
-                    onPressed: () async {
-                      await _model.sendLinkButtonOnTap(context);
+                    onPressed: () async{
+                      await _model.addUserRoleButtonOnTap(context);
+                      if(context.mounted) context.pop();
                     },
-                    text: '이메일로 링크 보내기',
+                    text: '관리자/키오스크 추가하기',
                     options: FFButtonOptions(
                       width: double.infinity,
                       height: 50,
