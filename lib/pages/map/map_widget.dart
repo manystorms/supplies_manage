@@ -330,101 +330,103 @@ class _MapWidgetState extends State<MapWidget> {
                   )
                 ],
               ),
-            Row(
-              mainAxisSize: MainAxisSize.max,
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Align(
-                  alignment: const AlignmentDirectional(1, 0),
-                  child: Text(
-                    '물품이 위치한 층',
-                    style: FlutterFlowTheme.of(context).bodyMedium.override(
-                      fontSize: 23,
-                      fontFamily: 'Pretendard',
-                      letterSpacing: 0.0,
-                      useGoogleFonts: false,
+            if(_model.getLocationMode)
+              Row(
+                mainAxisSize: MainAxisSize.max,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Align(
+                    alignment: const AlignmentDirectional(1, 0),
+                    child: Text(
+                      '물품이 위치한 층',
+                      style: FlutterFlowTheme.of(context).bodyMedium.override(
+                        fontSize: 23,
+                        fontFamily: 'Pretendard',
+                        letterSpacing: 0.0,
+                        useGoogleFonts: false,
+                      ),
                     ),
                   ),
-                ),
-                Align(
-                  alignment: const AlignmentDirectional(1, 0),
-                  child: Container(
-                    width: 120,
-                    height: 40,
-                    decoration: BoxDecoration(
-                      color: FlutterFlowTheme.of(context).secondaryBackground,
-                      borderRadius: BorderRadius.circular(8),
-                      shape: BoxShape.rectangle,
-                    ),
-                    child: FlutterFlowCountController(
-                      decrementIconBuilder: (enabled) => Icon(
-                        Icons.remove_rounded,
-                        color: enabled
-                            ? FlutterFlowTheme.of(context).secondaryText
-                            : FlutterFlowTheme.of(context).alternate,
-                        size: 30,
+                  Align(
+                    alignment: const AlignmentDirectional(1, 0),
+                    child: Container(
+                      width: 120,
+                      height: 40,
+                      decoration: BoxDecoration(
+                        color: FlutterFlowTheme.of(context).secondaryBackground,
+                        borderRadius: BorderRadius.circular(8),
+                        shape: BoxShape.rectangle,
                       ),
-                      incrementIconBuilder: (enabled) => Icon(
-                        Icons.add_rounded,
-                        color: enabled
-                            ? FlutterFlowTheme.of(context).primary
-                            : FlutterFlowTheme.of(context).alternate,
-                        size: 30,
-                      ),
-                      countBuilder: (count) => Text(
-                        count.toString(),
-                        style: FlutterFlowTheme.of(context).titleLarge.override(
-                          fontFamily: 'Pretendard',
-                          letterSpacing: 0.0,
-                          useGoogleFonts: false,
+                      child: FlutterFlowCountController(
+                        decrementIconBuilder: (enabled) => Icon(
+                          Icons.remove_rounded,
+                          color: enabled
+                              ? FlutterFlowTheme.of(context).secondaryText
+                              : FlutterFlowTheme.of(context).alternate,
+                          size: 30,
                         ),
+                        incrementIconBuilder: (enabled) => Icon(
+                          Icons.add_rounded,
+                          color: enabled
+                              ? FlutterFlowTheme.of(context).primary
+                              : FlutterFlowTheme.of(context).alternate,
+                          size: 30,
+                        ),
+                        countBuilder: (count) => Text(
+                          count.toString(),
+                          style: FlutterFlowTheme.of(context).titleLarge.override(
+                            fontFamily: 'Pretendard',
+                            letterSpacing: 0.0,
+                            useGoogleFonts: false,
+                          ),
+                        ),
+                        count: _model.choiceFloor,
+                        updateCount: (count) =>
+                            safeSetState(() => _model.choiceFloor = count),
+                        minimum: 1,
+                        stepSize: 1,
+                        contentPadding: const EdgeInsetsDirectional.fromSTEB(12, 0, 12, 0),
                       ),
-                      count: _model.choiceFloor,
-                      updateCount: (count) =>
-                          safeSetState(() => _model.choiceFloor = count),
-                      minimum: 1,
-                      stepSize: 1,
-                      contentPadding: const EdgeInsetsDirectional.fromSTEB(12, 0, 12, 0),
                     ),
                   ),
-                ),
-              ],
-            ),
-            Align(
-              alignment: const AlignmentDirectional(0, 0),
-              child: Padding(
-                padding: const EdgeInsetsDirectional.fromSTEB(0, 20, 0, 24),
-                child: FFButtonWidget(
-                  onPressed: () {
-                    if(_model.choiceColumn != 0 && _model.choiceRow != 0) {
-                      context.pop('${_model.choiceColumn}-${_model.choiceRow}-${_model.choiceFloor}');
-                    }else{
-                      showAlertWithoutChoice(context, '물품의 위치를 선택하세요');
-                    }
-                  },
-                  text: '입력 완료',
-                  options: FFButtonOptions(
-                    width: 300,
-                    height: 60,
-                    padding: const EdgeInsetsDirectional.fromSTEB(0, 0, 0, 0),
-                    iconPadding: const EdgeInsetsDirectional.fromSTEB(0, 0, 0, 0),
-                    color: FlutterFlowTheme.of(context).primary,
-                    textStyle: FlutterFlowTheme.of(context).headlineSmall.override(
-                      fontFamily: 'Pretendard',
-                      color: Colors.white,
-                      letterSpacing: 0.0,
-                      useGoogleFonts: false,
-                    ),
-                    elevation: 3,
-                    borderSide: const BorderSide(
-                      color: Colors.transparent,
-                      width: 1,
-                    ),
-                    borderRadius: BorderRadius.circular(40),
-                  ),
-                ),
+                ],
               ),
-            )
+            if(_model.getLocationMode)
+              Align(
+                alignment: const AlignmentDirectional(0, 0),
+                child: Padding(
+                  padding: const EdgeInsetsDirectional.fromSTEB(0, 20, 0, 24),
+                  child: FFButtonWidget(
+                    onPressed: () {
+                      if(_model.choiceColumn != 0 && _model.choiceRow != 0) {
+                        context.pop('${_model.choiceColumn}-${_model.choiceRow}-${_model.choiceFloor}');
+                      }else{
+                        showAlertWithoutChoice(context, '물품의 위치를 선택하세요');
+                      }
+                    },
+                    text: '입력 완료',
+                    options: FFButtonOptions(
+                      width: 300,
+                      height: 60,
+                      padding: const EdgeInsetsDirectional.fromSTEB(0, 0, 0, 0),
+                      iconPadding: const EdgeInsetsDirectional.fromSTEB(0, 0, 0, 0),
+                      color: FlutterFlowTheme.of(context).primary,
+                      textStyle: FlutterFlowTheme.of(context).headlineSmall.override(
+                        fontFamily: 'Pretendard',
+                        color: Colors.white,
+                        letterSpacing: 0.0,
+                        useGoogleFonts: false,
+                      ),
+                      elevation: 3,
+                      borderSide: const BorderSide(
+                        color: Colors.transparent,
+                        width: 1,
+                      ),
+                      borderRadius: BorderRadius.circular(40),
+                    ),
+                  ),
+                ),
+              )
           ],
         ),
       ),

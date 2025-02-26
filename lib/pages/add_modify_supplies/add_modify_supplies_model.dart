@@ -30,9 +30,10 @@ class AddModifySuppliesModel extends FlutterFlowModel<AddModifySuppliesWidget> {
   suppliesAmountTextControllerValidator;
   // State field(s) for checkConsumable widget.
   bool checkConsumableValue = false;
+  String? location;
 
   Future<void> getLocationButtonOnTap(BuildContext context) async {
-    context.push('/map/getLocationMode');
+    location = await context.push('/map/getLocationMode');
   }
 
   Future<void> uploadImageButtonOnTap(BuildContext context) async{
@@ -58,7 +59,7 @@ class AddModifySuppliesModel extends FlutterFlowModel<AddModifySuppliesWidget> {
       await suppliesRoomInfo.inputData(
         suppliesNameTextController.text,
         inputSuppliesAmount,
-        'asd',//location
+        location,
         checkConsumableValue
       );
       if(context.mounted) context.pop();
