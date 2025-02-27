@@ -145,22 +145,28 @@ class ManageSuppliesData extends SuppliesRoomData{
   }
 
   Future<void> inputData(String inputName, int? inputAmount, String? inputLocation, bool inputConsumable) async{
-    if(name.contains(inputName) == true) throw ('duplicationName');
+    await firestore.runTransaction((transaction) async {
+      final documentRef = firestore.collection(schoolName).doc(suppliesRoom);
+      final documentSnapshot = await transaction.get(documentRef);
 
-    final documentSnapshot = firestore.collection(schoolName).doc(suppliesRoom);
+      if (!documentSnapshot.exists) throw ('문서가 존재하지 않습니다.');
 
-    final Map<String, dynamic> inputSuppliesData = {
-      'name': inputName,
-      'amount': inputAmount,
-      'availableAmount': inputAmount,
-      'location': inputLocation,
-      'imageNum': 0,
-      'consumable': inputConsumable
-    };
+      final data = documentSnapshot.data() as Map<String, dynamic>;
+      List<dynamic> supplies = List.from(data['supplies'] ?? []);
 
-    await documentSnapshot.set({
-      'supplies': FieldValue.arrayUnion([inputSuppliesData])
-    }, SetOptions(merge: true));
+      if (supplies.any((item) => item['name'] == inputName)) throw ('duplicationName');
+
+      final Map<String, dynamic> inputSuppliesData = {
+        'name': inputName,
+        'amount': inputAmount,
+        'availableAmount': inputAmount,
+        'location': inputLocation,
+        'imageNum': 0,
+        'consumable': inputConsumable,
+      };
+      supplies.add(inputSuppliesData);
+      transaction.update(documentRef, {'supplies': supplies});
+    });
 
     name.add(inputName);
     amount.add(inputAmount);
