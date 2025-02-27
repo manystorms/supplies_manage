@@ -39,8 +39,11 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
         ),
         FFRoute(
           name: 'addmodifysupplies',
-          path: '/addmodifysupplies',
-          builder: (context, params) => const AddModifySuppliesWidget(),
+          path: '/addmodifysupplies/:suppliesName',
+            builder: (context, params) {
+              final suppliesName = params.getParam<String>('suppliesName', ParamType.String) ?? 'noData';
+              return AddModifySuppliesWidget(suppliesName: suppliesName);
+            }
         ),
         FFRoute(
           name: 'adduserrole',

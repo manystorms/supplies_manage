@@ -8,7 +8,10 @@ import 'add_modify_supplies_model.dart';
 export 'add_modify_supplies_model.dart';
 
 class AddModifySuppliesWidget extends StatefulWidget {
-  const AddModifySuppliesWidget({super.key});
+  final suppliesName;
+
+  @immutable
+  const AddModifySuppliesWidget({required this.suppliesName});
 
   @override
   State<AddModifySuppliesWidget> createState() =>
@@ -31,6 +34,10 @@ class _AddModifySuppliesWidgetState extends State<AddModifySuppliesWidget> {
     _model.suppliesAmountTextController ??= TextEditingController();
     _model.suppliesAmountFocusNode ??= FocusNode();
     _model.suppliesAmountFocusNode!.addListener(() => safeSetState(() {}));
+
+    if(widget.suppliesName == 'addMode') {
+      _model.addMode = true;
+    }
   }
 
   @override
@@ -68,7 +75,7 @@ class _AddModifySuppliesWidgetState extends State<AddModifySuppliesWidget> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                '물품 입력',
+                (_model.addMode)? '물품 입력':'물품 수정',
                 style: FlutterFlowTheme.of(context).headlineMedium.override(
                   fontFamily:
                   FlutterFlowTheme.of(context).headlineMediumFamily,
@@ -111,116 +118,117 @@ class _AddModifySuppliesWidgetState extends State<AddModifySuppliesWidget> {
                                 mainAxisSize: MainAxisSize.max,
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  TextFormField(
-                                    controller:
-                                    _model.suppliesNameTextController,
-                                    focusNode: _model.suppliesNameFocusNode,
-                                    autofocus: true,
-                                    textCapitalization:
-                                    TextCapitalization.words,
-                                    obscureText: false,
-                                    decoration: InputDecoration(
-                                      labelText: '준비물 이름',
-                                      labelStyle: FlutterFlowTheme.of(context)
-                                          .labelLarge
-                                          .override(
-                                        fontFamily:
-                                        FlutterFlowTheme.of(context)
-                                            .labelLargeFamily,
-                                        letterSpacing: 0.0,
-                                        useGoogleFonts: GoogleFonts.asMap()
-                                            .containsKey(
-                                            FlutterFlowTheme.of(context)
-                                                .labelLargeFamily),
-                                      ),
-                                      hintStyle: FlutterFlowTheme.of(context)
-                                          .labelMedium
-                                          .override(
-                                        fontFamily:
-                                        FlutterFlowTheme.of(context)
-                                            .labelMediumFamily,
-                                        letterSpacing: 0.0,
-                                        useGoogleFonts: GoogleFonts.asMap()
-                                            .containsKey(
-                                            FlutterFlowTheme.of(context)
-                                                .labelMediumFamily),
-                                      ),
-                                      errorStyle: FlutterFlowTheme.of(context)
-                                          .bodyMedium
-                                          .override(
-                                        fontFamily:
-                                        FlutterFlowTheme.of(context)
-                                            .bodyMediumFamily,
-                                        color: FlutterFlowTheme.of(context)
-                                            .error,
-                                        fontSize: 12,
-                                        letterSpacing: 0.0,
-                                        useGoogleFonts: GoogleFonts.asMap()
-                                            .containsKey(
-                                            FlutterFlowTheme.of(context)
-                                                .bodyMediumFamily),
-                                      ),
-                                      enabledBorder: OutlineInputBorder(
-                                        borderSide: BorderSide(
-                                          color: FlutterFlowTheme.of(context)
-                                              .alternate,
-                                          width: 2,
-                                        ),
-                                        borderRadius: BorderRadius.circular(12),
-                                      ),
-                                      focusedBorder: OutlineInputBorder(
-                                        borderSide: BorderSide(
-                                          color: FlutterFlowTheme.of(context)
-                                              .primary,
-                                          width: 2,
-                                        ),
-                                        borderRadius: BorderRadius.circular(12),
-                                      ),
-                                      errorBorder: OutlineInputBorder(
-                                        borderSide: BorderSide(
-                                          color: FlutterFlowTheme.of(context)
-                                              .error,
-                                          width: 2,
-                                        ),
-                                        borderRadius: BorderRadius.circular(12),
-                                      ),
-                                      focusedErrorBorder: OutlineInputBorder(
-                                        borderSide: BorderSide(
-                                          color: FlutterFlowTheme.of(context)
-                                              .error,
-                                          width: 2,
-                                        ),
-                                        borderRadius: BorderRadius.circular(12),
-                                      ),
-                                      filled: true,
-                                      fillColor: (_model.suppliesNameFocusNode
-                                          ?.hasFocus ??
-                                          false)
-                                          ? FlutterFlowTheme.of(context).accent1
-                                          : FlutterFlowTheme.of(context)
-                                          .secondaryBackground,
-                                      contentPadding:
-                                      const EdgeInsetsDirectional.fromSTEB(
-                                          16, 20, 16, 20),
-                                    ),
-                                    style: FlutterFlowTheme.of(context)
-                                        .bodyLarge
-                                        .override(
-                                      fontFamily:
-                                      FlutterFlowTheme.of(context)
-                                          .bodyLargeFamily,
-                                      letterSpacing: 0.0,
-                                      useGoogleFonts: GoogleFonts.asMap()
-                                          .containsKey(
+                                  if(_model.addMode)
+                                    TextFormField(
+                                      controller:
+                                      _model.suppliesNameTextController,
+                                      focusNode: _model.suppliesNameFocusNode,
+                                      autofocus: true,
+                                      textCapitalization:
+                                      TextCapitalization.words,
+                                      obscureText: false,
+                                      decoration: InputDecoration(
+                                        labelText: '준비물 이름',
+                                        labelStyle: FlutterFlowTheme.of(context)
+                                            .labelLarge
+                                            .override(
+                                          fontFamily:
                                           FlutterFlowTheme.of(context)
-                                              .bodyLargeFamily),
+                                              .labelLargeFamily,
+                                          letterSpacing: 0.0,
+                                          useGoogleFonts: GoogleFonts.asMap()
+                                              .containsKey(
+                                              FlutterFlowTheme.of(context)
+                                                  .labelLargeFamily),
+                                        ),
+                                        hintStyle: FlutterFlowTheme.of(context)
+                                            .labelMedium
+                                            .override(
+                                          fontFamily:
+                                          FlutterFlowTheme.of(context)
+                                              .labelMediumFamily,
+                                          letterSpacing: 0.0,
+                                          useGoogleFonts: GoogleFonts.asMap()
+                                              .containsKey(
+                                              FlutterFlowTheme.of(context)
+                                                  .labelMediumFamily),
+                                        ),
+                                        errorStyle: FlutterFlowTheme.of(context)
+                                            .bodyMedium
+                                            .override(
+                                          fontFamily:
+                                          FlutterFlowTheme.of(context)
+                                              .bodyMediumFamily,
+                                          color: FlutterFlowTheme.of(context)
+                                              .error,
+                                          fontSize: 12,
+                                          letterSpacing: 0.0,
+                                          useGoogleFonts: GoogleFonts.asMap()
+                                              .containsKey(
+                                              FlutterFlowTheme.of(context)
+                                                  .bodyMediumFamily),
+                                        ),
+                                        enabledBorder: OutlineInputBorder(
+                                          borderSide: BorderSide(
+                                            color: FlutterFlowTheme.of(context)
+                                                .alternate,
+                                            width: 2,
+                                          ),
+                                          borderRadius: BorderRadius.circular(12),
+                                        ),
+                                        focusedBorder: OutlineInputBorder(
+                                          borderSide: BorderSide(
+                                            color: FlutterFlowTheme.of(context)
+                                                .primary,
+                                            width: 2,
+                                          ),
+                                          borderRadius: BorderRadius.circular(12),
+                                        ),
+                                        errorBorder: OutlineInputBorder(
+                                          borderSide: BorderSide(
+                                            color: FlutterFlowTheme.of(context)
+                                                .error,
+                                            width: 2,
+                                          ),
+                                          borderRadius: BorderRadius.circular(12),
+                                        ),
+                                        focusedErrorBorder: OutlineInputBorder(
+                                          borderSide: BorderSide(
+                                            color: FlutterFlowTheme.of(context)
+                                                .error,
+                                            width: 2,
+                                          ),
+                                          borderRadius: BorderRadius.circular(12),
+                                        ),
+                                        filled: true,
+                                        fillColor: (_model.suppliesNameFocusNode
+                                            ?.hasFocus ??
+                                            false)
+                                            ? FlutterFlowTheme.of(context).accent1
+                                            : FlutterFlowTheme.of(context)
+                                            .secondaryBackground,
+                                        contentPadding:
+                                        const EdgeInsetsDirectional.fromSTEB(
+                                            16, 20, 16, 20),
+                                      ),
+                                      style: FlutterFlowTheme.of(context)
+                                          .bodyLarge
+                                          .override(
+                                        fontFamily:
+                                        FlutterFlowTheme.of(context)
+                                            .bodyLargeFamily,
+                                        letterSpacing: 0.0,
+                                        useGoogleFonts: GoogleFonts.asMap()
+                                            .containsKey(
+                                            FlutterFlowTheme.of(context)
+                                                .bodyLargeFamily),
+                                      ),
+                                      cursorColor:
+                                      FlutterFlowTheme.of(context).primary,
+                                      validator: _model
+                                          .suppliesNameTextControllerValidator
+                                          .asValidator(context),
                                     ),
-                                    cursorColor:
-                                    FlutterFlowTheme.of(context).primary,
-                                    validator: _model
-                                        .suppliesNameTextControllerValidator
-                                        .asValidator(context),
-                                  ),
                                   Material(
                                     color: Colors.transparent,
                                     child: SwitchListTile.adaptive(
@@ -526,53 +534,83 @@ class _AddModifySuppliesWidgetState extends State<AddModifySuppliesWidget> {
                     ),
                   ),
                 ),
-                Container(
-                  constraints: const BoxConstraints(
-                    maxWidth: 770,
-                  ),
-                  decoration: const BoxDecoration(),
-                  child: Column(
-                    mainAxisSize: MainAxisSize.max,
-                    children: [
-                      Padding(
-                        padding: const EdgeInsetsDirectional.fromSTEB(16, 12, 16, 12),
-                        child: FFButtonWidget(
-                          onPressed: () async{
-                            await _model.completeButtonOnTap(context);
-                            setState(() {});
-                          },
-                          text: '완료',
-                          options: FFButtonOptions(
-                            width: double.infinity,
-                            height: 48,
-                            padding:
-                            const EdgeInsetsDirectional.fromSTEB(24, 0, 24, 0),
-                            iconPadding:
-                            const EdgeInsetsDirectional.fromSTEB(0, 0, 0, 0),
-                            color: FlutterFlowTheme.of(context).primary,
-                            textStyle: FlutterFlowTheme.of(context)
-                                .titleSmall
-                                .override(
-                              fontFamily: FlutterFlowTheme.of(context)
-                                  .titleSmallFamily,
-                              color: Colors.white,
-                              letterSpacing: 0.0,
-                              useGoogleFonts: GoogleFonts.asMap()
-                                  .containsKey(FlutterFlowTheme.of(context)
-                                  .titleSmallFamily),
-                            ),
-                            elevation: 3,
-                            borderSide: const BorderSide(
-                              color: Colors.transparent,
-                              width: 1,
-                            ),
-                            borderRadius: BorderRadius.circular(8),
-                          ),
-                        ),
+                Padding(
+                  padding: const EdgeInsetsDirectional.fromSTEB(16, 12, 16, 12),
+                  child: FFButtonWidget(
+                    onPressed: () async{
+                      if(_model.addMode) {
+                        await _model.addSuppliesButtonOnTap(context);
+                      }else{
+                        await _model.modifySuppliesButtonOnTap(context, widget.suppliesName);
+                      }
+                    },
+                    text: '완료',
+                    options: FFButtonOptions(
+                      width: double.infinity,
+                      height: 48,
+                      padding:
+                      const EdgeInsetsDirectional.fromSTEB(24, 0, 24, 0),
+                      iconPadding:
+                      const EdgeInsetsDirectional.fromSTEB(0, 0, 0, 0),
+                      color: FlutterFlowTheme.of(context).primary,
+                      textStyle: FlutterFlowTheme.of(context)
+                          .titleSmall
+                          .override(
+                        fontFamily: FlutterFlowTheme.of(context)
+                            .titleSmallFamily,
+                        color: Colors.white,
+                        letterSpacing: 0.0,
+                        useGoogleFonts: GoogleFonts.asMap()
+                            .containsKey(FlutterFlowTheme.of(context)
+                            .titleSmallFamily),
                       ),
-                    ],
+                      elevation: 3,
+                      borderSide: const BorderSide(
+                        color: Colors.transparent,
+                        width: 1,
+                      ),
+                      borderRadius: BorderRadius.circular(8),
+                    ),
                   ),
                 ),
+                if(!_model.addMode)
+                  Padding(
+                    padding: const EdgeInsetsDirectional.fromSTEB(16, 0, 16, 12),
+                    child: FFButtonWidget(
+                      onPressed: () async{
+                        if(await _model.removeSuppliesButtonOnTap(context, widget.suppliesName)) {
+                          if(context.mounted) context.pop();
+                        }
+                      },
+                      text: '삭제',
+                      options: FFButtonOptions(
+                        width: double.infinity,
+                        height: 48,
+                        padding:
+                        const EdgeInsetsDirectional.fromSTEB(24, 0, 24, 0),
+                        iconPadding:
+                        const EdgeInsetsDirectional.fromSTEB(0, 0, 0, 0),
+                        color: FlutterFlowTheme.of(context).error,
+                        textStyle: FlutterFlowTheme.of(context)
+                            .titleSmall
+                            .override(
+                          fontFamily: FlutterFlowTheme.of(context)
+                              .titleSmallFamily,
+                          color: Colors.white,
+                          letterSpacing: 0.0,
+                          useGoogleFonts: GoogleFonts.asMap()
+                              .containsKey(FlutterFlowTheme.of(context)
+                              .titleSmallFamily),
+                        ),
+                        elevation: 3,
+                        borderSide: const BorderSide(
+                          color: Colors.transparent,
+                          width: 1,
+                        ),
+                        borderRadius: BorderRadius.circular(8),
+                      ),
+                    ),
+                  ),
               ],
             ),
           ),

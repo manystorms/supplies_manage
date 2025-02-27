@@ -21,6 +21,8 @@ class AddModifySuppliesModel extends FlutterFlowModel<AddModifySuppliesWidget> {
     return null;
   }
 
+  bool addMode = false;
+
   // State field(s) for checkIsInputAmount widget.
   bool checkIsInputAmountValue = true;
   // State field(s) for suppliesAmount widget.
@@ -44,7 +46,7 @@ class AddModifySuppliesModel extends FlutterFlowModel<AddModifySuppliesWidget> {
     }
   }
 
-  Future<void> completeButtonOnTap(BuildContext context) async{
+  Future<void> addSuppliesButtonOnTap(BuildContext context) async{
     final inputSuppliesAmount = int.tryParse(suppliesAmountTextController.text);
 
     if(suppliesNameTextController.text.isEmpty) {
@@ -58,18 +60,66 @@ class AddModifySuppliesModel extends FlutterFlowModel<AddModifySuppliesWidget> {
     try{
       await suppliesRoomInfo.inputData(
         suppliesNameTextController.text,
-        inputSuppliesAmount,
+          (checkIsInputAmountValue)? inputSuppliesAmount:null,
         location,
         checkConsumableValue
       );
       if(context.mounted) context.pop();
     }catch(e) {
-      if(context.mounted) await showAlertWithoutChoice(context, '에러 발생: 다시 시도해 주세요');
+      if(context.mounted) {
+        if(e.toString() == 'duplicationName') {
+          await showAlertWithoutChoice(context, '이미 해당 이름의 준비물이 있습니다');
+        }else{
+          await showAlertWithoutChoice(context, '에러 발생: 다시 시도해 주세요');
+        }
+      }
     }
+  }
+
+  Future<void> modifySuppliesButtonOnTap(BuildContext context, String suppliesName) async {
+    final inputSuppliesAmount = int.tryParse(suppliesAmountTextController.text);
+
+    if((inputSuppliesAmount == null || inputSuppliesAmount <= 0) && checkIsInputAmountValue == true) {
+      await showAlertWithoutChoice(context, '준비물의 수량은 자연수만 가능합니다');
+      return;
+    }
+
+    try{
+      await suppliesRoomInfo.modifyData(
+          suppliesName,
+          (checkIsInputAmountValue)? inputSuppliesAmount:null,
+          location,
+          checkConsumableValue
+      );
+      if(context.mounted) context.pop();
+    }catch(e) {
+      debugPrint(e.toString());
+      if(context.mounted) {
+        if(e.toString() == 'wrongAmount') {
+          await showAlertWithoutChoice(context, '입력한 개수보다 많은 물품이 현재 대여중 혹은 대여 신청 상태입니다');
+        }else{
+          await showAlertWithoutChoice(context, '에러 발생: 다시 시도해 주세요');
+        }
+      }
+    }
+  }
+
+  Future<bool> removeSuppliesButtonOnTap(BuildContext context, String suppliesName) async {
+    if(await showAlertWithTwoChoice(context, '삭제하시겠습니까?', '예', '아니오') == true) {
+      try{
+        await suppliesRoomInfo.removeData(suppliesName);
+        return true;
+      }catch(e) {
+        if(context.mounted) await showAlertWithoutChoice(context, '에러 발생: 다시 시도해 주세요');
+      }
+    }
+    return false;
   }
 
   @override
   void initState(BuildContext context) {
+    suppliesRoomInfo.imageFile = null;
+
     suppliesNameTextControllerValidator = _suppliesNameTextControllerValidator;
   }
 

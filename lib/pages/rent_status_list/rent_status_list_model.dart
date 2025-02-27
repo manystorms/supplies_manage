@@ -45,8 +45,13 @@ class RentApplyListModel extends FlutterFlowModel<RentStatusListWidget> {
     }
   }
 
-  Future<void> addModifySuppliesButtonOnTap(BuildContext context) async {
-    await context.push('/addmodifysupplies');
+  Future<void> addSuppliesButtonOnTap(BuildContext context) async {
+    await context.push('/addmodifysupplies/addMode');
+  }
+
+  Future<void> modifySuppliesButtonOnTap(BuildContext context, int index) async {
+    await context.push('/addmodifysupplies/${suppliesRoomInfo.name[index]}');
+
   }
 
   @override

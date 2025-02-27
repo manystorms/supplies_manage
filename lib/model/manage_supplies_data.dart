@@ -100,8 +100,52 @@ class ManageSuppliesData extends SuppliesRoomData{
     throw Exception('에러 발생: 데이터가 손상되었습니다.');
   }
 
+  Future<void> removeData(String suppliesName) async{
+    await firestore.runTransaction((transaction) async {
+      DocumentReference docRef = firestore.collection(schoolName).doc(suppliesRoom);
+
+      DocumentSnapshot documentSnapshot = await transaction.get(docRef);
+
+      if(!documentSnapshot.exists) throw('에러 발생');
+
+      var data = documentSnapshot.data() as Map<String, dynamic>;
+      List<dynamic> supplies = List.from(data['supplies'] ?? []);
+
+      int index = supplies.indexWhere((item) => item['name'] == suppliesName);
+      if(index == -1) throw ('에러 발생');
+
+      supplies.removeAt(index);
+      transaction.update(docRef, {'supplies':supplies});
+    });
+  }
+
+  Future<void> modifyData(String suppliesName, int? inputAmount, String? inputLocation, bool inputConsumable) async{
+    await firestore.runTransaction((transaction) async {
+      DocumentReference docRef = firestore.collection(schoolName).doc(suppliesRoom);
+
+      DocumentSnapshot documentSnapshot = await transaction.get(docRef);
+
+      if(!documentSnapshot.exists) throw('에러 발생');
+
+      var data = documentSnapshot.data() as Map<String, dynamic>;
+      List<dynamic> supplies = List.from(data['supplies'] ?? []);
+
+      int index = supplies.indexWhere((item) => item['name'] == suppliesName);
+      if(index == -1) throw ('에러 발생');
+
+      if(inputAmount != null && inputAmount < supplies[index]['availableAmount']) throw('wrongAmount');
+
+      supplies[index]['availableAmount'] += (inputAmount != null)? inputAmount - supplies[index]['amount']:null;
+      supplies[index]['amount'] = inputAmount;
+      if(inputLocation != null) supplies[index]['location']  = inputLocation;
+      supplies[index]['consumable'] = inputConsumable;
+
+      transaction.update(docRef, {'supplies':supplies});
+    });
+  }
+
   Future<void> inputData(String inputName, int? inputAmount, String? inputLocation, bool inputConsumable) async{
-    if(name.contains(inputName) == true) throw Exception('에러 발생: 추가하려는 준비물이 이미 입력되어 있습니다.');
+    if(name.contains(inputName) == true) throw ('duplicationName');
 
     final documentSnapshot = firestore.collection(schoolName).doc(suppliesRoom);
 
