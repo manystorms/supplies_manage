@@ -18,7 +18,7 @@ class RentSuppliesModel extends FlutterFlowModel<RentSuppliesWidget> {
     User? user = FirebaseAuth.instance.currentUser;
     if(user == null || user.email == null) throw Exception('에러 발생: 데이터가 손상되었습니다. 관리자에게 문의하세요');
 
-    await suppliesRoomInfo.rentSupplies(suppliesName, countControllerValue, user.email??'', textController.text);
+    await suppliesRoomInfo.rentApplication(suppliesName, countControllerValue, user.email??'', textController.text);
   }
 
   @override

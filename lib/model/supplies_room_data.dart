@@ -1,11 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
-import 'package:flutter/foundation.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:supplies_manage/model/sign_in_sign_up.dart';
 import 'package:uuid/uuid.dart';
-import 'package:ntp/ntp.dart';
-import 'package:worldtime/worldtime.dart';
 
 final FirebaseFirestore firestore = FirebaseFirestore.instance;
 
@@ -91,16 +87,14 @@ class SuppliesRoomData{
     throw Exception('에러 발생: 데이터가 손상되었습니다.');
   }
 
-  Future<void> rentSupplies(String suppliesName, int? rentAmount, String userName, String rentReason) async {
+  Future<void> rentApplication(String suppliesName, int? rentAmount, String userName, String rentReason) async {
     const uuid = Uuid();
     final rentId = uuid.v4();
     final todayDate = await getTodayDate();
     final documentSnapshot = firestore.collection(schoolName).doc(suppliesRoom);
-    final logRef = documentSnapshot.collection('log').doc(logDocumentName(todayDate));
 
     await firestore.runTransaction((transaction) async {
       final currentData = await transaction.get(documentSnapshot);
-      final logSnapshot = await transaction.get(logRef);
 
       if(!currentData.exists) throw ('에러 발생: 데이터가 손상되었습니다');
 
@@ -145,28 +139,6 @@ class SuppliesRoomData{
         'applicationList': applicationList,
         'supplies': supplies,
       });
-
-      final Map<String, dynamic> log = {
-        'rentDate': todayDate,
-        'rentPerson': userName,
-        'suppliesName': suppliesName,
-        'rentAmount': rentAmount,
-        'returnComplete': false,
-        'rentId': rentId
-      };
-
-      if(!logSnapshot.exists) {
-        transaction.set(logRef, {
-          'log': log
-        });
-      }else{
-        Map<String, dynamic>? data = logSnapshot.data();
-        if(data == null) throw('에러 발생: 데이터 손상');
-        List<dynamic> logList = data['log'] ?? [];
-        logList.add(log);
-
-        transaction.update(logRef, {'log': logList});
-      }
     });
   }
 
@@ -211,6 +183,55 @@ class SuppliesRoomData{
     applicationRentId.removeAt(applicationNum);
   }
 
+  Future<void> rentSupplies(String rentId) async{
+    final todayDate = await getTodayDate();
+    final documentSnapshot = firestore.collection(schoolName).doc(suppliesRoom);
+    final logRef = documentSnapshot.collection('log').doc(logDocumentName(todayDate));
+
+    await firestore.runTransaction((transaction) async {
+      final currentData = await transaction.get(documentSnapshot);
+      final logSnapshot = await transaction.get(logRef);
+
+      if(!currentData.exists) throw ('에러 발생: 데이터가 손상되었습니다');
+
+      Map<String, dynamic>? data = currentData.data();
+      if(data == null) throw ('에러 발생: 데이터가 손상되었습니다');
+      List<dynamic> applicationList = data['applicationList'] ?? [];
+
+      int applicationNum = applicationList.indexWhere((item) => item['rentId'] == rentId);
+      if(applicationNum == -1) throw('에러 발생: application 데이터 손상');
+
+      applicationList[applicationNum]['rentState'] = '대여 중';
+      applicationRentState[applicationRentId.indexOf(rentId)] = '대여 중';
+
+      transaction.update(documentSnapshot, {
+        'applicationList': applicationList,
+      });
+
+      final Map<String, dynamic> log = {
+        'rentDate': todayDate,
+        'rentPerson': applicationList[applicationNum]['userName'],
+        'suppliesName': applicationList[applicationNum]['suppliesName'],
+        'rentAmount': applicationList[applicationNum]['rentAmount'],
+        'returnComplete': false,
+        'rentId': rentId
+      };
+
+      if(!logSnapshot.exists) {
+        transaction.set(logRef, {
+          'log': [log]
+        });
+      }else{
+        Map<String, dynamic>? data = logSnapshot.data();
+        if(data == null) throw('에러 발생: 데이터 손상');
+        List<dynamic> logList = data['log'] ?? [];
+        logList.add(log);
+
+        transaction.update(logRef, {'log': logList});
+      }
+    });
+  }
+
   Future<void> updateRentState(String rentId, String newRentState) async {
     final documentSnapshot = firestore.collection(schoolName).doc(suppliesRoom);
 
@@ -235,15 +256,16 @@ class SuppliesRoomData{
     });
   }
 
-  Future<String> getTodayDate() async{
-    if(kIsWeb) {
-      Worldtime time = Worldtime();
-      print(time.toString());
-      return '2025-3-4';
-    }else{
-      final now = await NTP.now();
-      return '${now.year}-${now.month}-${now.day}';
-    }
+  Future<String> getTodayDate() async{ //0.1~0.2초 소요
+    final docRef = firestore.collection(schoolName).doc('time');
+
+    await docRef.set({
+      'time': FieldValue.serverTimestamp()
+    });
+
+    final documentSnapshot = await docRef.get();
+    final now = documentSnapshot['time']?.toDate();
+    return '${now.year}-${now.month}-${now.day}';
   }
 
   String logDocumentName(String date) {
