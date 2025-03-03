@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:supplies_manage/model/sign_in_sign_up.dart';
 import 'package:uuid/uuid.dart';
+import 'package:ntp/ntp.dart';
 
 final FirebaseFirestore firestore = FirebaseFirestore.instance;
 
@@ -89,7 +90,9 @@ class SuppliesRoomData{
 
   Future<void> rentSupplies(String suppliesName, int? rentAmount, String userName, String rentReason) async {
     var uuid = const Uuid();
+    final rentId = uuid.v4();
     final documentSnapshot = firestore.collection(schoolName).doc(suppliesRoom);
+    String todayDate = await getTodayDate();
 
     await firestore.runTransaction((transaction) async {
       final currentData = await transaction.get(documentSnapshot);
@@ -112,7 +115,8 @@ class SuppliesRoomData{
           'suppliesName': suppliesName,
           'rentAmount': rentAmount,
           'rentState': '대여 신청',
-          'rentId': uuid.v4()
+          'rentId': rentId,
+          'rentDate': todayDate
         });
       } else {
         applicationList.add({
@@ -121,7 +125,8 @@ class SuppliesRoomData{
           'rentAmount': rentAmount,
           'rentReason': rentReason,
           'rentState': '대여 신청',
-          'rentId': uuid.v4()
+          'rentId': rentId,
+          'rentData': todayDate
         });
       }
 
@@ -135,6 +140,29 @@ class SuppliesRoomData{
         'applicationList': applicationList,
         'supplies': supplies,
       });
+
+      DocumentReference logRef = documentSnapshot.collection('log').doc(logDocumentName(todayDate));
+      DocumentSnapshot logSnapshot = await transaction.get(logRef);
+
+      final Map<String, dynamic> log = {
+        'date': todayDate,
+        'rentPerson': userName,
+        'suppliesName': suppliesName,
+        'rentAmount': rentAmount,
+        'returnComplete': false,
+        'rentId': rentId
+      };
+
+      if(!logSnapshot.exists) {
+        transaction.set(logRef, {
+          'log': log
+        });
+      }else{
+        List<dynamic> logList = List.from(logSnapshot['log'] ?? []);
+        logList.add(log);
+
+        transaction.update(logRef, {'log': logList});
+      }
     });
   }
 
@@ -189,8 +217,6 @@ class SuppliesRoomData{
 
       Map<String, dynamic>? data = currentData.data();
       if(data == null) throw ('에러 발생: 데이터가 손상되었습니다');
-
-      List<dynamic> supplies = data['supplies'] ?? [];
       List<dynamic> applicationList = data['applicationList'] ?? [];
 
       int applicationNum = applicationList.indexWhere((item) => item['rentId'] == rentId);
@@ -201,9 +227,17 @@ class SuppliesRoomData{
 
       transaction.update(documentSnapshot, {
         'applicationList': applicationList,
-        'supplies': supplies,
       });
     });
   }
-}
 
+  Future<String> getTodayDate() async{
+    DateTime now = DateTime.now();//await NTP.now();
+    return '${now.year}-${now.month}-${now.day}';
+  }
+
+  String logDocumentName(String date) {
+    final List<String> dateParts = date.split('-');
+    return dateParts[0]+dateParts[1].padLeft(2, '0');
+  }
+}
