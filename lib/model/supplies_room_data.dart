@@ -84,48 +84,55 @@ class SuppliesRoomData{
     throw Exception('에러 발생: 데이터가 손상되었습니다.');
   }
 
-  Future<void> rentSupplies(int suppliesNum, int rentAmount, String userName, String rentReason) async {
-    if(amount[suppliesNum] == null || availableAmount[suppliesNum] == null) return;
-
-    if((availableAmount[suppliesNum]??0) < rentAmount) {
-      throw Exception('에러 발생: 대여하려는 준비물의 수가 대여가능한 준비물의 수보다 많습니다.');
-    }
-
-    availableAmount[suppliesNum] = (availableAmount[suppliesNum]??0) - rentAmount;
+  Future<void> rentSupplies(String suppliesName, int? rentAmount, String userName, String rentReason) async {
 
     final documentSnapshot = firestore.collection(schoolName).doc(suppliesRoom);
-    final currentData = await documentSnapshot.get();
 
-    if(currentData.exists) {
-      Map<String, dynamic>? data = currentData.data();
-      if(data != null && data.containsKey('supplies')) {
-        List<dynamic> applicationList = data['applicationList']??[];
+    await firestore.runTransaction((transaction) async {
+      final currentData = await transaction.get(documentSnapshot);
 
-        if(rentReason == '') {
-          applicationList.add({
-            'userName': userName,
-            'suppliesName': name[suppliesNum],
-            'rentAmount': rentAmount,
-            'rentState': '대여 신청'
-          });
-        }else{
-          applicationList.add({
-            'userName': userName,
-            'suppliesName': name[suppliesNum],
-            'rentAmount': rentAmount,
-            'rentReason': rentReason,
-            'rentState': '대여 신청'
+      if (currentData.exists) {
+        Map<String, dynamic>? data = currentData.data();
+        if (data != null && data.containsKey('supplies')) {
+          List<dynamic> supplies = data['supplies'] ?? [];
+          List<dynamic> applicationList = data['applicationList'] ?? [];
+
+          int suppliesNum = supplies.indexWhere((item) => item['name'] == suppliesName);
+
+          if(supplies[suppliesNum]['availableAmount'] != null && supplies[suppliesNum]['availableAmount'] < rentAmount) {
+            throw ('rentAmountTooMuch');
+          }
+
+          if (rentReason == '') {
+            applicationList.add({
+              'userName': userName,
+              'suppliesName': suppliesName,
+              'rentAmount': rentAmount,
+              'rentState': '대여 신청',
+            });
+          } else {
+            applicationList.add({
+              'userName': userName,
+              'suppliesName': suppliesName,
+              'rentAmount': rentAmount,
+              'rentReason': rentReason,
+              'rentState': '대여 신청',
+            });
+          }
+
+          if(supplies[suppliesNum]['availableAmount'] != null) {
+            supplies[suppliesNum]['availableAmount'] =
+                (supplies[suppliesNum]['availableAmount'] ?? 0) - rentAmount;
+            availableAmount[suppliesNum] = supplies[suppliesNum]['availableAmount'];
+          }
+
+          transaction.update(documentSnapshot, {
+            'applicationList': applicationList,
+            'supplies': supplies,
           });
         }
-
-        List<dynamic> supplies = data['supplies'] ??[];
-        supplies[suppliesNum]['availableAmount'] = availableAmount[suppliesNum];
-
-        await documentSnapshot.update({'applicationList': applicationList, 'supplies': supplies});
-        return;
       }
-    }
-    throw Exception('에러 발생: 데이터가 손상되었습니다. 관리자에게 문의하세요.');
+    });
   }
 
   Future<void> rentCancel(int applicationNum) async {

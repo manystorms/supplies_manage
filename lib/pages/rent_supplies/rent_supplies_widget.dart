@@ -313,12 +313,17 @@ class _RentSuppliesWidgetState extends State<RentSuppliesWidget> {
                   onPressed: () async {
                     if (await showAlertWithTwoChoice(context, '대여 신청하시겠습니까?', '예', '아니오') == true && context.mounted) {
                       try{
-                        await _model.applicationRentButtonPressed(widget.suppliesNum);
+                        await _model.applicationRentButtonPressed(suppliesRoomInfo.name[widget.suppliesNum]);
                         await showAlertWithoutChoice(context, '대여 완료되었습니다');
                         context.pop();
                       }catch(e){
                         debugPrint(e.toString());
-                        await showAlertWithoutChoice(context, '오류가 발생해 대여가 되지 않았습니다');
+
+                        if(e.toString() == 'rentAmountTooMuch') {
+                          await showAlertWithoutChoice(context, '대여하려는 준비물의 수가 대여가능한 준비물의 수보다 많습니다');
+                        }else{
+                          await showAlertWithoutChoice(context, '오류가 발생해 대여가 되지 않았습니다');
+                        }
                       }
                     }
                   },

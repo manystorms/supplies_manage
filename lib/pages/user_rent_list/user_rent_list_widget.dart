@@ -160,7 +160,7 @@ class _UserRentListWidgetState extends State<UserRentListWidget>
                                               const SizedBox(width: 16),
                                               FFButtonWidget(
                                                 onPressed: () {
-                                                  _model.showMapButtonOnTap(context, i);
+                                                  _model.showMapButtonOnTap(context, suppliesRoomInfo.applicationSuppliesName[i]);
                                                 },
                                                 text: '위치',
                                                 options: FFButtonOptions(

@@ -14,11 +14,11 @@ class RentSuppliesModel extends FlutterFlowModel<RentSuppliesWidget> {
   // State field(s) for CountController widget.
   int countControllerValue = 1;
 
-  Future<void> applicationRentButtonPressed(int suppliesNum) async {
+  Future<void> applicationRentButtonPressed(String suppliesName) async {
     User? user = FirebaseAuth.instance.currentUser;
     if(user == null || user.email == null) throw Exception('에러 발생: 데이터가 손상되었습니다. 관리자에게 문의하세요');
 
-    await suppliesRoomInfo.rentSupplies(suppliesNum, countControllerValue, user.email??'', textController.text);
+    await suppliesRoomInfo.rentSupplies(suppliesName, countControllerValue, user.email??'', textController.text);
   }
 
   @override

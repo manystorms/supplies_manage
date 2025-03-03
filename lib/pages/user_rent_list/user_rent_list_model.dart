@@ -31,7 +31,9 @@ class UserRentListModel extends FlutterFlowModel<UserRentListWidget> {
     }
   }
 
-  Future<void> showMapButtonOnTap(BuildContext context, int index) async {
+  Future<void> showMapButtonOnTap(BuildContext context, String suppliesName) async {
+    int index = suppliesRoomInfo.name.indexOf(suppliesName);
+
     if(suppliesRoomInfo.location[index] == null) {
       await showAlertWithoutChoice(context, '위치 정보가 없습니다');
     }else{

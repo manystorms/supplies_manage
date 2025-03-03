@@ -293,9 +293,8 @@ class _RentApplyListWidgetState extends State<RentApplyListWidget>
                                             const SizedBox(width: 12.0),
                                             FFButtonWidget(
                                               onPressed: () async {
-                                                setState(() {
-                                                  context.push('/rentsupplies/$i');
-                                                });
+                                                await context.push('/rentsupplies/$i');
+                                                setState(() {});
                                               },
                                               text: '신청',
                                               options: FFButtonOptions(
