@@ -24,9 +24,10 @@ class UserRentListModel extends FlutterFlowModel<UserRentListWidget> {
 
   Future<void> rentCancelOnTap(BuildContext context, int applicationNum) async{
     try{
-      await suppliesRoomInfo.rentCancel(applicationNum);
+      await suppliesRoomInfo.rentCancel(suppliesRoomInfo.applicationRentId[applicationNum]);
       if(context.mounted) await showAlertWithoutChoice(context, '반납 신청이 취소되었습니다');
     }catch(e){
+      debugPrint(e.toString());
       if(context.mounted) await showAlertWithoutChoice(context, '에러 발생: 반납 신청이 되지 않았습니다\n다시 시도하세요');
     }
   }

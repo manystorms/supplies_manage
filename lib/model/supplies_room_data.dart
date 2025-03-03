@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:supplies_manage/model/sign_in_sign_up.dart';
+import 'package:uuid/uuid.dart';
 
 final FirebaseFirestore firestore = FirebaseFirestore.instance;
 
@@ -20,10 +21,10 @@ class SuppliesRoomData{
   final List<int> applicationRentAmount;
   final List<String?> applicationRentReason;
   final List<String> applicationRentState;
-  final DocumentSnapshot<Map<String, dynamic>> backUpDocumentSnapshot;
+  final List<String> applicationRentId;
 
   SuppliesRoomData(this.schoolName, this.suppliesRoom, this.name, this.amount, this.availableAmount, this.location, this.consumable, this.imageUrl,
-      this.applicationUserName, this.applicationSuppliesName, this.applicationRentAmount, this.applicationRentReason, this.applicationRentState, this.backUpDocumentSnapshot);
+      this.applicationUserName, this.applicationSuppliesName, this.applicationRentAmount, this.applicationRentReason, this.applicationRentState, this.applicationRentId);
 
   static Future<SuppliesRoomData> getData(String schoolName, String suppliesRoom) async{
     final documentSnapshot = await firestore.collection(schoolName).doc(suppliesRoom).get();
@@ -43,6 +44,7 @@ class SuppliesRoomData{
       List<int> applicationRentAmount = [];
       List<String?> applicationRentReason = [];
       List<String> applicationRentState = [];
+      List<String> applicationRentId = [];
 
       if (data != null && data.containsKey('supplies')) {
         List<dynamic> supplies = data['supplies'];
@@ -75,122 +77,97 @@ class SuppliesRoomData{
           applicationRentAmount.add(application['rentAmount']);
           applicationRentReason.add(application['rentReason']);
           applicationRentState.add(application['rentState']);
+          applicationRentId.add(application['rentId']);
         }
       }
 
       return SuppliesRoomData(schoolName, suppliesRoom, name, amount, availableAmount, location, consumable,
-          imageUrl, applicationUserName, applicationSuppliesName, applicationRentAmount, applicationRentReason, applicationRentState, documentSnapshot);
+          imageUrl, applicationUserName, applicationSuppliesName, applicationRentAmount, applicationRentReason, applicationRentState, applicationRentId);
     }
     throw Exception('에러 발생: 데이터가 손상되었습니다.');
   }
 
   Future<void> rentSupplies(String suppliesName, int? rentAmount, String userName, String rentReason) async {
-
+    var uuid = const Uuid();
     final documentSnapshot = firestore.collection(schoolName).doc(suppliesRoom);
 
     await firestore.runTransaction((transaction) async {
       final currentData = await transaction.get(documentSnapshot);
 
-      if (currentData.exists) {
-        Map<String, dynamic>? data = currentData.data();
-        if (data != null && data.containsKey('supplies')) {
-          List<dynamic> supplies = data['supplies'] ?? [];
-          List<dynamic> applicationList = data['applicationList'] ?? [];
+      if(!currentData.exists) throw ('에러 발생: 데이터가 손상되었습니다');
 
-          int suppliesNum = supplies.indexWhere((item) => item['name'] == suppliesName);
+      Map<String, dynamic>? data = currentData.data();
+      if(data == null) throw ('에러 발생: 데이터가 손상되었습니다');
 
-          if(supplies[suppliesNum]['availableAmount'] != null && supplies[suppliesNum]['availableAmount'] < rentAmount) {
-            throw ('rentAmountTooMuch');
-          }
+      List<dynamic> supplies = data['supplies'] ?? [];
+      List<dynamic> applicationList = data['applicationList'] ?? [];
 
-          if (rentReason == '') {
-            applicationList.add({
-              'userName': userName,
-              'suppliesName': suppliesName,
-              'rentAmount': rentAmount,
-              'rentState': '대여 신청',
-            });
-          } else {
-            applicationList.add({
-              'userName': userName,
-              'suppliesName': suppliesName,
-              'rentAmount': rentAmount,
-              'rentReason': rentReason,
-              'rentState': '대여 신청',
-            });
-          }
+      int suppliesNum = supplies.indexWhere((item) => item['name'] == suppliesName);
 
-          if(supplies[suppliesNum]['availableAmount'] != null) {
-            supplies[suppliesNum]['availableAmount'] =
-                (supplies[suppliesNum]['availableAmount'] ?? 0) - rentAmount;
-            availableAmount[suppliesNum] = supplies[suppliesNum]['availableAmount'];
-          }
+      if(supplies[suppliesNum]['availableAmount'] != null && supplies[suppliesNum]['availableAmount'] < rentAmount) throw ('rentAmountTooMuch');
 
-          transaction.update(documentSnapshot, {
-            'applicationList': applicationList,
-            'supplies': supplies,
-          });
-        }
+      if (rentReason == '') {
+        applicationList.add({
+          'userName': userName,
+          'suppliesName': suppliesName,
+          'rentAmount': rentAmount,
+          'rentState': '대여 신청',
+          'rentId': uuid.v4()
+        });
+      } else {
+        applicationList.add({
+          'userName': userName,
+          'suppliesName': suppliesName,
+          'rentAmount': rentAmount,
+          'rentReason': rentReason,
+          'rentState': '대여 신청',
+          'rentId': uuid.v4()
+        });
       }
+
+      if(supplies[suppliesNum]['availableAmount'] != null) {
+        supplies[suppliesNum]['availableAmount'] =
+            (supplies[suppliesNum]['availableAmount'] ?? 0) - rentAmount;
+        availableAmount[suppliesNum] = supplies[suppliesNum]['availableAmount'];
+      }
+
+      transaction.update(documentSnapshot, {
+        'applicationList': applicationList,
+        'supplies': supplies,
+      });
     });
   }
 
-  Future<void> rentCancel(int applicationNum) async {
-    final applicationName = applicationSuppliesName[applicationNum];
-    final suppliesNum = name.indexOf(applicationName);
-    if(suppliesNum == -1) {
-      throw Exception('에러 발생: 데이터가 손상되었습니다.');
-    }
-
-    Map<String, dynamic> removedApplication = {};
-    if(applicationRentReason[applicationNum] == null) {
-      removedApplication = {
-        'rentAmount': applicationRentAmount[applicationNum],
-        'suppliesName': applicationSuppliesName[applicationNum],
-        'userName': applicationUserName[applicationNum],
-        'rentState': applicationRentState[applicationNum]
-      };
-    }else{
-      removedApplication = {
-        'rentAmount': applicationRentAmount[applicationNum],
-        'suppliesName': applicationSuppliesName[applicationNum],
-        'userName': applicationUserName[applicationNum],
-        'rentReason':applicationRentReason[applicationNum],
-        'rentState': applicationRentState[applicationNum]
-      };
-    }
-
+  Future<void> rentCancel(String rentId) async {
     final documentSnapshot = firestore.collection(schoolName).doc(suppliesRoom);
-    final currentData = await documentSnapshot.get();
 
-    /*if(currentData != backUpDocumentSnapshot) {
-      throw Exception('에러 발생: 데이터가 변경되었습니다.\n새로고침을 하고 다시 시도하세요.');
-    }*/
+    await firestore.runTransaction((transaction) async {
+      final currentData = await transaction.get(documentSnapshot);
 
-    if (!currentData.exists) {
-      throw Exception('에러 발생: 데이터가 손상되었습니다.');
-    }
+      if(!currentData.exists) throw ('에러 발생: 데이터가 손상되었습니다');
 
-    final Map<String, dynamic>? data = currentData.data();
-    if (data == null || !data.containsKey('supplies')) {
-      throw Exception('에러 발생: 데이터가 손상되었습니다.');
-    }
+      Map<String, dynamic>? data = currentData.data();
+      if(data == null) throw ('에러 발생: 데이터가 손상되었습니다');
 
-    List<dynamic> supplies = data['supplies'];
-    if(availableAmount[suppliesNum] != null) {
-      availableAmount[suppliesNum] = (availableAmount[suppliesNum]??0)+applicationRentAmount[applicationNum];
-      supplies[suppliesNum]['availableAmount'] = availableAmount[suppliesNum];
-    }
-    applicationRentAmount.removeAt(applicationNum);
-    applicationSuppliesName.removeAt(applicationNum);
-    applicationUserName.removeAt(applicationNum);
-    applicationRentReason.removeAt(applicationNum);
-    applicationRentState.removeAt(applicationNum);
+      List<dynamic> supplies = data['supplies'] ?? [];
+      List<dynamic> applicationList = data['applicationList'] ?? [];
 
+      int applicationNum = applicationList.indexWhere((item) => item['rentId'] == rentId);
+      if(applicationNum == -1) throw('에러 발생: application 데이터 손상');
+      int suppliesNum = supplies.indexWhere((item) => item['name'] == applicationList[applicationNum]['suppliesName']);
+      if(suppliesNum == -1) throw('에러 발생: supplies 데이터 손상');
 
-    await documentSnapshot.update({
-      'supplies': supplies,
-      "applicationList": FieldValue.arrayRemove([removedApplication])
+      if(supplies[suppliesNum]['availableAmount'] != null) {
+        supplies[suppliesNum]['availableAmount'] =
+            supplies[suppliesNum]['availableAmount']+applicationList[applicationNum]['rentAmount'];
+      }
+
+      applicationList.removeAt(applicationNum);
+
+      transaction.update(documentSnapshot, {
+        'applicationList': applicationList,
+        'supplies': supplies,
+      });
     });
   }
 
@@ -226,17 +203,5 @@ class SuppliesRoomData{
       throw Exception('에러 발생: 해당 애플리케이션을 찾을 수 없습니다.');
     }
   }
-
-
-/*Future<void> sendUpdateData() async{
-    final documentSnapshot = firestore.collection(schoolName).doc(suppliesRoom);
-    List<dynamic> applicationList = data['applicationList'];
-
-    List<dynamic> supplies = data['supplies'];
-    supplies[suppliesNum]['availableAmount'] = availableAmount[suppliesNum];
-
-
-    await documentSnapshot.update({'applicationList': applicationList, 'supplies': supplies});
-  }*/
 }
 
