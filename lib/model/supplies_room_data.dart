@@ -1,8 +1,11 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
+import 'package:flutter/foundation.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:supplies_manage/model/sign_in_sign_up.dart';
 import 'package:uuid/uuid.dart';
 import 'package:ntp/ntp.dart';
+import 'package:worldtime/worldtime.dart';
 
 final FirebaseFirestore firestore = FirebaseFirestore.instance;
 
@@ -89,13 +92,15 @@ class SuppliesRoomData{
   }
 
   Future<void> rentSupplies(String suppliesName, int? rentAmount, String userName, String rentReason) async {
-    var uuid = const Uuid();
+    const uuid = Uuid();
     final rentId = uuid.v4();
+    final todayDate = await getTodayDate();
     final documentSnapshot = firestore.collection(schoolName).doc(suppliesRoom);
-    String todayDate = await getTodayDate();
+    final logRef = documentSnapshot.collection('log').doc(logDocumentName(todayDate));
 
     await firestore.runTransaction((transaction) async {
       final currentData = await transaction.get(documentSnapshot);
+      final logSnapshot = await transaction.get(logRef);
 
       if(!currentData.exists) throw ('에러 발생: 데이터가 손상되었습니다');
 
@@ -141,11 +146,8 @@ class SuppliesRoomData{
         'supplies': supplies,
       });
 
-      DocumentReference logRef = documentSnapshot.collection('log').doc(logDocumentName(todayDate));
-      DocumentSnapshot logSnapshot = await transaction.get(logRef);
-
       final Map<String, dynamic> log = {
-        'date': todayDate,
+        'rentDate': todayDate,
         'rentPerson': userName,
         'suppliesName': suppliesName,
         'rentAmount': rentAmount,
@@ -158,7 +160,9 @@ class SuppliesRoomData{
           'log': log
         });
       }else{
-        List<dynamic> logList = List.from(logSnapshot['log'] ?? []);
+        Map<String, dynamic>? data = logSnapshot.data();
+        if(data == null) throw('에러 발생: 데이터 손상');
+        List<dynamic> logList = data['log'] ?? [];
         logList.add(log);
 
         transaction.update(logRef, {'log': logList});
@@ -232,8 +236,14 @@ class SuppliesRoomData{
   }
 
   Future<String> getTodayDate() async{
-    DateTime now = DateTime.now();//await NTP.now();
-    return '${now.year}-${now.month}-${now.day}';
+    if(kIsWeb) {
+      Worldtime time = Worldtime();
+      print(time.toString());
+      return '2025-3-4';
+    }else{
+      final now = await NTP.now();
+      return '${now.year}-${now.month}-${now.day}';
+    }
   }
 
   String logDocumentName(String date) {
