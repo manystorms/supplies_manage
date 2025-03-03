@@ -169,39 +169,41 @@ class SuppliesRoomData{
         'supplies': supplies,
       });
     });
+
+    int applicationNum = applicationRentId.indexOf(rentId);
+    applicationUserName.removeAt(applicationNum);
+    applicationSuppliesName.removeAt(applicationNum);
+    applicationRentAmount.removeAt(applicationNum);
+    applicationRentReason.removeAt(applicationNum);
+    applicationRentState.removeAt(applicationNum);
+    applicationRentId.removeAt(applicationNum);
   }
 
-  Future<void> updateRentState(int applicationNum, String newRentState) async {
-    final applicationName = applicationSuppliesName[applicationNum];
-    final suppliesNum = name.indexOf(applicationName);
-    if(suppliesNum == -1) {
-      throw Exception('에러 발생: 데이터가 손상되었습니다.');
-    }
-
+  Future<void> updateRentState(String rentId, String newRentState) async {
     final documentSnapshot = firestore.collection(schoolName).doc(suppliesRoom);
-    final currentData = await documentSnapshot.get();
 
-    if (!currentData.exists) {
-      throw Exception('에러 발생: 데이터가 손상되었습니다.');
-    }
+    await firestore.runTransaction((transaction) async {
+      final currentData = await transaction.get(documentSnapshot);
 
-    final Map<String, dynamic>? data = currentData.data();
-    if (data == null || !data.containsKey('applicationList')) {
-      throw Exception('에러 발생: 데이터가 손상되었습니다.');
-    }
+      if(!currentData.exists) throw ('에러 발생: 데이터가 손상되었습니다');
 
-    List<dynamic> applicationList = data['applicationList'];
+      Map<String, dynamic>? data = currentData.data();
+      if(data == null) throw ('에러 발생: 데이터가 손상되었습니다');
 
-    if (applicationList.isNotEmpty && applicationNum >= 0 && applicationNum < applicationList.length) {
+      List<dynamic> supplies = data['supplies'] ?? [];
+      List<dynamic> applicationList = data['applicationList'] ?? [];
+
+      int applicationNum = applicationList.indexWhere((item) => item['rentId'] == rentId);
+      if(applicationNum == -1) throw('에러 발생: application 데이터 손상');
+
       applicationList[applicationNum]['rentState'] = newRentState;
+      applicationRentState[applicationRentId.indexOf(rentId)] = newRentState;
 
-      await documentSnapshot.update({
+      transaction.update(documentSnapshot, {
         'applicationList': applicationList,
+        'supplies': supplies,
       });
-      applicationRentState[applicationNum] = newRentState;
-    } else {
-      throw Exception('에러 발생: 해당 애플리케이션을 찾을 수 없습니다.');
-    }
+    });
   }
 }
 

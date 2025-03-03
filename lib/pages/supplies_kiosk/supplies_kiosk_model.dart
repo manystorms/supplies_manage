@@ -36,7 +36,7 @@ class SuppliesKioskModel extends FlutterFlowModel<SuppliesKioskWidget> {
     if(checkIsReallyReturn == null || checkIsReallyReturn == false) return;
 
     try{
-      await suppliesRoomInfo.updateRentState(applicationNum, '대여 중');
+      await suppliesRoomInfo.updateRentState(suppliesRoomInfo.applicationRentId[applicationNum], '대여 중');
     }catch(e) {
       if(context.mounted) await showAlertWithoutChoice(context, '에러가 발생했습니다');
     }
