@@ -45,7 +45,7 @@ class _MainPageWidgetState extends State<MainPageWidget> {
             children: [
               Container(
                 width: double.infinity,
-                height: 160.0,
+                height: 200.0,
                 decoration: BoxDecoration(
                   color: FlutterFlowTheme.of(context).secondaryBackground,
                   image: DecorationImage(
@@ -67,7 +67,7 @@ class _MainPageWidgetState extends State<MainPageWidget> {
                         children: [
                           Padding(
                             padding:
-                            const EdgeInsetsDirectional.fromSTEB(16.0, 64.0, 16.0, 12.0),
+                            const EdgeInsetsDirectional.fromSTEB(16.0, 100.0, 16.0, 12.0),
                             child: Column(
                               mainAxisSize: MainAxisSize.max,
                               crossAxisAlignment: CrossAxisAlignment.start,
@@ -105,98 +105,100 @@ class _MainPageWidgetState extends State<MainPageWidget> {
                       ),
                       Align(
                         alignment: const AlignmentDirectional(1, -1),
-                        child: Padding(
-                          padding: const EdgeInsetsDirectional.fromSTEB(0, 15, 10, 0),
-                          child: Row(
-                            mainAxisSize: MainAxisSize.max,
-                            mainAxisAlignment: MainAxisAlignment.end,
-                            children: [
-                              InkWell(
-                                onTap: () {
-                                  showDialog(
-                                      context: context,
-                                      builder: (BuildContext context) {
-                                        return Dialog(
-                                          child: Padding(
-                                            padding: const EdgeInsets.all(12),
-                                            child: Container(
-                                              width: 210,
-                                              height: 160,
-                                              decoration: BoxDecoration(
-                                                color: FlutterFlowTheme.of(context).secondaryBackground,
-                                                borderRadius: BorderRadius.circular(8),
-                                              ),
+                        child: SafeArea(
+                            child: Padding(
+                              padding: const EdgeInsetsDirectional.fromSTEB(0, 0, 10, 0),
+                              child: Row(
+                                mainAxisSize: MainAxisSize.max,
+                                mainAxisAlignment: MainAxisAlignment.end,
+                                children: [
+                                  InkWell(
+                                    onTap: () {
+                                      showDialog(
+                                          context: context,
+                                          builder: (BuildContext context) {
+                                            return Dialog(
                                               child: Padding(
                                                 padding: const EdgeInsets.all(12),
-                                                child: Column(
-                                                  mainAxisSize: MainAxisSize.max,
-                                                  mainAxisAlignment: MainAxisAlignment.center,
-                                                  children: [
-                                                    Icon(
-                                                      Icons.account_circle,
-                                                      color: FlutterFlowTheme.of(context).primaryText,
-                                                      size: 60,
-                                                    ),
-                                                    Padding(
-                                                      padding: const EdgeInsetsDirectional.fromSTEB(0, 4, 0, 0),
-                                                      child: Text(
-                                                        userName,
-                                                        style: FlutterFlowTheme.of(context).bodyMedium.override(
-                                                          fontFamily: 'Pretendard',
-                                                          letterSpacing: 0.0,
-                                                          useGoogleFonts: false,
+                                                child: Container(
+                                                  width: 210,
+                                                  height: 160,
+                                                  decoration: BoxDecoration(
+                                                    color: FlutterFlowTheme.of(context).secondaryBackground,
+                                                    borderRadius: BorderRadius.circular(8),
+                                                  ),
+                                                  child: Padding(
+                                                    padding: const EdgeInsets.all(12),
+                                                    child: Column(
+                                                      mainAxisSize: MainAxisSize.max,
+                                                      mainAxisAlignment: MainAxisAlignment.center,
+                                                      children: [
+                                                        Icon(
+                                                          Icons.account_circle,
+                                                          color: FlutterFlowTheme.of(context).primaryText,
+                                                          size: 60,
                                                         ),
-                                                      ),
-                                                    ),
-                                                    Padding(
-                                                      padding: const EdgeInsetsDirectional.fromSTEB(0, 4, 0, 0),
-                                                      child: Text(
-                                                        userRole.name,
-                                                        style: FlutterFlowTheme.of(context).labelSmall.override(
-                                                          fontFamily: 'Pretendard',
-                                                          letterSpacing: 0.0,
-                                                          useGoogleFonts: false,
+                                                        Padding(
+                                                          padding: const EdgeInsetsDirectional.fromSTEB(0, 4, 0, 0),
+                                                          child: Text(
+                                                            userName,
+                                                            style: FlutterFlowTheme.of(context).bodyMedium.override(
+                                                              fontFamily: 'Pretendard',
+                                                              letterSpacing: 0.0,
+                                                              useGoogleFonts: false,
+                                                            ),
+                                                          ),
                                                         ),
-                                                      ),
-                                                    ),
-                                                    Padding(
-                                                      padding: const EdgeInsetsDirectional.fromSTEB(0, 4, 0, 0),
-                                                      child: SelectableText(
-                                                        userUid,
-                                                        style: FlutterFlowTheme.of(context).labelSmall.override(
-                                                          fontFamily: 'Pretendard',
-                                                          letterSpacing: 0.0,
-                                                          useGoogleFonts: false,
+                                                        Padding(
+                                                          padding: const EdgeInsetsDirectional.fromSTEB(0, 4, 0, 0),
+                                                          child: Text(
+                                                            userRole.name,
+                                                            style: FlutterFlowTheme.of(context).labelSmall.override(
+                                                              fontFamily: 'Pretendard',
+                                                              letterSpacing: 0.0,
+                                                              useGoogleFonts: false,
+                                                            ),
+                                                          ),
                                                         ),
-                                                      ),
+                                                        Padding(
+                                                          padding: const EdgeInsetsDirectional.fromSTEB(0, 4, 0, 0),
+                                                          child: SelectableText(
+                                                            userUid,
+                                                            style: FlutterFlowTheme.of(context).labelSmall.override(
+                                                              fontFamily: 'Pretendard',
+                                                              letterSpacing: 0.0,
+                                                              useGoogleFonts: false,
+                                                            ),
+                                                          ),
+                                                        ),
+                                                      ],
                                                     ),
-                                                  ],
+                                                  ),
                                                 ),
                                               ),
-                                            ),
-                                          ),
-                                        );
-                                      }
-                                  );
-                                },
-                                child: const Icon(
-                                  Icons.account_circle,
-                                  color: Colors.white,
-                                  size: 30,
-                                ),
+                                            );
+                                          }
+                                      );
+                                    },
+                                    child: const Icon(
+                                      Icons.account_circle,
+                                      color: Colors.white,
+                                      size: 30,
+                                    ),
+                                  ),
+                                  const SizedBox(width: 10),
+                                  InkWell(
+                                    onTap: () => _model.logOutButtonOnTap(context),
+                                    child: const Icon(
+                                      Icons.logout_rounded,
+                                      color: Colors.white,
+                                      size: 30,
+                                    ),
+                                  )
+                                ],
                               ),
-                              const SizedBox(width: 10),
-                              InkWell(
-                                onTap: () => _model.logOutButtonOnTap(context),
-                                child: const Icon(
-                                  Icons.logout_rounded,
-                                  color: Colors.white,
-                                  size: 30,
-                                ),
-                              )
-                            ],
-                          ),
-                        ),
+                            ),
+                        )
                       )
                     ],
                   ),

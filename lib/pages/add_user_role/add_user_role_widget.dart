@@ -100,7 +100,7 @@ class _AddUserRoleWidgetState extends State<AddUserRoleWidget> {
               ),
               Padding(
                 padding: const EdgeInsetsDirectional.fromSTEB(16, 12, 16, 0),
-                child: Container(
+                child: SizedBox(
                   width: double.infinity,
                   child: TextFormField(
                     controller: _model.emailAddressTextController,
@@ -168,19 +168,22 @@ class _AddUserRoleWidgetState extends State<AddUserRoleWidget> {
                   ),
                 ),
               ),
-              DropdownButton<String>(
-                value: _model.selectedRole,
-                onChanged: (String? newValue) {
-                  setState(() {
-                    _model.selectedRole = newValue;
-                  });
-                },
-                items: _model.option.map<DropdownMenuItem<String>>((String value) {
-                  return DropdownMenuItem<String>(
-                    value: value,
-                    child: Text(value),
-                  );
-                }).toList(),
+              Align(
+                alignment: const AlignmentDirectional(-0.8, 0),
+                child: DropdownButton<String>(
+                  value: _model.selectedRole,
+                  onChanged: (String? newValue) {
+                    setState(() {
+                      _model.selectedRole = newValue;
+                    });
+                  },
+                  items: _model.option.map<DropdownMenuItem<String>>((String value) {
+                    return DropdownMenuItem<String>(
+                      value: value,
+                      child: Text(value),
+                    );
+                  }).toList(),
+                ),
               ),
               Align(
                 alignment: const AlignmentDirectional(0, 0),

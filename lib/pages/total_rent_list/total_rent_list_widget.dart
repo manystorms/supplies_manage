@@ -133,26 +133,36 @@ class _TotalRentListWidgetState extends State<TotalRentListWidget>
                                         padding: const EdgeInsetsDirectional
                                             .fromSTEB(
                                             16.0, 0.0, 0.0, 0.0),
-                                        child: Text(
-                                          suppliesRoomInfo.applicationSuppliesName[i],
-                                          style:
-                                          FlutterFlowTheme.of(context)
-                                              .bodyLarge
-                                              .override(
-                                            fontFamily:
-                                            'Pretendard',
-                                            letterSpacing: 0.0,
-                                            useGoogleFonts: false,
+                                        child: SizedBox(
+                                          width: 80,
+                                          child: Text(
+                                            suppliesRoomInfo.applicationSuppliesName[i],
+                                            style:
+                                            FlutterFlowTheme.of(context)
+                                                .bodyLarge
+                                                .override(
+                                              fontFamily:
+                                              'Pretendard',
+                                              letterSpacing: 0.0,
+                                              useGoogleFonts: false,
+                                            ),
+                                            overflow: TextOverflow.ellipsis,
+                                            maxLines: 3,
                                           ),
-                                        ),
+                                        )
                                       ),
                                       const Spacer(),
                                       const SizedBox(width: 15),
-                                      Text(
-                                          '대여 신청자: ${suppliesRoomInfo.applicationUserName[i]}\n'
-                                              '대여 수량: ${suppliesRoomInfo.applicationRentAmount[i]}\n'
-                                              '대여 사유: ${suppliesRoomInfo.applicationRentReason[i]??'없음'}\n'
-                                              '현재 상태: ${suppliesRoomInfo.applicationRentState[i]}'
+                                      SizedBox(
+                                        width: 150,
+                                        child: Text(
+                                            '신청자: ${suppliesRoomInfo.applicationUserName[i]}\n'
+                                                '수량: ${suppliesRoomInfo.applicationRentAmount[i]}\n'
+                                                '현재 상태: ${suppliesRoomInfo.applicationRentState[i]}\n'
+                                                '대여 사유: ${suppliesRoomInfo.applicationRentReason[i]??'없음'}',
+                                          overflow: TextOverflow.ellipsis,
+                                          maxLines: 5,
+                                        ),
                                       ),
                                       const SizedBox(width: 10)
                                     ],

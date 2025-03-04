@@ -292,54 +292,104 @@ class _SuppliesKioskWidgetState extends State<SuppliesKioskWidget>
                                                                 padding: const EdgeInsetsDirectional
                                                                     .fromSTEB(
                                                                     16.0, 0.0, 0.0, 0.0),
-                                                                child: Text(
-                                                                  suppliesRoomInfo.applicationSuppliesName[i],
-                                                                  style:
-                                                                  FlutterFlowTheme.of(context)
-                                                                      .bodyLarge
-                                                                      .override(
-                                                                    fontFamily:
-                                                                    'Pretendard',
-                                                                    letterSpacing: 0.0,
-                                                                    useGoogleFonts: false,
+                                                                child: SizedBox(
+                                                                  width: 80,
+                                                                  child: Text(
+                                                                    suppliesRoomInfo.applicationSuppliesName[i],
+                                                                    style:
+                                                                    FlutterFlowTheme.of(context)
+                                                                        .bodyLarge
+                                                                        .override(
+                                                                      fontFamily:
+                                                                      'Pretendard',
+                                                                      letterSpacing: 0.0,
+                                                                      useGoogleFonts: false,
+                                                                    ),
+                                                                    overflow: TextOverflow.ellipsis,
+                                                                    maxLines: 3,
                                                                   ),
-                                                                ),
+                                                                )
                                                               ),
                                                               const Spacer(),
-                                                              const SizedBox(width: 15),
-                                                              Text(
-                                                                  '대여 신청자: ${suppliesRoomInfo.applicationUserName[i]}\n'
-                                                                      '대여 수량: ${suppliesRoomInfo.applicationRentAmount[i]}\n'
-                                                                      '현재 상태: ${suppliesRoomInfo.applicationRentState[i]}'
-                                                              ),
-                                                              const SizedBox(width: 10),
-                                                              FFButtonWidget(
-                                                                onPressed: () async {
-                                                                  await _model.rentButtonOnTap(context, i);
-                                                                  setState(() {});
-                                                                },
-                                                                text: '대여',
-                                                                options: FFButtonOptions(
-                                                                  width: 75.0,
-                                                                  height: 70.0,
-                                                                  padding: const EdgeInsetsDirectional.fromSTEB(24.0, 0.0, 24.0, 0.0),
-                                                                  iconPadding:
-                                                                  const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
-                                                                  color: FlutterFlowTheme.of(context).primary,
-                                                                  textStyle: FlutterFlowTheme.of(context).titleSmall.override(
-                                                                    fontFamily: 'Pretendard',
-                                                                    color: Colors.white,
-                                                                    letterSpacing: 0.0,
-                                                                    useGoogleFonts: false,
+                                                              (MediaQuery.of(context).size.width > 550)?
+                                                                Row(
+                                                                  mainAxisAlignment: MainAxisAlignment.end,
+                                                                  children: [
+                                                                    Text(
+                                                                        '대여 신청자: ${suppliesRoomInfo.applicationUserName[i]}\n'
+                                                                            '대여 수량: ${suppliesRoomInfo.applicationRentAmount[i]}\n'
+                                                                            '현재 상태: ${suppliesRoomInfo.applicationRentState[i]}'
+                                                                    ),
+                                                                    const SizedBox(width: 10),
+                                                                    FFButtonWidget(
+                                                                      onPressed: () async {
+                                                                        await _model.rentButtonOnTap(context, i);
+                                                                        setState(() {});
+                                                                      },
+                                                                      text: '대여',
+                                                                      options: FFButtonOptions(
+                                                                        width: 75.0,
+                                                                        height: 70.0,
+                                                                        padding: const EdgeInsetsDirectional.fromSTEB(24.0, 0.0, 24.0, 0.0),
+                                                                        iconPadding:
+                                                                        const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
+                                                                        color: FlutterFlowTheme.of(context).primary,
+                                                                        textStyle: FlutterFlowTheme.of(context).titleSmall.override(
+                                                                          fontFamily: 'Pretendard',
+                                                                          color: Colors.white,
+                                                                          letterSpacing: 0.0,
+                                                                          useGoogleFonts: false,
+                                                                        ),
+                                                                        elevation: 3.0,
+                                                                        borderSide: const BorderSide(
+                                                                          color: Colors.transparent,
+                                                                          width: 1.0,
+                                                                        ),
+                                                                        borderRadius: BorderRadius.circular(8.0),
+                                                                      ),
+                                                                    ),
+                                                                  ],
+                                                                ):
+                                                              Column(
+                                                                mainAxisAlignment: MainAxisAlignment.end,
+                                                                children: [
+                                                                  SizedBox(
+                                                                    width: 140,
+                                                                    child: Text(
+                                                                        '대여 신청자: ${suppliesRoomInfo.applicationUserName[i]}\n'
+                                                                            '대여 수량: ${suppliesRoomInfo.applicationRentAmount[i]}\n'
+                                                                            '현재 상태: ${suppliesRoomInfo.applicationRentState[i]}'
+                                                                    ),
                                                                   ),
-                                                                  elevation: 3.0,
-                                                                  borderSide: const BorderSide(
-                                                                    color: Colors.transparent,
-                                                                    width: 1.0,
+                                                                  FFButtonWidget(
+                                                                    onPressed: () async {
+                                                                      await _model.rentButtonOnTap(context, i);
+                                                                      setState(() {});
+                                                                    },
+                                                                    text: '대여',
+                                                                    options: FFButtonOptions(
+                                                                      width: 75.0,
+                                                                      height: 40.0,
+                                                                      padding: const EdgeInsetsDirectional.fromSTEB(24.0, 0.0, 24.0, 0.0),
+                                                                      iconPadding:
+                                                                      const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
+                                                                      color: FlutterFlowTheme.of(context).primary,
+                                                                      textStyle: FlutterFlowTheme.of(context).titleSmall.override(
+                                                                        fontFamily: 'Pretendard',
+                                                                        color: Colors.white,
+                                                                        letterSpacing: 0.0,
+                                                                        useGoogleFonts: false,
+                                                                      ),
+                                                                      elevation: 3.0,
+                                                                      borderSide: const BorderSide(
+                                                                        color: Colors.transparent,
+                                                                        width: 1.0,
+                                                                      ),
+                                                                      borderRadius: BorderRadius.circular(8.0),
+                                                                    ),
                                                                   ),
-                                                                  borderRadius: BorderRadius.circular(8.0),
-                                                                ),
-                                                              ),
+                                                                ],
+                                                              )
                                                             ],
                                                           ),
                                                         ),
@@ -398,18 +448,23 @@ class _SuppliesKioskWidgetState extends State<SuppliesKioskWidget>
                                                         padding: const EdgeInsetsDirectional
                                                             .fromSTEB(
                                                             16.0, 0.0, 0.0, 0.0),
-                                                        child: Text(
-                                                          suppliesRoomInfo.applicationSuppliesName[i],
-                                                          style:
-                                                          FlutterFlowTheme.of(context)
-                                                              .bodyLarge
-                                                              .override(
-                                                            fontFamily:
-                                                            'Pretendard',
-                                                            letterSpacing: 0.0,
-                                                            useGoogleFonts: false,
+                                                        child: SizedBox(
+                                                          width: 80,
+                                                          child: Text(
+                                                            suppliesRoomInfo.applicationSuppliesName[i],
+                                                            style:
+                                                            FlutterFlowTheme.of(context)
+                                                                .bodyLarge
+                                                                .override(
+                                                              fontFamily:
+                                                              'Pretendard',
+                                                              letterSpacing: 0.0,
+                                                              useGoogleFonts: false,
+                                                            ),
+                                                            overflow: TextOverflow.ellipsis,
+                                                            maxLines: 3,
                                                           ),
-                                                        ),
+                                                        )
                                                       ),
                                                       const Spacer(),
                                                       const SizedBox(width: 15),

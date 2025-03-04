@@ -135,27 +135,122 @@ class _UserRentListWidgetState extends State<UserRentListWidget>
                                             padding: const EdgeInsetsDirectional
                                                 .fromSTEB(
                                                 16.0, 0.0, 0.0, 0.0),
-                                            child: Text(
-                                              suppliesRoomInfo.applicationSuppliesName[i],
-                                              style:
-                                              FlutterFlowTheme.of(context)
-                                                  .bodyLarge
-                                                  .override(
-                                                fontFamily:
-                                                'Pretendard',
-                                                letterSpacing: 0.0,
-                                                useGoogleFonts: false,
+                                            child: SizedBox(
+                                              width: 80,
+                                              child: Text(
+                                                suppliesRoomInfo.applicationSuppliesName[i],
+                                                style:
+                                                FlutterFlowTheme.of(context)
+                                                    .bodyLarge
+                                                    .override(
+                                                  fontFamily:
+                                                  'Pretendard',
+                                                  letterSpacing: 0.0,
+                                                  useGoogleFonts: false,
+                                                ),
+                                                overflow: TextOverflow.ellipsis,
+                                                maxLines: 3,
                                               ),
-                                            ),
+                                            )
                                           ),
-                                          const Spacer(),    //남은 공간 모두 차지하여, 버튼 오른쪽으로 위치하도록.
-                                          Row(         //위치, 신청 버튼 수정 부분
+                                          const Spacer(),
+                                          (MediaQuery.of(context).size.width > 550)?
+                                            Row(
+                                              mainAxisAlignment: MainAxisAlignment.end,
+                                              children: [
+                                                const SizedBox(width: 16,),
+                                                SizedBox(
+                                                  width: 100,
+                                                  child: Text(
+                                                      '대여 신청 수량: ${suppliesRoomInfo.applicationRentAmount[i]}\n'
+                                                          '현재 상태: ${suppliesRoomInfo.applicationRentState[i]}\n'
+                                                          '대여 사유: ${suppliesRoomInfo.applicationRentReason[i]??'없음'}',
+                                                    overflow: TextOverflow.ellipsis,
+                                                    maxLines: 5,
+                                                  ),
+                                                ),
+                                                const SizedBox(width: 16),
+                                                FFButtonWidget(
+                                                  onPressed: () {
+                                                    _model.showMapButtonOnTap(context, suppliesRoomInfo.applicationSuppliesName[i]);
+                                                  },
+                                                  text: '위치',
+                                                  options: FFButtonOptions(
+                                                    width: 75.0,
+                                                    height: 70.0,
+                                                    padding:
+                                                    const EdgeInsetsDirectional
+                                                        .fromSTEB(24.0, 0.0,
+                                                        24.0, 0.0),
+                                                    iconPadding:
+                                                    const EdgeInsetsDirectional
+                                                        .fromSTEB(0.0, 0.0,
+                                                        0.0, 0.0),
+                                                    color: FlutterFlowTheme.of(
+                                                        context)
+                                                        .primary,
+                                                    textStyle: FlutterFlowTheme
+                                                        .of(context)
+                                                        .titleSmall
+                                                        .override(
+                                                      fontFamily:
+                                                      'Pretendard',
+                                                      letterSpacing: 0.0,
+                                                      useGoogleFonts: false,
+                                                    ),
+                                                    elevation: 3.0,
+                                                    borderSide: const BorderSide(
+                                                      color: Colors.transparent,
+                                                      width: 1.0,
+                                                    ),
+                                                    borderRadius:
+                                                    BorderRadius.circular(
+                                                        8.0),
+                                                  ),
+                                                ),
+                                                const SizedBox(width: 12.0),
+                                                FFButtonWidget(
+                                                  onPressed: () async{
+                                                    await _model.rentCancelOnTap(context, i);
+                                                    setState(() {});
+                                                  },
+                                                  text: '신청 취소',
+                                                  options: FFButtonOptions(
+                                                    width: 95.0,
+                                                    height: 70.0,
+                                                    padding: const EdgeInsetsDirectional.fromSTEB(24.0, 0.0, 24.0, 0.0),
+                                                    iconPadding:
+                                                    const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
+                                                    color: FlutterFlowTheme.of(context).primary,
+                                                    textStyle: FlutterFlowTheme.of(context).titleSmall.override(
+                                                      fontFamily: 'Pretendard',
+                                                      color: Colors.white,
+                                                      letterSpacing: 0.0,
+                                                      useGoogleFonts: false,
+                                                    ),
+                                                    elevation: 3.0,
+                                                    borderSide: const BorderSide(
+                                                      color: Colors.transparent,
+                                                      width: 1.0,
+                                                    ),
+                                                    borderRadius: BorderRadius.circular(8.0),
+                                                  ),
+                                                ),
+                                              ],
+                                            ):
+                                          Column(
                                             mainAxisAlignment: MainAxisAlignment.end,
                                             children: [
-                                              Text(
+                                              const SizedBox(width: 16,),
+                                              SizedBox(
+                                                width: 150,
+                                                child: Text(
                                                   '대여 신청 수량: ${suppliesRoomInfo.applicationRentAmount[i]}\n'
-                                                      '대여 사유: ${suppliesRoomInfo.applicationRentReason[i]??'없음'}\n'
-                                                      '현재 상태: ${suppliesRoomInfo.applicationRentState[i]}'
+                                                      '현재 상태: ${suppliesRoomInfo.applicationRentState[i]}\n'
+                                                      '대여 사유: ${suppliesRoomInfo.applicationRentReason[i]??'없음'}',
+                                                  overflow: TextOverflow.ellipsis,
+                                                  maxLines: 5,
+                                                ),
                                               ),
                                               const SizedBox(width: 16),
                                               FFButtonWidget(
@@ -165,7 +260,7 @@ class _UserRentListWidgetState extends State<UserRentListWidget>
                                                 text: '위치',
                                                 options: FFButtonOptions(
                                                   width: 75.0,
-                                                  height: 70.0,
+                                                  height: 40.0,
                                                   padding:
                                                   const EdgeInsetsDirectional
                                                       .fromSTEB(24.0, 0.0,
@@ -196,7 +291,7 @@ class _UserRentListWidgetState extends State<UserRentListWidget>
                                                       8.0),
                                                 ),
                                               ),
-                                              const SizedBox(width: 12.0),
+                                              const SizedBox(height: 7,),
                                               FFButtonWidget(
                                                 onPressed: () async{
                                                   await _model.rentCancelOnTap(context, i);
@@ -205,14 +300,24 @@ class _UserRentListWidgetState extends State<UserRentListWidget>
                                                 text: '신청 취소',
                                                 options: FFButtonOptions(
                                                   width: 95.0,
-                                                  height: 70.0,
-                                                  padding: const EdgeInsetsDirectional.fromSTEB(24.0, 0.0, 24.0, 0.0),
+                                                  height: 40.0,
+                                                  padding:
+                                                  const EdgeInsetsDirectional
+                                                      .fromSTEB(24.0, 0.0,
+                                                      24.0, 0.0),
                                                   iconPadding:
-                                                  const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
-                                                  color: FlutterFlowTheme.of(context).primary,
-                                                  textStyle: FlutterFlowTheme.of(context).titleSmall.override(
-                                                    fontFamily: 'Pretendard',
-                                                    color: Colors.white,
+                                                  const EdgeInsetsDirectional
+                                                      .fromSTEB(0.0, 0.0,
+                                                      0.0, 0.0),
+                                                  color: FlutterFlowTheme.of(
+                                                      context)
+                                                      .primary,
+                                                  textStyle: FlutterFlowTheme
+                                                      .of(context)
+                                                      .titleSmall
+                                                      .override(
+                                                    fontFamily:
+                                                    'Pretendard',
                                                     letterSpacing: 0.0,
                                                     useGoogleFonts: false,
                                                   ),
@@ -221,11 +326,13 @@ class _UserRentListWidgetState extends State<UserRentListWidget>
                                                     color: Colors.transparent,
                                                     width: 1.0,
                                                   ),
-                                                  borderRadius: BorderRadius.circular(8.0),
+                                                  borderRadius:
+                                                  BorderRadius.circular(
+                                                      8.0),
                                                 ),
                                               ),
                                             ],
-                                          ),
+                                          )
                                         ],
                                       ),
                                     ),
