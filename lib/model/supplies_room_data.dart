@@ -90,7 +90,6 @@ class SuppliesRoomData{
   Future<void> rentApplication(String suppliesName, int? rentAmount, String userName, String rentReason) async {
     const uuid = Uuid();
     final rentId = uuid.v4();
-    final todayDate = await getTodayDate();
     final documentSnapshot = firestore.collection(schoolName).doc(suppliesRoom);
 
     await firestore.runTransaction((transaction) async {
@@ -114,8 +113,7 @@ class SuppliesRoomData{
           'suppliesName': suppliesName,
           'rentAmount': rentAmount,
           'rentState': '대여 신청',
-          'rentId': rentId,
-          'rentDate': todayDate
+          'rentId': rentId
         });
       } else {
         applicationList.add({
@@ -124,8 +122,7 @@ class SuppliesRoomData{
           'rentAmount': rentAmount,
           'rentReason': rentReason,
           'rentState': '대여 신청',
-          'rentId': rentId,
-          'rentData': todayDate
+          'rentId': rentId
         });
       }
 
@@ -203,6 +200,7 @@ class SuppliesRoomData{
 
       applicationList[applicationNum]['rentState'] = '대여 중';
       applicationRentState[applicationRentId.indexOf(rentId)] = '대여 중';
+      applicationList[applicationNum]['rentDate'] = todayDate;
 
       transaction.update(documentSnapshot, {
         'applicationList': applicationList,
@@ -230,6 +228,63 @@ class SuppliesRoomData{
         transaction.update(logRef, {'log': logList});
       }
     });
+  }
+
+  Future<void> returnSupplies(String rentId) async{
+    final documentSnapshot = firestore.collection(schoolName).doc(suppliesRoom);
+
+    await firestore.runTransaction((transaction) async {
+      final currentData = await transaction.get(documentSnapshot);
+
+      if(!currentData.exists) throw ('에러 발생: 데이터가 손상되었습니다');
+
+      Map<String, dynamic>? data = currentData.data();
+      if(data == null) throw ('에러 발생: 데이터가 손상되었습니다');
+
+      List<dynamic> supplies = data['supplies'] ?? [];
+      List<dynamic> applicationList = data['applicationList'] ?? [];
+
+      int applicationNum = applicationList.indexWhere((item) => item['rentId'] == rentId);
+      if(applicationNum == -1) throw('에러 발생: application 데이터 손상');
+      int suppliesNum = supplies.indexWhere((item) => item['name'] == applicationList[applicationNum]['suppliesName']);
+      if(suppliesNum == -1) throw('에러 발생: supplies 데이터 손상');
+
+      final logRef = documentSnapshot.collection('log').doc(logDocumentName(applicationList[applicationNum]['rentDate']));
+      final logSnapshot = await transaction.get(logRef);
+      Map<String, dynamic>? logData = logSnapshot.data();
+
+      if(logData != null) {
+        List<dynamic> logs = logData['log'];
+
+        int logIndex = logs.indexWhere((item) => item['rentId'] == rentId);
+
+        logs[logIndex]['returnDate'] = await getTodayDate();
+        logs[logIndex]['returnComplete'] = true;
+        logs[logIndex].remove('rentId');
+
+        transaction.update(logRef, {'log': logs});
+      }
+
+      if(supplies[suppliesNum]['availableAmount'] != null) {
+        supplies[suppliesNum]['availableAmount'] =
+            supplies[suppliesNum]['availableAmount']+applicationList[applicationNum]['rentAmount'];
+      }
+
+      applicationList.removeAt(applicationNum);
+
+      transaction.update(documentSnapshot, {
+        'applicationList': applicationList,
+        'supplies': supplies,
+      });
+    });
+
+    int applicationNum = applicationRentId.indexOf(rentId);
+    applicationUserName.removeAt(applicationNum);
+    applicationSuppliesName.removeAt(applicationNum);
+    applicationRentAmount.removeAt(applicationNum);
+    applicationRentReason.removeAt(applicationNum);
+    applicationRentState.removeAt(applicationNum);
+    applicationRentId.removeAt(applicationNum);
   }
 
   Future<void> updateRentState(String rentId, String newRentState) async {
