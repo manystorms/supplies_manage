@@ -19,6 +19,7 @@ List<TileInfo> tile = [
   TileInfo('물품 추가/수정', '/rentstatuslist', UserRole.admin),
   TileInfo('현재 대여 목록', '/totalrentlist', UserRole.admin),
   TileInfo('대여/반납', '/supplieskiosk', UserRole.admin),
+  TileInfo('대여/반납 기록', '/rentlog', UserRole.admin),
   TileInfo('관리자/키오스크 추가', '/adduserrole', UserRole.admin),
   TileInfo('대여/반납', '/supplieskiosk', UserRole.kiosk)
 ];

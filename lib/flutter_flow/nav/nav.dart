@@ -61,6 +61,11 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           builder: (context, params) => const RentApplyListWidget(),
         ),
         FFRoute(
+          name: 'rentlog',
+          path: '/rentlog',
+          builder: (context, params) => const RentLogWidget(),
+        ),
+        FFRoute(
           name: 'forgotpassword',
           path: '/forgotpassword',
           builder: (context, params) => const ForgotPasswordWidget(),

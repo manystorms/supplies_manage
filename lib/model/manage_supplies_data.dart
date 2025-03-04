@@ -222,3 +222,23 @@ class ManageSuppliesData extends SuppliesRoomData{
     return downloadUrl;
   }
 }
+
+
+Future<List<Map<String, dynamic>>> getRentLog(int year, int month) async {
+  final String documentName = year.toString()+month.toString().padLeft(2, '0');
+
+  DocumentSnapshot documentSnapshot = await firestore
+      .collection(userSchoolName)
+      .doc(userSuppliesRoom)
+      .collection('log')
+      .doc(documentName)
+      .get();
+
+  if(!documentSnapshot.exists) throw ('noLogData');
+
+  Map<String, dynamic>? logData = documentSnapshot.data() as Map<String, dynamic>?;
+  if (logData == null) throw ('noLogData');
+
+  List<dynamic> logs = logData['log'] ?? [];
+  return logs.cast<Map<String, dynamic>>();
+}

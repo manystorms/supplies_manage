@@ -10,5 +10,6 @@ export 'package:supplies_manage/pages/supplies_kiosk/supplies_kiosk_widget.dart'
 export 'package:supplies_manage/pages/map/map_widget.dart' show MapWidget;
 export 'package:supplies_manage/pages/forgot_password/forgot_password_widget.dart' show ForgotPasswordWidget;
 export 'package:supplies_manage/pages/add_user_role/add_user_role_widget.dart' show AddUserRoleWidget;
+export 'package:supplies_manage/pages/rent_log/rent_log_widget.dart' show RentLogWidget;
 
 //만든 페이지를 불러오는 코드인듯!
