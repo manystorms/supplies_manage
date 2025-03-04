@@ -150,7 +150,7 @@ class _RentLogWidgetState extends State<RentLogWidget>
                                 DataCell(Text(_model.logData[i]['rentPerson'])),
                                 DataCell(Text(_model.logData[i]['suppliesName'])),
                                 DataCell(Text(_model.logData[i]['rentAmount'].toString())),
-                                DataCell(Text((_model.logData[i]['returnComplete'])? '대여 중':'반납 완료')),
+                                DataCell(Text((_model.logData[i]['returnComplete'])? '반납 완료':'대여 중')),
                                 DataCell(Text(_model.logData[i]['returnDate']??'')),
                               ]),
                           ],
