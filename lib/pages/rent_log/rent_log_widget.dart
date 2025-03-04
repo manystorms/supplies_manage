@@ -124,82 +124,40 @@ class _RentLogWidgetState extends State<RentLogWidget>
                     )
                   ],
                 ),
-                if(_model.getSuppliesData == false)
+                if(_model.getLogData == false)
                   const Center(
                     child: CircularProgressIndicator(),
                   )
                 else
-                  Flexible(
+                  Expanded(
                     child: SingleChildScrollView(
-                      child: Column(
-                        mainAxisSize: MainAxisSize.max,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          for(int i = 0; i < suppliesRoomInfo.applicationUserName.length; i++)
-                            Padding(
-                              padding: const EdgeInsetsDirectional.fromSTEB(
-                                  16.0, 8.0, 16.0, 0.0),
-                              child: Container(
-                                width: double.infinity,
-                                decoration: BoxDecoration(
-                                  color: FlutterFlowTheme.of(context)
-                                      .primaryBackground,
-                                  borderRadius:
-                                  BorderRadius.circular(12.0),
-                                ),
-                                child: Padding(
-                                  padding: const EdgeInsetsDirectional.fromSTEB(
-                                      8.0, 8.0, 12.0, 8.0),
-                                  child: Row(
-                                    mainAxisSize: MainAxisSize.max,
-                                    crossAxisAlignment:
-                                    CrossAxisAlignment.center,
-                                    children: [
-                                      ClipRRect(
-                                        borderRadius:
-                                        BorderRadius.circular(8.0),
-                                        child: Image.network(
-                                          _model.getImageUrl(i),
-                                          width: 70.0,
-                                          height: 70.0,
-                                          fit: BoxFit.cover,
-                                        ),
-                                      ),
-                                      Padding(
-                                        padding: const EdgeInsetsDirectional
-                                            .fromSTEB(
-                                            16.0, 0.0, 0.0, 0.0),
-                                        child: Text(
-                                          suppliesRoomInfo.applicationSuppliesName[i],
-                                          style:
-                                          FlutterFlowTheme.of(context)
-                                              .bodyLarge
-                                              .override(
-                                            fontFamily:
-                                            'Pretendard',
-                                            letterSpacing: 0.0,
-                                            useGoogleFonts: false,
-                                          ),
-                                        ),
-                                      ),
-                                      const Spacer(),
-                                      const SizedBox(width: 15),
-                                      Text(
-                                          '대여 신청자: ${suppliesRoomInfo.applicationUserName[i]}\n'
-                                              '대여 수량: ${suppliesRoomInfo.applicationRentAmount[i]}\n'
-                                              '대여 사유: ${suppliesRoomInfo.applicationRentReason[i]??'없음'}\n'
-                                              '현재 상태: ${suppliesRoomInfo.applicationRentState[i]}'
-                                      ),
-                                      const SizedBox(width: 10)
-                                    ],
-                                  ),
-                                ),
-                              ),
-                            ),
-                        ],
+                      scrollDirection: Axis.vertical,
+                      child: SingleChildScrollView(
+                        scrollDirection: Axis.horizontal,
+                        child: DataTable(
+                          columns: const <DataColumn>[
+                            DataColumn(label: Text('대여 일자')),
+                            DataColumn(label: Text('대여자')),
+                            DataColumn(label: Text('대여 품목')),
+                            DataColumn(label: Text('대여 수량')),
+                            DataColumn(label: Text('반납 여부')),
+                            DataColumn(label: Text('반납 일자')),
+                          ],
+                          rows: <DataRow>[
+                            for(int i = 0; i < _model.logData.length; i++)
+                              DataRow(cells: <DataCell>[
+                                DataCell(Text(_model.logData[i]['rentDate'])),
+                                DataCell(Text(_model.logData[i]['rentPerson'])),
+                                DataCell(Text(_model.logData[i]['suppliesName'])),
+                                DataCell(Text(_model.logData[i]['rentAmount'].toString())),
+                                DataCell(Text((_model.logData[i]['returnComplete'])? '대여 중':'반납 완료')),
+                                DataCell(Text(_model.logData[i]['returnDate']??'')),
+                              ]),
+                          ],
+                        ),
                       ),
                     ),
-                  )
+                  ),
               ],
             ),
           ],

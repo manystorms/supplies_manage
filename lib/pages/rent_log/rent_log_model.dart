@@ -9,7 +9,7 @@ late ManageSuppliesData suppliesRoomInfo;
 const int startYear = 2020;
 
 class RentLogModel extends FlutterFlowModel<RentLogWidget> {
-  bool getSuppliesData = false;
+  bool getLogData = true;
   int selectedYear = DateTime.now().year;
   int selectedMonth = DateTime.now().month;
   final List<int> years = List.generate(DateTime.now().year - startYear + 1, (index) => startYear + index);
@@ -17,8 +17,12 @@ class RentLogModel extends FlutterFlowModel<RentLogWidget> {
   List<Map<String, dynamic>> logData = [];
   
   Future<void> getRentLogButtonOnTap(BuildContext context) async{
+    if(getLogData == false) return;
+
     try{
+      getLogData = false;
       logData = await getRentLog(selectedYear, selectedMonth);
+      getLogData = true;
     }catch(e) {
       if(context.mounted) {
         if(e.toString() == 'noLogData') {
@@ -27,6 +31,7 @@ class RentLogModel extends FlutterFlowModel<RentLogWidget> {
           showAlertWithoutChoice(context, '에러 발생');
         }
       }
+      getLogData = true;
     }
   }
 
