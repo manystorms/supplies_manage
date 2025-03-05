@@ -311,6 +311,31 @@ class SuppliesRoomData{
     });
   }
 
+  bool suppliesSearch(int suppliesNum, String searchTerm) {
+    if(searchTerm.isEmpty) {
+      return true;
+    }else if(name[suppliesNum].contains(searchTerm)) {
+      return true;
+    }else{
+      return false;
+    }
+  }
+
+  bool applicationSearch(int applicationNum, String searchTerm) {
+    if(searchTerm.isEmpty) {
+      return true;
+    }else if(applicationUserName[applicationNum].contains(searchTerm)){
+      return true;
+    }else if(applicationSuppliesName[applicationNum].contains(searchTerm)) {
+      return true;
+    }else if(applicationRentReason[applicationNum]?.contains(searchTerm)??false){
+      return true;
+    }
+    else{
+      return false;
+    }
+  }
+
   Future<String> getTodayDate() async{ //0.1~0.2초 소요
     final docRef = firestore.collection(schoolName).doc('time');
 

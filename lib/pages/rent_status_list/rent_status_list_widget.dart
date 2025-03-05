@@ -218,141 +218,66 @@ class _RentStatusListWidgetState extends State<RentStatusListWidget>
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             for(int i = 0; i < suppliesRoomInfo.name.length; i++)
-                              Padding(
-                                padding: const EdgeInsetsDirectional.fromSTEB(
-                                    16.0, 8.0, 16.0, 0.0),
-                                child: Container(
-                                  width: double.infinity,
-                                  decoration: BoxDecoration(
-                                    color: FlutterFlowTheme.of(context)
-                                        .primaryBackground,
-                                    borderRadius:
-                                    BorderRadius.circular(12.0),
-                                  ),
-                                  child: Padding(
-                                    padding: const EdgeInsetsDirectional.fromSTEB(
-                                        8.0, 8.0, 12.0, 8.0),
-                                    child: Row(
-                                      mainAxisSize: MainAxisSize.max,
-                                      crossAxisAlignment:
-                                      CrossAxisAlignment.center,
-                                      children: [
-                                        ClipRRect(
-                                          borderRadius:
-                                          BorderRadius.circular(8.0),
-                                          child: Image.network(
-                                            suppliesRoomInfo.imageUrl[i],
-                                            width: 120.0,
-                                            height: 70.0,
-                                            fit: BoxFit.cover,
-                                          ),
-                                        ),
-                                        Padding(
-                                          padding: const EdgeInsetsDirectional
-                                              .fromSTEB(
-                                              16.0, 0.0, 0.0, 0.0),
-                                          child: SizedBox(
-                                            width: 80,
-                                            child: Text(
-                                              suppliesRoomInfo.name[i],
-                                              style:
-                                              FlutterFlowTheme.of(context)
-                                                  .bodyLarge
-                                                  .override(
-                                                fontFamily:
-                                                'Pretendard',
-                                                letterSpacing: 0.0,
-                                                useGoogleFonts: false,
-                                              ),
-                                              overflow: TextOverflow.ellipsis,
-                                              maxLines: 3,
+                              if(suppliesRoomInfo.suppliesSearch(i, _model.searchBarTextController.text))
+                                Padding(
+                                  padding: const EdgeInsetsDirectional.fromSTEB(
+                                      16.0, 8.0, 16.0, 0.0),
+                                  child: Container(
+                                    width: double.infinity,
+                                    decoration: BoxDecoration(
+                                      color: FlutterFlowTheme.of(context)
+                                          .primaryBackground,
+                                      borderRadius:
+                                      BorderRadius.circular(12.0),
+                                    ),
+                                    child: Padding(
+                                      padding: const EdgeInsetsDirectional.fromSTEB(
+                                          8.0, 8.0, 12.0, 8.0),
+                                      child: Row(
+                                        mainAxisSize: MainAxisSize.max,
+                                        crossAxisAlignment:
+                                        CrossAxisAlignment.center,
+                                        children: [
+                                          ClipRRect(
+                                            borderRadius:
+                                            BorderRadius.circular(8.0),
+                                            child: Image.network(
+                                              suppliesRoomInfo.imageUrl[i],
+                                              width: 120.0,
+                                              height: 70.0,
+                                              fit: BoxFit.cover,
                                             ),
-                                          )
-                                        ),
-                                        const Spacer(),
-                                        (MediaQuery.of(context).size.width > 550)?
-                                          Row(
-                                            mainAxisAlignment: MainAxisAlignment.end,
-                                            children: [
-                                              Text(
-                                                  '수량: ${suppliesRoomInfo.amount[i]??'입력되지 않음'}\n'
-                                                      '대여 가능 수량: ${suppliesRoomInfo.availableAmount[i]??'입력되지 않음'}'
-                                              ),
-                                              const SizedBox(width: 16),
-                                              FFButtonWidget(
-                                                onPressed: () {
-                                                  _model.showMapButtonOnTap(context, i);
-                                                },
-                                                text: '위치',
-                                                options: FFButtonOptions(
-                                                  width: 75.0,
-                                                  height: 70.0,
-                                                  padding:
-                                                  const EdgeInsetsDirectional
-                                                      .fromSTEB(24.0, 0.0,
-                                                      24.0, 0.0),
-                                                  iconPadding:
-                                                  const EdgeInsetsDirectional
-                                                      .fromSTEB(0.0, 0.0,
-                                                      0.0, 0.0),
-                                                  color: FlutterFlowTheme.of(
-                                                      context)
-                                                      .primary,
-                                                  textStyle: FlutterFlowTheme
-                                                      .of(context)
-                                                      .titleSmall
-                                                      .override(
-                                                    fontFamily:
-                                                    'Pretendard',
-                                                    letterSpacing: 0.0,
-                                                    useGoogleFonts: false,
-                                                  ),
-                                                  elevation: 3.0,
-                                                  borderSide: const BorderSide(
-                                                    color: Colors.transparent,
-                                                    width: 1.0,
-                                                  ),
-                                                  borderRadius:
-                                                  BorderRadius.circular(
-                                                      8.0),
+                                          ),
+                                          Padding(
+                                            padding: const EdgeInsetsDirectional
+                                                .fromSTEB(
+                                                16.0, 0.0, 0.0, 0.0),
+                                            child: SizedBox(
+                                              width: 80,
+                                              child: Text(
+                                                suppliesRoomInfo.name[i],
+                                                style:
+                                                FlutterFlowTheme.of(context)
+                                                    .bodyLarge
+                                                    .override(
+                                                  fontFamily:
+                                                  'Pretendard',
+                                                  letterSpacing: 0.0,
+                                                  useGoogleFonts: false,
                                                 ),
+                                                overflow: TextOverflow.ellipsis,
+                                                maxLines: 3,
                                               ),
-                                              const SizedBox(width: 12.0),
-                                              FFButtonWidget(
-                                                onPressed: () async{
-                                                  await _model.modifySuppliesButtonOnTap(context, i);
-                                                  getSuppliesRoomData();
-                                                },
-                                                text: '수정',
-                                                options: FFButtonOptions(
-                                                  width: 75.0,
-                                                  height: 70.0,
-                                                  padding: const EdgeInsetsDirectional.fromSTEB(24.0, 0.0, 24.0, 0.0),
-                                                  iconPadding:
-                                                  const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
-                                                  color: FlutterFlowTheme.of(context).primary,
-                                                  textStyle: FlutterFlowTheme.of(context).titleSmall.override(
-                                                    fontFamily: 'Pretendard',
-                                                    color: Colors.white,
-                                                    letterSpacing: 0.0,
-                                                    useGoogleFonts: false,
-                                                  ),
-                                                  elevation: 3.0,
-                                                  borderSide: const BorderSide(
-                                                    color: Colors.transparent,
-                                                    width: 1.0,
-                                                  ),
-                                                  borderRadius: BorderRadius.circular(8.0),
-                                                ),
-                                              ),
-                                            ],
-                                          ):
-                                            Column(
+                                            )
+                                          ),
+                                          const Spacer(),
+                                          (MediaQuery.of(context).size.width > 550)?
+                                            Row(
                                               mainAxisAlignment: MainAxisAlignment.end,
                                               children: [
                                                 Text(
-                                                    '수량: ${suppliesRoomInfo.amount[i]??'입력x'}\n'
-                                                        '대여 가능 수량: ${suppliesRoomInfo.availableAmount[i]??'입력x'}'
+                                                    '수량: ${suppliesRoomInfo.amount[i]??'입력되지 않음'}\n'
+                                                        '대여 가능 수량: ${suppliesRoomInfo.availableAmount[i]??'입력되지 않음'}'
                                                 ),
                                                 const SizedBox(width: 16),
                                                 FFButtonWidget(
@@ -362,7 +287,7 @@ class _RentStatusListWidgetState extends State<RentStatusListWidget>
                                                   text: '위치',
                                                   options: FFButtonOptions(
                                                     width: 75.0,
-                                                    height: 40.0,
+                                                    height: 70.0,
                                                     padding:
                                                     const EdgeInsetsDirectional
                                                         .fromSTEB(24.0, 0.0,
@@ -393,7 +318,7 @@ class _RentStatusListWidgetState extends State<RentStatusListWidget>
                                                         8.0),
                                                   ),
                                                 ),
-                                                const SizedBox(height: 7,),
+                                                const SizedBox(width: 12.0),
                                                 FFButtonWidget(
                                                   onPressed: () async{
                                                     await _model.modifySuppliesButtonOnTap(context, i);
@@ -402,7 +327,7 @@ class _RentStatusListWidgetState extends State<RentStatusListWidget>
                                                   text: '수정',
                                                   options: FFButtonOptions(
                                                     width: 75.0,
-                                                    height: 40.0,
+                                                    height: 70.0,
                                                     padding: const EdgeInsetsDirectional.fromSTEB(24.0, 0.0, 24.0, 0.0),
                                                     iconPadding:
                                                     const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
@@ -422,12 +347,88 @@ class _RentStatusListWidgetState extends State<RentStatusListWidget>
                                                   ),
                                                 ),
                                               ],
-                                            )
-                                      ],
+                                            ):
+                                              Column(
+                                                mainAxisAlignment: MainAxisAlignment.end,
+                                                children: [
+                                                  Text(
+                                                      '수량: ${suppliesRoomInfo.amount[i]??'입력x'}\n'
+                                                          '대여 가능 수량: ${suppliesRoomInfo.availableAmount[i]??'입력x'}'
+                                                  ),
+                                                  const SizedBox(width: 16),
+                                                  FFButtonWidget(
+                                                    onPressed: () {
+                                                      _model.showMapButtonOnTap(context, i);
+                                                    },
+                                                    text: '위치',
+                                                    options: FFButtonOptions(
+                                                      width: 75.0,
+                                                      height: 40.0,
+                                                      padding:
+                                                      const EdgeInsetsDirectional
+                                                          .fromSTEB(24.0, 0.0,
+                                                          24.0, 0.0),
+                                                      iconPadding:
+                                                      const EdgeInsetsDirectional
+                                                          .fromSTEB(0.0, 0.0,
+                                                          0.0, 0.0),
+                                                      color: FlutterFlowTheme.of(
+                                                          context)
+                                                          .primary,
+                                                      textStyle: FlutterFlowTheme
+                                                          .of(context)
+                                                          .titleSmall
+                                                          .override(
+                                                        fontFamily:
+                                                        'Pretendard',
+                                                        letterSpacing: 0.0,
+                                                        useGoogleFonts: false,
+                                                      ),
+                                                      elevation: 3.0,
+                                                      borderSide: const BorderSide(
+                                                        color: Colors.transparent,
+                                                        width: 1.0,
+                                                      ),
+                                                      borderRadius:
+                                                      BorderRadius.circular(
+                                                          8.0),
+                                                    ),
+                                                  ),
+                                                  const SizedBox(height: 7,),
+                                                  FFButtonWidget(
+                                                    onPressed: () async{
+                                                      await _model.modifySuppliesButtonOnTap(context, i);
+                                                      getSuppliesRoomData();
+                                                    },
+                                                    text: '수정',
+                                                    options: FFButtonOptions(
+                                                      width: 75.0,
+                                                      height: 40.0,
+                                                      padding: const EdgeInsetsDirectional.fromSTEB(24.0, 0.0, 24.0, 0.0),
+                                                      iconPadding:
+                                                      const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
+                                                      color: FlutterFlowTheme.of(context).primary,
+                                                      textStyle: FlutterFlowTheme.of(context).titleSmall.override(
+                                                        fontFamily: 'Pretendard',
+                                                        color: Colors.white,
+                                                        letterSpacing: 0.0,
+                                                        useGoogleFonts: false,
+                                                      ),
+                                                      elevation: 3.0,
+                                                      borderSide: const BorderSide(
+                                                        color: Colors.transparent,
+                                                        width: 1.0,
+                                                      ),
+                                                      borderRadius: BorderRadius.circular(8.0),
+                                                    ),
+                                                  ),
+                                                ],
+                                              )
+                                        ],
+                                      ),
                                     ),
                                   ),
                                 ),
-                              ),
                           ],
                         ),
                       ),

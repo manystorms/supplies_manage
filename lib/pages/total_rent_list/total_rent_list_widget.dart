@@ -31,6 +31,9 @@ class _TotalRentListWidgetState extends State<TotalRentListWidget>
     super.initState();
     _model = createModel(context, () => UserRentListModel());
 
+    _model.searchBarTextController ??= TextEditingController();
+    _model.searchBarFocusNode ??= FocusNode();
+
     getSuppliesRoomData();
 
     User? user = FirebaseAuth.instance.currentUser;
@@ -88,6 +91,104 @@ class _TotalRentListWidgetState extends State<TotalRentListWidget>
             Column(
               mainAxisSize: MainAxisSize.max,
               children: [
+                Row(
+                  mainAxisSize: MainAxisSize.max,
+                  children: [
+                    Expanded(
+                      child: Padding(
+                        padding: const EdgeInsetsDirectional.fromSTEB(
+                            16.0, 12.0, 8.0, 0.0),
+                        child: TextFormField(
+                          controller: _model.searchBarTextController,
+                          focusNode: _model.searchBarFocusNode,
+                          textCapitalization: TextCapitalization.words,
+                          obscureText: false,
+                          decoration: InputDecoration(
+                            labelText: '물품 검색',
+                            labelStyle: FlutterFlowTheme.of(context)
+                                .labelMedium
+                                .override(
+                              fontFamily: 'Pretendard',
+                              letterSpacing: 0.0,
+                              useGoogleFonts: false,
+                            ),
+                            hintStyle: FlutterFlowTheme.of(context)
+                                .labelMedium
+                                .override(
+                              fontFamily: 'Pretendard',
+                              letterSpacing: 0.0,
+                              useGoogleFonts: false,
+                            ),
+                            enabledBorder: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                color: FlutterFlowTheme.of(context).alternate,
+                                width: 2.0,
+                              ),
+                              borderRadius: BorderRadius.circular(12.0),
+                            ),
+                            focusedBorder: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                color: FlutterFlowTheme.of(context).primary,
+                                width: 2.0,
+                              ),
+                              borderRadius: BorderRadius.circular(12.0),
+                            ),
+                            errorBorder: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                color: FlutterFlowTheme.of(context).error,
+                                width: 2.0,
+                              ),
+                              borderRadius: BorderRadius.circular(12.0),
+                            ),
+                            focusedErrorBorder: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                color: FlutterFlowTheme.of(context).error,
+                                width: 2.0,
+                              ),
+                              borderRadius: BorderRadius.circular(12.0),
+                            ),
+                            filled: true,
+                            fillColor:
+                            FlutterFlowTheme.of(context).primaryBackground,
+                            contentPadding: const EdgeInsetsDirectional.fromSTEB(
+                                24.0, 24.0, 20.0, 24.0),
+                            prefixIcon: Icon(
+                              Icons.search,
+                              color: FlutterFlowTheme.of(context).secondaryText,
+                              size: 16.0,
+                            ),
+                          ),
+                          style:
+                          FlutterFlowTheme.of(context).bodyMedium.override(
+                            fontFamily: 'Pretendard',
+                            letterSpacing: 0.0,
+                            useGoogleFonts: false,
+                          ),
+                          validator: _model.searchBarTextControllerValidator
+                              .asValidator(context),
+                        ),
+                      ),
+                    ),
+                    Padding(
+                      padding:
+                      const EdgeInsetsDirectional.fromSTEB(0.0, 12.0, 12.0, 0.0),
+                      child: FlutterFlowIconButton(
+                        borderColor: Colors.transparent,
+                        borderRadius: 30.0,
+                        borderWidth: 1.0,
+                        buttonSize: 50.0,
+                        icon: Icon(
+                          Icons.search_sharp,
+                          color: FlutterFlowTheme.of(context).primaryText,
+                          size: 30.0,
+                        ),
+                        onPressed: () {
+                          setState(() {});
+                        },
+                      ),
+                    ),
+                  ],
+                ),
                 if(_model.getSuppliesData == false)
                   const Center(
                     child: CircularProgressIndicator(),
@@ -100,80 +201,81 @@ class _TotalRentListWidgetState extends State<TotalRentListWidget>
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           for(int i = 0; i < suppliesRoomInfo.applicationUserName.length; i++)
-                            Padding(
-                              padding: const EdgeInsetsDirectional.fromSTEB(
-                                  16.0, 8.0, 16.0, 0.0),
-                              child: Container(
-                                width: double.infinity,
-                                decoration: BoxDecoration(
-                                  color: FlutterFlowTheme.of(context)
-                                      .primaryBackground,
-                                  borderRadius:
-                                  BorderRadius.circular(12.0),
-                                ),
-                                child: Padding(
-                                  padding: const EdgeInsetsDirectional.fromSTEB(
-                                      8.0, 8.0, 12.0, 8.0),
-                                  child: Row(
-                                    mainAxisSize: MainAxisSize.max,
-                                    crossAxisAlignment:
-                                    CrossAxisAlignment.center,
-                                    children: [
-                                      ClipRRect(
-                                        borderRadius:
-                                        BorderRadius.circular(8.0),
-                                        child: Image.network(
-                                          _model.getImageUrl(i),
-                                          width: 70.0,
-                                          height: 70.0,
-                                          fit: BoxFit.cover,
-                                        ),
-                                      ),
-                                      Padding(
-                                        padding: const EdgeInsetsDirectional
-                                            .fromSTEB(
-                                            16.0, 0.0, 0.0, 0.0),
-                                        child: SizedBox(
-                                          width: 80,
-                                          child: Text(
-                                            suppliesRoomInfo.applicationSuppliesName[i],
-                                            style:
-                                            FlutterFlowTheme.of(context)
-                                                .bodyLarge
-                                                .override(
-                                              fontFamily:
-                                              'Pretendard',
-                                              letterSpacing: 0.0,
-                                              useGoogleFonts: false,
-                                            ),
-                                            overflow: TextOverflow.ellipsis,
-                                            maxLines: 3,
+                            if(suppliesRoomInfo.applicationSearch(i, _model.searchBarTextController.text))
+                              Padding(
+                                padding: const EdgeInsetsDirectional.fromSTEB(
+                                    16.0, 8.0, 16.0, 0.0),
+                                child: Container(
+                                  width: double.infinity,
+                                  decoration: BoxDecoration(
+                                    color: FlutterFlowTheme.of(context)
+                                        .primaryBackground,
+                                    borderRadius:
+                                    BorderRadius.circular(12.0),
+                                  ),
+                                  child: Padding(
+                                    padding: const EdgeInsetsDirectional.fromSTEB(
+                                        8.0, 8.0, 12.0, 8.0),
+                                    child: Row(
+                                      mainAxisSize: MainAxisSize.max,
+                                      crossAxisAlignment:
+                                      CrossAxisAlignment.center,
+                                      children: [
+                                        ClipRRect(
+                                          borderRadius:
+                                          BorderRadius.circular(8.0),
+                                          child: Image.network(
+                                            _model.getImageUrl(i),
+                                            width: 70.0,
+                                            height: 70.0,
+                                            fit: BoxFit.cover,
                                           ),
-                                        )
-                                      ),
-                                      const Spacer(),
-                                      const SizedBox(width: 15),
-                                      SizedBox(
-                                        width: 150,
-                                        child: Text(
-                                            '신청자: ${suppliesRoomInfo.applicationUserName[i]}\n'
-                                                '수량: ${suppliesRoomInfo.applicationRentAmount[i]}\n'
-                                                '현재 상태: ${suppliesRoomInfo.applicationRentState[i]}\n'
-                                                '대여 사유: ${suppliesRoomInfo.applicationRentReason[i]??'없음'}',
-                                          overflow: TextOverflow.ellipsis,
-                                          maxLines: 5,
                                         ),
-                                      ),
-                                      const SizedBox(width: 10)
-                                    ],
+                                        Padding(
+                                          padding: const EdgeInsetsDirectional
+                                              .fromSTEB(
+                                              16.0, 0.0, 0.0, 0.0),
+                                          child: SizedBox(
+                                            width: 80,
+                                            child: Text(
+                                              suppliesRoomInfo.applicationSuppliesName[i],
+                                              style:
+                                              FlutterFlowTheme.of(context)
+                                                  .bodyLarge
+                                                  .override(
+                                                fontFamily:
+                                                'Pretendard',
+                                                letterSpacing: 0.0,
+                                                useGoogleFonts: false,
+                                              ),
+                                              overflow: TextOverflow.ellipsis,
+                                              maxLines: 3,
+                                            ),
+                                          )
+                                        ),
+                                        const Spacer(),
+                                        const SizedBox(width: 15),
+                                        SizedBox(
+                                          width: 150,
+                                          child: Text(
+                                              '신청자: ${suppliesRoomInfo.applicationUserName[i]}\n'
+                                                  '수량: ${suppliesRoomInfo.applicationRentAmount[i]}\n'
+                                                  '현재 상태: ${suppliesRoomInfo.applicationRentState[i]}\n'
+                                                  '대여 사유: ${suppliesRoomInfo.applicationRentReason[i]??'없음'}',
+                                            overflow: TextOverflow.ellipsis,
+                                            maxLines: 5,
+                                          ),
+                                        ),
+                                        const SizedBox(width: 10)
+                                      ],
+                                    ),
                                   ),
                                 ),
                               ),
-                            ),
-                        ],
+                          ],
+                        ),
                       ),
-                    ),
-                  )
+                    )
               ],
             ),
           ],

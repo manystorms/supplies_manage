@@ -9,6 +9,10 @@ late SuppliesRoomData suppliesRoomInfo;
 class UserRentListModel extends FlutterFlowModel<TotalRentListWidget> {
   ///  State fields for stateful widgets in this page.
 
+  FocusNode? searchBarFocusNode;
+  TextEditingController? searchBarTextController;
+  String? Function(BuildContext, String?)? searchBarTextControllerValidator;
+
   bool getSuppliesData = false;
 
   Future<void> getSuppliesRoomData() async{
@@ -25,5 +29,8 @@ class UserRentListModel extends FlutterFlowModel<TotalRentListWidget> {
   void initState(BuildContext context) {}
 
   @override
-  void dispose() {}
+  void dispose() {
+    searchBarFocusNode?.dispose();
+    searchBarTextController?.dispose();
+  }
 }

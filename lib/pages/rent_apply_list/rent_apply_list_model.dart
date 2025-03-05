@@ -22,14 +22,6 @@ class RentApplyListModel extends FlutterFlowModel<RentApplyListWidget> {
     suppliesRoomInfo = await SuppliesRoomData.getData(userSchoolName, userSuppliesRoom);
   }
 
-  bool isSearchTargetSupplies(int index) {
-    if(searchTarget == null || suppliesRoomInfo.name[index].contains(searchTarget??'')) {
-      return true;
-    }else{
-      return false;
-    }
-  }
-
   Future<void> showMapButtonOnTap(BuildContext context, int index) async {
     if(suppliesRoomInfo.location[index] == null) {
       await showAlertWithoutChoice(context, '위치 정보가 없습니다');

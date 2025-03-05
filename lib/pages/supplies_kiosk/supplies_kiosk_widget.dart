@@ -230,7 +230,7 @@ class _SuppliesKioskWidgetState extends State<SuppliesKioskWidget>
                           size: 30,
                         ),
                         onPressed: () {
-                          print('IconButton pressed ...');
+                          setState(() {});
                         },
                       ),
                     ),
@@ -258,7 +258,8 @@ class _SuppliesKioskWidgetState extends State<SuppliesKioskWidget>
                                               crossAxisAlignment: CrossAxisAlignment.start,
                                               children: [
                                                 for(int i = 0; i < suppliesRoomInfo.applicationUserName.length; i++)
-                                                  if(suppliesRoomInfo.applicationRentState[i] == '대여 신청')
+                                                  if(suppliesRoomInfo.applicationRentState[i] == '대여 신청'
+                                                      && suppliesRoomInfo.applicationSearch(i, _model.searchBarTextController.text))
                                                     Padding(
                                                       padding: const EdgeInsetsDirectional.fromSTEB(
                                                           16.0, 8.0, 16.0, 0.0),
@@ -354,7 +355,7 @@ class _SuppliesKioskWidgetState extends State<SuppliesKioskWidget>
                                                                 mainAxisAlignment: MainAxisAlignment.end,
                                                                 children: [
                                                                   SizedBox(
-                                                                    width: 140,
+                                                                    width: 125,
                                                                     child: Text(
                                                                         '대여 신청자: ${suppliesRoomInfo.applicationUserName[i]}\n'
                                                                             '대여 수량: ${suppliesRoomInfo.applicationRentAmount[i]}\n'
@@ -414,7 +415,8 @@ class _SuppliesKioskWidgetState extends State<SuppliesKioskWidget>
                                       crossAxisAlignment: CrossAxisAlignment.start,
                                       children: [
                                         for(int i = 0; i < suppliesRoomInfo.applicationUserName.length; i++)
-                                          if(suppliesRoomInfo.applicationRentState[i] == '대여 중')
+                                          if(suppliesRoomInfo.applicationRentState[i] == '대여 중'
+                                              && suppliesRoomInfo.applicationSearch(i, _model.searchBarTextController.text))
                                             Padding(
                                               padding: const EdgeInsetsDirectional.fromSTEB(
                                                   16.0, 8.0, 16.0, 0.0),
@@ -445,62 +447,107 @@ class _SuppliesKioskWidgetState extends State<SuppliesKioskWidget>
                                                         ),
                                                       ),
                                                       Padding(
-                                                        padding: const EdgeInsetsDirectional
-                                                            .fromSTEB(
-                                                            16.0, 0.0, 0.0, 0.0),
-                                                        child: SizedBox(
-                                                          width: 80,
-                                                          child: Text(
-                                                            suppliesRoomInfo.applicationSuppliesName[i],
-                                                            style:
-                                                            FlutterFlowTheme.of(context)
-                                                                .bodyLarge
-                                                                .override(
-                                                              fontFamily:
-                                                              'Pretendard',
-                                                              letterSpacing: 0.0,
-                                                              useGoogleFonts: false,
+                                                          padding: const EdgeInsetsDirectional
+                                                              .fromSTEB(
+                                                              16.0, 0.0, 0.0, 0.0),
+                                                          child: SizedBox(
+                                                            width: 80,
+                                                            child: Text(
+                                                              suppliesRoomInfo.applicationSuppliesName[i],
+                                                              style:
+                                                              FlutterFlowTheme.of(context)
+                                                                  .bodyLarge
+                                                                  .override(
+                                                                fontFamily:
+                                                                'Pretendard',
+                                                                letterSpacing: 0.0,
+                                                                useGoogleFonts: false,
+                                                              ),
+                                                              overflow: TextOverflow.ellipsis,
+                                                              maxLines: 3,
                                                             ),
-                                                            overflow: TextOverflow.ellipsis,
-                                                            maxLines: 3,
-                                                          ),
-                                                        )
+                                                          )
                                                       ),
                                                       const Spacer(),
-                                                      const SizedBox(width: 15),
-                                                      Text(
-                                                          '대여 신청자: ${suppliesRoomInfo.applicationUserName[i]}\n'
-                                                              '대여 수량: ${suppliesRoomInfo.applicationRentAmount[i]}\n'
-                                                              '현재 상태: ${suppliesRoomInfo.applicationRentState[i]}'
-                                                      ),
-                                                      const SizedBox(width: 10),
-                                                      FFButtonWidget(
-                                                        onPressed: () async {
-                                                          await _model.returnButtonOnTap(context, i);
-                                                          setState(() {});
-                                                        },
-                                                        text: '반납',
-                                                        options: FFButtonOptions(
-                                                          width: 75.0,
-                                                          height: 70.0,
-                                                          padding: const EdgeInsetsDirectional.fromSTEB(24.0, 0.0, 24.0, 0.0),
-                                                          iconPadding:
-                                                          const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
-                                                          color: FlutterFlowTheme.of(context).primary,
-                                                          textStyle: FlutterFlowTheme.of(context).titleSmall.override(
-                                                            fontFamily: 'Pretendard',
-                                                            color: Colors.white,
-                                                            letterSpacing: 0.0,
-                                                            useGoogleFonts: false,
+                                                      (MediaQuery.of(context).size.width > 550)?
+                                                      Row(
+                                                        mainAxisAlignment: MainAxisAlignment.end,
+                                                        children: [
+                                                          Text(
+                                                              '대여 신청자: ${suppliesRoomInfo.applicationUserName[i]}\n'
+                                                                  '대여 수량: ${suppliesRoomInfo.applicationRentAmount[i]}\n'
+                                                                  '현재 상태: ${suppliesRoomInfo.applicationRentState[i]}'
                                                           ),
-                                                          elevation: 3.0,
-                                                          borderSide: const BorderSide(
-                                                            color: Colors.transparent,
-                                                            width: 1.0,
+                                                          const SizedBox(width: 10),
+                                                          FFButtonWidget(
+                                                            onPressed: () async {
+                                                              await _model.returnButtonOnTap(context, i);
+                                                              setState(() {});
+                                                            },
+                                                            text: '반납',
+                                                            options: FFButtonOptions(
+                                                              width: 75.0,
+                                                              height: 70.0,
+                                                              padding: const EdgeInsetsDirectional.fromSTEB(24.0, 0.0, 24.0, 0.0),
+                                                              iconPadding:
+                                                              const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
+                                                              color: FlutterFlowTheme.of(context).primary,
+                                                              textStyle: FlutterFlowTheme.of(context).titleSmall.override(
+                                                                fontFamily: 'Pretendard',
+                                                                color: Colors.white,
+                                                                letterSpacing: 0.0,
+                                                                useGoogleFonts: false,
+                                                              ),
+                                                              elevation: 3.0,
+                                                              borderSide: const BorderSide(
+                                                                color: Colors.transparent,
+                                                                width: 1.0,
+                                                              ),
+                                                              borderRadius: BorderRadius.circular(8.0),
+                                                            ),
                                                           ),
-                                                          borderRadius: BorderRadius.circular(8.0),
-                                                        ),
-                                                      ),
+                                                        ],
+                                                      ):
+                                                      Column(
+                                                        mainAxisAlignment: MainAxisAlignment.end,
+                                                        children: [
+                                                          SizedBox(
+                                                            width: 125,
+                                                            child: Text(
+                                                                '대여 신청자: ${suppliesRoomInfo.applicationUserName[i]}\n'
+                                                                    '대여 수량: ${suppliesRoomInfo.applicationRentAmount[i]}\n'
+                                                                    '현재 상태: ${suppliesRoomInfo.applicationRentState[i]}'
+                                                            ),
+                                                          ),
+                                                          FFButtonWidget(
+                                                            onPressed: () async {
+                                                              await _model.returnButtonOnTap(context, i);
+                                                              setState(() {});
+                                                            },
+                                                            text: '반납',
+                                                            options: FFButtonOptions(
+                                                              width: 75.0,
+                                                              height: 40.0,
+                                                              padding: const EdgeInsetsDirectional.fromSTEB(24.0, 0.0, 24.0, 0.0),
+                                                              iconPadding:
+                                                              const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
+                                                              color: FlutterFlowTheme.of(context).primary,
+                                                              textStyle: FlutterFlowTheme.of(context).titleSmall.override(
+                                                                fontFamily: 'Pretendard',
+                                                                color: Colors.white,
+                                                                letterSpacing: 0.0,
+                                                                useGoogleFonts: false,
+                                                              ),
+                                                              elevation: 3.0,
+                                                              borderSide: const BorderSide(
+                                                                color: Colors.transparent,
+                                                                width: 1.0,
+                                                              ),
+                                                              borderRadius: BorderRadius.circular(8.0),
+                                                            ),
+                                                          ),
+                                                        ],
+                                                      )
                                                     ],
                                                   ),
                                                 ),
