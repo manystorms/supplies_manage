@@ -142,7 +142,7 @@ class _DeleteAccountWidgetState
                       padding: const EdgeInsetsDirectional
                           .fromSTEB(0, 4, 0, 24),
                       child: Text(
-                        '삭제할 계정의 아이디와 비밀번호를 입력하세요\n저희는 이메일 주소 이외에는 어떤 정보도 수집하지 않으며 계정 삭제 즉시 모든 데이터는 삭제됩니다',
+                        '삭제할 계정의 아이디와 비밀번호를 입력하세요\n저희는 이메일 주소 이외에는 어떤 데이터도 수집하지 않으며 계정 삭제 즉시 모든 데이터는 삭제됩니다',
                         textAlign: TextAlign.start,
                         style:
                         FlutterFlowTheme.of(context)
