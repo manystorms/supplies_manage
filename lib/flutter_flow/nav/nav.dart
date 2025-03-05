@@ -51,6 +51,11 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           builder: (context, params) => const AddUserRoleWidget(),
         ),
         FFRoute(
+          name: 'deleteaccount',
+          path: '/deleteaccount',
+          builder: (context, params) => const DeleteAccountWidget(),
+        ),
+        FFRoute(
           name: 'supplieskiosk',
           path: '/supplieskiosk',
           builder: (context, params) => const SuppliesKioskWidget(),

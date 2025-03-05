@@ -1,5 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:supplies_manage/show_alert.dart';
 
 const userSchoolName = '물리준비실';
 const userSuppliesRoom = 'supplies';
@@ -61,6 +63,37 @@ Future<User> createAccount(String email, String password) async {
   }else{
     throw('No User Data');
   }
+}
+
+Future<void> deleteAccount(String email, String password) async {
+  UserCredential userCredential = await FirebaseAuth.instance.signInWithEmailAndPassword(
+    email: email,
+    password: password,
+  );
+
+  final User? user = userCredential.user;
+  if(user == null) throw ('에러 발생');
+
+  DocumentSnapshot doc = await FirebaseFirestore.instance.collection(userSchoolName).doc('authRole').get();
+  List<dynamic> adminUidList = doc['adminUid'] ?? [];
+  List<dynamic> kioskUidList = doc['kioskUid'] ?? [];
+
+  bool updated = false;
+  if (adminUidList.contains(user.uid)) {
+    adminUidList.remove(user.uid);
+    updated = true;
+  }
+
+  if (kioskUidList.contains(user.uid)) {
+    kioskUidList.remove(user.uid);
+    updated = true;
+  }
+
+  if (updated) {
+    await doc.reference.update({'adminUid': adminUidList, 'kioskUid': kioskUidList});
+  }
+
+  await user.delete();
 }
 
 Future<void> sendResetPasswordLink(String emailAddress) async {

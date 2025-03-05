@@ -16,12 +16,15 @@ class TileInfo{
 List<TileInfo> tile = [
   TileInfo('물품 검색', '/rentapplylist', UserRole.student),
   TileInfo('내 대여 목록', '/userrentlist', UserRole.student),
+  TileInfo('계정 탈퇴', '/deleteaccount', UserRole.student),
   TileInfo('물품 추가/수정', '/rentstatuslist', UserRole.admin),
   TileInfo('대여 신청 목록', '/totalrentlist', UserRole.admin),
   TileInfo('대여/반납', '/supplieskiosk', UserRole.admin),
   TileInfo('대여/반납 기록', '/rentlog', UserRole.admin),
   TileInfo('관리자/키오스크 추가', '/adduserrole', UserRole.admin),
-  TileInfo('대여/반납', '/supplieskiosk', UserRole.kiosk)
+  TileInfo('계정 탈퇴', '/deleteaccount', UserRole.admin),
+  TileInfo('대여/반납', '/supplieskiosk', UserRole.kiosk),
+  TileInfo('계정 탈퇴', '/deleteaccount', UserRole.kiosk),
 ];
 
 class MainPageModel extends FlutterFlowModel<MainPageWidget> {
