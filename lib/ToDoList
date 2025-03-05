@@ -9,3 +9,9 @@
 키오스크 페이지에 map 볼 수 있도록 버튼 만들기
 관리자인지 아닌지 수시로 확인하기
 user_rent_list, total_rent_list에서 대여 사유 확인 가능
+
+물품을 삭제할 경우, 이미 대여된 경우가 있는지 확인하기.. 필수
+
+개인정보 url
+https://doc-hosting.flycricket.io/ddshs-junbimul-daeyeo-privacy-policy/32e310c4-9bb9-4630-af3c-303beb3bf7bd/privacy
+https://doc-hosting.flycricket.io/ddshs-junbimul-daeyeo-terms-of-use/8e09cd21-577e-4dc5-ae6d-3af186fdedd4/terms
