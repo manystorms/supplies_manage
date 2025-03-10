@@ -5,13 +5,10 @@
 수량이 입력되지 않은 경우 처리---
 로그인되지 않거나 오랜 시간이 지난 경우, 다시 로그인 페이지로 돌아가도록 하기
 로그인 화면 사진 추가
-검색기능 만들기
 키오스크 페이지에 map 볼 수 있도록 버튼 만들기
 관리자인지 아닌지 수시로 확인하기
 user_rent_list, total_rent_list에서 대여 사유 확인 가능
-회원가입 버튼으로 로그인한 경우 정보가 뜨지 않음
-
-물품을 삭제할 경우, 이미 대여된 경우가 있는지 확인하기.. 필수
+물품을 삭제할 경우 이미지도 같이 삭제하기
 
 개인정보 url
 https://doc-hosting.flycricket.io/ddshs-junbimul-daeyeo-privacy-policy/32e310c4-9bb9-4630-af3c-303beb3bf7bd/privacy

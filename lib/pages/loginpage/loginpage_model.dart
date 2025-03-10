@@ -50,6 +50,7 @@ class LoginCreateAccountPageModel
       }
 
       await createAccount(emailAddressCreateTextController.text, passwordCreateTextController.text);
+      if(context.mounted) await showAlertWithoutChoice(context, '회원가입 완료');
       return true;
     } on FirebaseAuthException catch (e) {
       if(context.mounted) {

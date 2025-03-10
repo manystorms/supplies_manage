@@ -105,9 +105,9 @@ class AddModifySuppliesModel extends FlutterFlowModel<AddModifySuppliesWidget> {
   }
 
   Future<bool> removeSuppliesButtonOnTap(BuildContext context, String suppliesName) async {
-    if(await showAlertWithTwoChoice(context, '삭제하시겠습니까?', '예', '아니오') == true) {
+    if(await showAlertWithTwoChoice(context, '삭제하시겠습니까?\n해당 물품을 대여한 사람이 있다면 대여가 취소됩니다', '예', '아니오') == true) {
       try{
-        await suppliesRoomInfo.removeData(suppliesName);
+        if(context.mounted) await suppliesRoomInfo.removeData(suppliesName);
         return true;
       }catch(e) {
         if(context.mounted) await showAlertWithoutChoice(context, '에러 발생: 다시 시도해 주세요');

@@ -658,9 +658,7 @@ class _LoginCreateAccountPageWidgetState
                                                     .fromSTEB(0, 0, 0, 16),
                                                 child: FFButtonWidget(
                                                   onPressed: () async {
-                                                    if(await _model.createAccountSuccess(context) == true && context.mounted) {
-                                                      context.push('/mainpage');
-                                                    }
+                                                    await _model.createAccountSuccess(context);
                                                   },
                                                   text: 'Get Started',
                                                   options: FFButtonOptions(

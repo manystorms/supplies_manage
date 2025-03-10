@@ -112,12 +112,15 @@ class ManageSuppliesData extends SuppliesRoomData{
 
       var data = documentSnapshot.data() as Map<String, dynamic>;
       List<dynamic> supplies = List.from(data['supplies'] ?? []);
+      List<dynamic> application = List.from(data['applicationList'] ?? []);
+
+      application.removeWhere((item) => item['suppliesName'] == suppliesName);
 
       int index = supplies.indexWhere((item) => item['name'] == suppliesName);
       if(index == -1) throw ('에러 발생');
 
       supplies.removeAt(index);
-      transaction.update(docRef, {'supplies':supplies});
+      transaction.update(docRef, {'supplies':supplies, 'applicationList':application});
     });
   }
 
