@@ -191,7 +191,7 @@ class ManageSuppliesData extends SuppliesRoomData{
   }
 
   Future<String>  inputImageData(int suppliesNum) async{
-    String imageUrl = await uploadImage('$schoolName/$ㅊsuppliesRoom/${name[suppliesNum].toString()}');
+    String imageUrl = await uploadImage('$schoolName/$suppliesRoom/${name[suppliesNum].toString()}');
 
     final documentSnapshot = firestore.collection(schoolName).doc(suppliesRoom);
 
